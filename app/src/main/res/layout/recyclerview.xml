@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="8dp"
     android:layout_gravity="center"
-    android:orientation="vertical">
+    android:background="@drawable/bglayout"
+    android:orientation="vertical"
+    android:padding="12dp">
+
     <TextView
+        android:id="@+id/type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LEC"
-        android:textStyle="bold"
         android:textSize="15sp"
-        android:id="@+id/type"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/subject"
@@ -22,38 +24,40 @@
         android:text="subject"
         android:textColor="#030303"
         android:textSize="17sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
+
         <TextView
+            android:id="@+id/timing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/timing"
             android:layout_margin="10dp"
 
             android:text="time"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
+
         <TextView
+            android:id="@+id/faculty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/faculty"
             android:layout_margin="10dp"
             android:text="faculty"
 
             android:textSize="15sp" />
+
         <TextView
+            android:id="@+id/room"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/room"
             android:layout_margin="10dp"
             android:text="room"
-            android:textStyle="bold"
-
             android:textColor="#030303"
-            android:textSize="15sp"/>
-    </LinearLayout>
 
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 
 </LinearLayout>
