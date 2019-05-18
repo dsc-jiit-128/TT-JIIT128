@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:text="LEC"
         android:textSize="15sp"
+        android:textColor="#FFFFFF"
         android:textStyle="bold" />
 
     <TextView
@@ -22,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/type"
         android:text="subject"
-        android:textColor="#030303"
+        android:textColor="#FFFFFF"
         android:textSize="17sp" />
 
     <LinearLayout
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
 
+            android:textColor="#FFFFFF"
             android:text="time"
             android:textSize="15sp" />
 
@@ -45,6 +47,7 @@
             android:layout_margin="10dp"
             android:text="faculty"
 
+            android:textColor="#FFFFFF"
             android:textSize="15sp" />
 
         <TextView
@@ -53,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="room"
-            android:textColor="#030303"
+            android:textColor="#FFFFFF"
 
             android:textSize="15sp"
             android:textStyle="bold" />
