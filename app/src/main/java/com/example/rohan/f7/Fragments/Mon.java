@@ -1,5 +1,6 @@
 package com.example.rohan.f7.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -52,6 +53,10 @@ public class Mon extends Fragment {
         databaseReference=firebaseDatabase.getReference("Mon");
         classDetails=new ArrayList<ClassDetail>();
         //int count;
+        final ProgressDialog pd= new ProgressDialog(getContext());
+        pd.setMessage("Please Wait...");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.show();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -78,6 +83,7 @@ public class Mon extends Fragment {
                     classDetail.setFaculty(faculty);
                     classDetail.setRoom(room);*/
                     classDetails.add(value);
+                    pd.dismiss();
                 //    offline.add(value);
                 }
                 RecyclerAdapter recyclerAdapter=new RecyclerAdapter(classDetails, getContext());

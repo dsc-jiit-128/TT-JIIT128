@@ -1,5 +1,6 @@
 package com.example.rohan.f7;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -40,32 +41,451 @@ import javax.xml.transform.sax.SAXTransformerFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-  /*  String[] type={
-            "[LEC]"
+    String[] type={
+            "LEC",
+            "TUTE",
+            "TUTE",
+            "TUTE",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LAB"
     };
     String[] subject={
-           "Environmental Science"
+           "COMPUTER NETWORKS",
+            "Technology & Culture",
+            "Technology & Culture",
+            "PRINCIPLES OF MANAGEMENT",
+            "Materials Science",
+            "Laser Technology and Applications",
+            "COMPUTER BASED NUMERICAL TECHNIQUES",
+            "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
+            "MA311",
+            "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
+            "MA312",
+            "Quantum Mechanics for Engineers",
+            "Technology & Culture",
+            "Technology & Culture",
+            "Technology & Culture",
+            "NStrategic Human Resource Management",
+            "PRINCIPLES OF MANAGEMENT",
+            "SOFTWARE ENGINEERING LAB"
+
+    };
+    String[] value={
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE"
+
     };
     String[] faculty={
-
-
-            "MANISHA"
+            "RUPESH",
+            "RG",
+            "AA",
+            "DV",
+            "SD",
+            "AV",
+            "PKS",
+            "PINKEY",
+            "NFMATHS1",
+            "AMITA",
+            "NEHA",
+            "VM",
+            "ALKA",
+            "AA",
+            "RG",
+            "PRV",
+            "DV",
+            "SHRUTI/NFCS2"
 
     };
     String[] timing={
-
-
-            "10:50-11:40"
-
-
-
+            "9:00-9:50",
+            "9:55-10:45",
+            "9:55-10:45",
+            "9:55-10:45",
+            "10:50-11:40",
+            "10:50-11:40",
+            "10:50-11:40",
+            "10:50-11:40",
+            "10:50-11:40",
+            "10:50-11:40",
+            "10:50-11:40",
+            "10:50-11:40",
+            "11:45-12:35",
+            "11:45-12:35",
+            "11:45-12:35",
+            "11:45-12:35",
+            "12:40-1:30",
+            "1:35-3:20"
           };
-    String[] room={
+    String[] venue={
+            "254",
+            "127",
+            "126",
+            "121",
+            "118(A)",
+            "118(B)",
+            "244(A)",
+            "244(B)",
+            "111",
+            "217",
+            "226",
+            "228",
+            "111",
+            "217",
+            "226",
+            "228",
+            "111",
+            "35"
+    };
 
-            "254"
+    String[] type2={
+            "LAB",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "TUTE",
+            "TUTE",
+            "TUTE",
+            "TUTE",
+            "TUTE",
+            "TUTE",
+            "TUTE"
+    };
+    String[] subject2={
+            "Open Source Software Lab",
+            "COMPUTER NETWORKS",
+            "Technology & Culture",
+            "Technology & Culture",
+            "Technology & Culture",
+            "NStrategic Human Resource Management",
+            "SOFTWARE ENGINEERING",
+            "ARTIFICIAL INTELLIGENCE",
+            "MATERIALS SCIENCE",
+            "Laser Technology and Applications",
+            "COMPUTER BASED NUMERICAL TECHNIQUES",
+            "Matrix Computations",
+            "MA311",
+            "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
+            "MA312",
+            "Quantum Mechanics for Engineers",
+            "Quantum Mechanics for Engineers",
+            "Materials Science",
+            "Laser Technology and Applications",
+            "COMPUTER BASED NUMERICAL TECHNIQUES",
+            "MA331",
+            "MA311",
+            "NStrategic Human Resource Management"
+    };
+    String [] value2={
+            "CORE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE"
 
-    };*/
+    };
+    String [] faculty2={
+            "HM/RUPESH/CHETNA",
+            "RUPESH",
+            "ALKA",
+            "AA",
+            "RG",
+            "PRV",
+            "NFCS2",
+            "OMPRAKASH",
+            "SD",
+            "AV",
+            "PKS",
+            "PINKEY",
+            "NFMATHS1",
+            "AMITA",
+            "NEHA",
+            "VM",
+            "VM",
+            "SD",
+            "AV",
+            "PKS",
+            "PINKEY",
+            "NFMATHS1",
+            "PRV"
+    };
+    String [] timing2={
+            "9:00-10:45",
+            "10:50-11:40",
+            "11:45-12:35",
+            "11:45-12:35",
+            "11:45-12:35",
+            "11:45-12:35",
+            "12:40-1:30",
+            "12:40-1:30",
+            "1:35-2:25",
+            "1:35-2:25",
+            "1:35-2:25",
+            "1:35-2:25",
+            "1:35-2:25",
+            "1:35-2:25",
+            "1:35-2:25",
+            "1:35-2:25",
+            "2:30-3:20",
+            "2:30-3:20",
+            "2:30-3:20",
+            "2:30-3:20",
+            "2:30-3:20",
+            "2:30-3:20",
+            "3:25-4:15"
+    };
+    String [] venue2={
+            "35",
+            "111",
+            "111",
+            "226",
+            "226",
+            "118",
+            "226",
+            "118",
+            "217",
+            "226",
+            "228",
+            "111",
+            "118",
+            "123",
+            "137",
+            "244",
+            "244(A)",
+            "244(B)",
+            "118(A)",
+            "228",
+            "111",
+            "113",
+            "123"
+    };
 
+    String [] type3={
+            "LAB",
+            "TUTE",
+            "TUTE",
+            "TUTE"
+    };
+    String [] subject3={
+            "Information Security Lab",
+            "NMA533",
+            "COMPUTER NETWORKS LAB",
+            "COMPUTER NETWORKS"
+    };
+    String [] value3={
+            "CORE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE"
+
+};
+
+    String [] faculty3={
+            "KM",
+            "AMITA",
+            "BDJ/SP/NEERAJ",
+            "RUPESH"
+    };
+    String [] timing3={
+            "9:00-9:50",
+            "11:45-12:35",
+            "1:35-2:25",
+            "3:25-4:15"
+    };
+    String [] venue3={
+            "MML",
+            "121",
+            "151",
+            "229"
+    };
+    String [] type4={
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "LEC",
+            "TUTE",
+            "TUTE",
+            "TUTE",
+            "LAB"
+    };
+    String [] subject4={
+            "COMPUTER NETWORKS",
+            "Materials Science",
+            "Laser Technology and Applications",
+            "COMPUTER BASED NUMERICAL TECHNIQUES",
+            "Matrix Computations",
+            "MA311",
+            "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
+            "MA312",
+            "Quantum Mechanics for Engineers",
+            "SOFTWARE ENGINEERING",
+            "ARTIFICIAL INTELLIGENCE",
+            "NHS521",
+            "SOFTWARE ENGINEERING",
+            "ARTIFICIAL INTELLIGENCE",
+            "ARTIFICIAL INTELLIGENCE LAB"
+    };
+    String [] value4={
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE",
+            "ELECTIVE"
+
+    };
+    String [] faculty4={
+            "RUPESH",
+            "SD",
+            "AV",
+            "PKS",
+            "PINKEY",
+            "NFMATHS1",
+            "AMITA",
+            "NEHA",
+            "VM",
+            "NFCS2",
+            "OMPRAKASH",
+            "ALKA",
+            "NFCS2",
+            "NFCS1",
+            "NEHA"
+    };
+    String [] timing4={
+            "9:00-9:50",
+            "9:55-10:45",
+            "9:55-10:45",
+            "9:55-10:45",
+            "9:55-10:45",
+            "9:55-10:45",
+            "9:55-10:45",
+            "9:55-10:45",
+            "9:55-10:45",
+            "10:50-11:40",
+            "10:50-11:40",
+            "12:40-1:30",
+            "1:35-2:25",
+            "2:30-3:20",
+            "3:25-5:10"
+    };
+    String [] venue4={
+            "RUPESH",
+            "SD",
+            "AV",
+            "PKS",
+            "PINKEY",
+            "NFMATHS1",
+            "AMITA",
+            "NEHA",
+            "VM",
+            "NFCS2",
+            "OPRAKASH",
+            "ALKA",
+            "NFCS2",
+            "NFCS1",
+            "OMPRAKASH/NEHA"
+    };
+
+    String [] type5={
+            "LEC",
+            "LEC"
+    };
+    String [] subject5={
+            "ARTIFICIAL INTELLIGENCE LAB",
+            "SOFTWARE ENGINEERING"
+    };
+    String [] value5={
+            "ELECTIVE",
+            "ELECTIVE"
+    };
+
+    String [] faculty5={
+            "OMPRAKASH",
+            "NFCS2"
+    };
+    String [] timing5={
+            "9:00-9:50",
+            "9:00-9:50"
+    };
+    String [] venue5={
+            "228",
+            "118(B)"
+    };
+
+    ArrayList<ArrayList<SubjectDetails>> subjectDetailsArrayList= new ArrayList<>();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
@@ -101,6 +521,76 @@ public class MainActivity extends AppCompatActivity {
         else{
             mViewPager.setCurrentItem(dayofweek-2,true);
         }
+        ArrayList<SubjectDetails> MONDAY = new ArrayList<>();
+        for (int i=0;i<subject.length;i++)
+        {
+            SubjectDetails subjectDetails = new SubjectDetails(
+                    type[i],
+                    subject[i],
+                    timing[i],
+                    faculty[i],
+                    venue[i],
+                    value[i]);
+            MONDAY.add(subjectDetails);
+        }
+        ArrayList<SubjectDetails> TUESDAY = new ArrayList<>();
+        for (int i=0;i<subject2.length;i++)
+        {
+            SubjectDetails subjectDetails = new SubjectDetails(
+                    type2[i],
+                    subject2[i],
+                    timing2[i],
+                    faculty2[i],
+                    venue2[i],
+                    value2[i]);
+            TUESDAY.add(subjectDetails);
+        }
+        ArrayList<SubjectDetails> WEDNESDAY = new ArrayList<>();
+        for (int i=0;i<subject3.length;i++)
+        {
+            SubjectDetails subjectDetails = new SubjectDetails(
+                    type3[i],
+                    subject3[i],
+                    timing3[i],
+                    faculty3[i],
+                    venue3[i],
+                    value3[i]);
+            WEDNESDAY.add(subjectDetails);
+        }
+        ArrayList<SubjectDetails> THURSDAY = new ArrayList<>();
+        for (int i=0;i<subject4.length;i++)
+        {
+            SubjectDetails subjectDetails = new SubjectDetails(
+                    type4[i],
+                    subject4[i],
+                    timing4[i],
+                    faculty4[i],
+                    venue4[i],
+                    value4[i]);
+            THURSDAY.add(subjectDetails);
+        }
+        ArrayList<SubjectDetails> FRIDAY = new ArrayList<>();
+        for (int i=0;i<subject5.length;i++)
+        {
+            SubjectDetails subjectDetails = new SubjectDetails(
+                    type5[i],
+                    subject5[i],
+                    timing5[i],
+                    faculty5[i],
+                    venue5[i],
+                    value5[i]);
+            FRIDAY.add(subjectDetails);
+        }
+        subjectDetailsArrayList.add(MONDAY);
+        subjectDetailsArrayList.add(TUESDAY);
+        subjectDetailsArrayList.add(WEDNESDAY);
+        subjectDetailsArrayList.add(THURSDAY);
+        subjectDetailsArrayList.add(FRIDAY);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("SEMESTER_5").setValue(subjectDetailsArrayList);
+
+
       /* databaseReference = FirebaseDatabase.getInstance().getReference();
       //  List<ClassDetail> allDetails = new ArrayList<ClassDetail>();
         for(int i=0;i<1;i++)
@@ -154,7 +644,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (id == R.id.action_settings) {
-            return true;
+            startActivity(new Intent(MainActivity.this, WebKiosk.class));
+
         }
 
         return super.onOptionsItemSelected(item);
