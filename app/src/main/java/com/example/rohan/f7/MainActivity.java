@@ -1,7 +1,11 @@
 package com.example.rohan.f7;
 
+import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -20,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rohan.f7.Fragments.Fri;
 import com.example.rohan.f7.Fragments.Mon;
@@ -27,10 +32,12 @@ import com.example.rohan.f7.Fragments.Sat;
 import com.example.rohan.f7.Fragments.Thu;
 import com.example.rohan.f7.Fragments.Tue;
 import com.example.rohan.f7.Fragments.Wed;
+import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -70,14 +77,14 @@ public class MainActivity extends AppCompatActivity {
             "Laser Technology and Applications",
             "COMPUTER BASED NUMERICAL TECHNIQUES",
             "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
-            "MA311",
+            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
             "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
-            "MA312",
+            "LOGICAL REASONING AND INEQUALITIES",
             "Quantum Mechanics for Engineers",
             "Technology & Culture",
             "Technology & Culture",
             "Technology & Culture",
-            "NStrategic Human Resource Management",
+            "Strategic Human Resource Management",
             "PRINCIPLES OF MANAGEMENT",
             "SOFTWARE ENGINEERING LAB"
 
@@ -196,24 +203,24 @@ public class MainActivity extends AppCompatActivity {
             "Technology & Culture",
             "Technology & Culture",
             "Technology & Culture",
-            "NStrategic Human Resource Management",
+            "Strategic Human Resource Management",
             "SOFTWARE ENGINEERING",
             "ARTIFICIAL INTELLIGENCE",
             "MATERIALS SCIENCE",
             "Laser Technology and Applications",
             "COMPUTER BASED NUMERICAL TECHNIQUES",
             "Matrix Computations",
-            "MA311",
+            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
             "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
-            "MA312",
+            "LOGICAL REASONING AND INEQUALITIES",
             "Quantum Mechanics for Engineers",
             "Quantum Mechanics for Engineers",
             "Materials Science",
             "Laser Technology and Applications",
             "COMPUTER BASED NUMERICAL TECHNIQUES",
             "MA331",
-            "MA311",
-            "NStrategic Human Resource Management"
+            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
+            "Strategic Human Resource Management"
     };
     String [] value2={
             "CORE",
@@ -321,16 +328,19 @@ public class MainActivity extends AppCompatActivity {
             "LAB",
             "TUTE",
             "TUTE",
+            "LAB",
             "TUTE"
     };
     String [] subject3={
             "Information Security Lab",
-            "NMA533",
+            "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
+            "LOGICAL REASONING AND INEQUALITIES",
             "COMPUTER NETWORKS LAB",
             "COMPUTER NETWORKS"
     };
     String [] value3={
             "CORE",
+            "ELECTIVE",
             "ELECTIVE",
             "ELECTIVE",
             "ELECTIVE"
@@ -340,18 +350,21 @@ public class MainActivity extends AppCompatActivity {
     String [] faculty3={
             "KM",
             "AMITA",
-            "BDJ/SP/NEERAJ",
+            "NEHA",
+            "BDJ/SB/NEERAJ",
             "RUPESH"
     };
     String [] timing3={
-            "9:00-9:50",
+            "9:00-10:45",
             "11:45-12:35",
-            "1:35-2:25",
+            "11:45-12:35",
+            "1:35-3:20",
             "3:25-4:15"
     };
     String [] venue3={
             "MML",
             "121",
+            "226",
             "151",
             "229"
     };
@@ -378,9 +391,9 @@ public class MainActivity extends AppCompatActivity {
             "Laser Technology and Applications",
             "COMPUTER BASED NUMERICAL TECHNIQUES",
             "Matrix Computations",
-            "MA311",
+            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
             "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
-            "MA312",
+            "LOGICAL REASONING AND INEQUALITIES",
             "Quantum Mechanics for Engineers",
             "SOFTWARE ENGINEERING",
             "ARTIFICIAL INTELLIGENCE",
@@ -442,51 +455,56 @@ public class MainActivity extends AppCompatActivity {
             "3:25-5:10"
     };
     String [] venue4={
-            "RUPESH",
-            "SD",
-            "AV",
-            "PKS",
-            "PINKEY",
-            "NFMATHS1",
-            "AMITA",
-            "NEHA",
-            "VM",
-            "NFCS2",
-            "OPRAKASH",
-            "ALKA",
-            "NFCS2",
-            "NFCS1",
-            "OMPRAKASH/NEHA"
+            "226",
+            "217",
+            "226",
+            "228",
+            "111",
+            "244(A)",
+            "244(B)",
+            "118(A)",
+            "148",
+            "228",
+            "118(A)",
+            "116",
+            "126",
+            "126",
+            "151"
     };
 
     String [] type5={
+            "LEC",
             "LEC",
             "LEC"
     };
     String [] subject5={
             "ARTIFICIAL INTELLIGENCE LAB",
-            "SOFTWARE ENGINEERING"
+            "SOFTWARE ENGINEERING",
+            "PRINCIPLES OF MANAGEMENT"
     };
     String [] value5={
+            "ELECTIVE",
             "ELECTIVE",
             "ELECTIVE"
     };
 
     String [] faculty5={
             "OMPRAKASH",
-            "NFCS2"
+            "NFCS2",
+            "DV"
     };
     String [] timing5={
             "9:00-9:50",
-            "9:00-9:50"
+            "9:00-9:50",
+            "1:35-2:25"
     };
     String [] venue5={
             "228",
-            "118(B)"
+            "118(B)",
+            "217"
     };
 
     ArrayList<ArrayList<SubjectDetails>> subjectDetailsArrayList= new ArrayList<>();
-    FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
 
@@ -521,6 +539,53 @@ public class MainActivity extends AppCompatActivity {
         else{
             mViewPager.setCurrentItem(dayofweek-2,true);
         }
+        //setTimeTableToDataBase();
+
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        final TinyDB tinyDB= new TinyDB(this);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    GenericTypeIndicator<ArrayList<ArrayList<SubjectDetails>>> t = new GenericTypeIndicator<ArrayList<ArrayList<SubjectDetails>>>() {
+                    };
+
+                    if (tinyDB.getSubjectDetails("SEMESTER_5")==null)
+                    {
+                        tinyDB.putSubjectDetails("SEMESTER_5",dataSnapshot.child("SEMESTER_5").getValue(t));
+
+                    }else if ((tinyDB.getSubjectDetails("SEMESTER_5")!=dataSnapshot.child("SEMESTER_5").getValue(t))){
+                        tinyDB.putSubjectDetails("SEMESTER_5",dataSnapshot.child("SEMESTER_5").getValue(t));
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
+                }
+            });
+
+
+        if (tinyDB.getSubjectDetails("SEMESTER_5")!=null)
+        {
+            Toast.makeText(this, ""+tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(0).getSubjectName(), Toast.LENGTH_SHORT).show();
+        }
+
+        if (tinyDB.getChoices("ELECTIVES")==null){
+            Toast.makeText(this, "CHOOSE ELECTIVES", Toast.LENGTH_SHORT).show();
+
+            ChoicesDialog choicesDialog= new ChoicesDialog(this);
+            choicesDialog.show();
+
+        }
+
+
+    }
+
+    private void setTimeTableToDataBase() {
         ArrayList<SubjectDetails> MONDAY = new ArrayList<>();
         for (int i=0;i<subject.length;i++)
         {
@@ -581,54 +646,20 @@ public class MainActivity extends AppCompatActivity {
                     value5[i]);
             FRIDAY.add(subjectDetails);
         }
+        ArrayList<SubjectDetails> SATURDAY = new ArrayList<>();
+
         subjectDetailsArrayList.add(MONDAY);
         subjectDetailsArrayList.add(TUESDAY);
         subjectDetailsArrayList.add(WEDNESDAY);
         subjectDetailsArrayList.add(THURSDAY);
         subjectDetailsArrayList.add(FRIDAY);
+        subjectDetailsArrayList.add(SATURDAY);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("SEMESTER_5").setValue(subjectDetailsArrayList);
 
-
-      /* databaseReference = FirebaseDatabase.getInstance().getReference();
-      //  List<ClassDetail> allDetails = new ArrayList<ClassDetail>();
-        for(int i=0;i<1;i++)
-        {
-            ClassDetail classDetail = new ClassDetail();
-            classDetail.setType(type[i]);
-            classDetail.setSubject(subject[i]);
-            classDetail.setFaculty(faculty[i]);
-            classDetail.setTiming(timing[i]);
-            classDetail.setRoom(room[i]);
-           // allDetails.add(classDetail);
-
-            databaseReference.child("Sat").child(String.valueOf(i+1)).setValue(classDetail);
-
-        }
-
-       databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        })*/
-
-
-
-
-
-
     }
 
-    public void writeToDatabase(String type, String subject, String timing, String faculty, String room){
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -644,8 +675,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (id == R.id.action_settings) {
-            startActivity(new Intent(MainActivity.this, WebKiosk.class));
 
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            customTabsIntent.launchUrl(this, Uri.parse("https://webkiosk.jiit.ac.in/"));
+
+
+        }
+        if (id==R.id.changeElective){
+            ChoicesDialog choicesDialog = new ChoicesDialog(this);
+            choicesDialog.show();
         }
 
         return super.onOptionsItemSelected(item);

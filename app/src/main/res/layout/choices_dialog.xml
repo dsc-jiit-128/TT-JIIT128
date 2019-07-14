@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/sidenavbar">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/elective1"
+                android:padding="4dp"
+                android:background="@drawable/choicesbg">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="COMPUTER NETWORKS"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EMBEDED SYSTEMS"
+                    android:textColor="#ffffff"/>
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/elective2"
+                android:layout_below="@+id/elective1"
+                android:padding="4dp"
+                android:background="@drawable/choicesbg">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SOFTWARE ENGINEERING"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ARTIFICIAL INTELLIGENCE"
+                    android:textColor="#ffffff"/>
+            </RadioGroup>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/elective3"
+                android:layout_below="@id/elective2"
+                android:padding="4dp"
+                android:background="@drawable/choicesbg">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Matrix Computations"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quantum Mechanics for Engineers"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Materials Science"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Laser Technology and Applications"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="STATISTICAL INFORMATION THEORY WITH APPLICATIONS"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LOGICAL REASONING AND INEQUALITIES"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="COMPUTER BASED NUMERICAL TECHNIQUES"
+                    android:textColor="#ffffff"/>
+            </RadioGroup>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/elective4"
+                android:layout_below="@id/elective3"
+                android:padding="4dp"
+                android:background="@drawable/choicesbg">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PLANNING AND ECONOMIC DEVELOPMENT"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Technology and Culture"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PRINCIPLES OF MANAGEMENT"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sociology of Youth"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Strategic Human Resource Management"
+                    android:textColor="#ffffff"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MARKETING MANAGEMENT"
+                    android:textColor="#ffffff"/>
+
+            </RadioGroup>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="12dp"
+                android:layout_below="@+id/elective4"
+                android:layout_centerHorizontal="true"
+                android:text="   save electives   "
+                android:background="@drawable/bg"
+                android:id="@+id/saveElectives"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -8,14 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHolder> {
 
 
-    List<ClassDetail> classDetails;
+    ArrayList<SubjectDetails> classDetails;
     Context context;
-    public RecyclerAdapter(List<ClassDetail> classDetails, Context context)
+    public RecyclerAdapter(ArrayList<SubjectDetails> classDetails, Context context)
     {
         this.classDetails=classDetails;
         this.context=context;
@@ -31,12 +32,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.MyHolder holder, int position) {
 
-        ClassDetail classlist=classDetails.get(position);
-        holder.type.setText(classlist.getType());
-        holder.subject.setText(classlist.getSubject());
-        holder.timing.setText(classlist.getTiming());
-        holder.faculty.setText(classlist.getFaculty());
-        holder.room.setText(classlist.getRoom());
+        SubjectDetails classlist=classDetails.get(position);
+        holder.type.setText(classlist.subjectType);
+        holder.subject.setText(classlist.subjectName);
+        holder.timing.setText(classlist.subjectTiming);
+        holder.faculty.setText(classlist.subjectFaculty);
+        holder.room.setText(classlist.subjectVenue);
     }
 
     @Override

@@ -5,6 +5,11 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="webkiosk"
+        android:title="Webkiosk"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/changeElective"
+        android:title="Change Elective">
+    </item>
+
 </menu>

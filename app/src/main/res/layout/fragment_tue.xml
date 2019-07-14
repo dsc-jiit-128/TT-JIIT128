@@ -5,6 +5,17 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.Tue">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NO CLASSES TODAY !"
+        android:textSize="24dp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/noClassMsg"
+        android:textColor="#ffffff"
+        android:gravity="center_horizontal"
+        />
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

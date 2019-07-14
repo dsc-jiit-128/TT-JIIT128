@@ -14,10 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.rohan.f7.Choices;
 import com.example.rohan.f7.ClassDetail;
 import com.example.rohan.f7.R;
 import com.example.rohan.f7.RecyclerAdapter;
 import com.example.rohan.f7.SQLite;
+import com.example.rohan.f7.SubjectDetails;
+import com.example.rohan.f7.TinyDB;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +38,7 @@ public class Mon extends Fragment {
     RecyclerView recyclerView;
     List<ClassDetail> offline=new ArrayList<>();
     SQLite sqLite;
-
+    private RecyclerAdapter recyclerAdapter;
 
 
     @Override
@@ -49,59 +52,54 @@ public class Mon extends Fragment {
         recyclerView=view.findViewById(R.id.recycle);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        firebaseDatabase=FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference("Mon");
-        classDetails=new ArrayList<ClassDetail>();
-        //int count;
-        final ProgressDialog pd= new ProgressDialog(getContext());
-        pd.setMessage("Please Wait...");
-        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pd.show();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                offline.clear();
-                int count=0;
-                for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
+
+
+        TinyDB tinyDB = new TinyDB(getActivity());
+        try{
+            if (tinyDB.getSubjectDetails("SEMESTER_5").get(0)!=null){
+
+                ArrayList<SubjectDetails> subjectDetails = new ArrayList<>();
+                if (tinyDB.getChoices("ELECTIVES")!=null)
                 {
-                    //classDetails.clear();
-                    ClassDetail value=dataSnapshot1.getValue(ClassDetail.class);
-                   /* ClassDetail classDetail=new ClassDetail();
-                    assert value != null;*/
-                    String type = value.getType();
-                    String subject = value.getSubject();
-                    String timing = value.getTiming();
-                    String faculty = value.getFaculty();
-                    String room = value.getRoom();
+                    for (int i=0;i<tinyDB.getSubjectDetails("SEMESTER_5").get(0).size();i++){
+                        if (tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectValue().equals("CORE"))
+                        {
+                            subjectDetails.add(tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i));
+                        }else{
+                            Choices choices = new Choices();
+                            choices = tinyDB.getChoices("ELECTIVES");
+                            if (tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectName().contains(choices.getElective1())
+                                    || tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectName().contains(choices.getElective2())
+                                    || tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectName().contains(choices.getElective3())
+                                    || tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectName().contains(choices.getElective4()))
+                            {
+                                subjectDetails.add(tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i));
+                            }
+                        }
+                    }
+                    if (subjectDetails==null){
+                        view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
+                    }
 
-                    count++;
-                    sqLite.insertClass("MON",count, type, subject, timing,faculty,room);
-                    /*classDetail.setType(type);
-                    classDetail.setSubject(subject);
-                    classDetail.setTiming(timing);
-                    classDetail.setFaculty(faculty);
-                    classDetail.setRoom(room);*/
-                    classDetails.add(value);
-                    pd.dismiss();
-                //    offline.add(value);
+                    recyclerAdapter=new RecyclerAdapter(subjectDetails, getContext());
+                    recyclerAdapter.notifyDataSetChanged();
+                }else{
+                    recyclerAdapter=new RecyclerAdapter(tinyDB.getSubjectDetails("SEMESTER_5").get(0), getContext());
+                    recyclerAdapter.notifyDataSetChanged();
                 }
-                RecyclerAdapter recyclerAdapter=new RecyclerAdapter(classDetails, getContext());
+
+
                 recyclerView.setAdapter(recyclerAdapter);
+            }else{
+                view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-
-            }
-        });
-        if (!isNetworkAvailable())
-        {
-            offline= sqLite.getClassDetail("MON");
-            RecyclerAdapter recyclerAdapter=new RecyclerAdapter(offline, getContext());
-            recyclerView.setAdapter(recyclerAdapter);
+        }catch (Exception e){
+            view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
         }
+
+
         return view;
     }
     private boolean isNetworkAvailable() {

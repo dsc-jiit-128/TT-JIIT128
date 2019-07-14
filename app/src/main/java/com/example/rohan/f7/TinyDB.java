@@ -77,21 +77,6 @@ public class TinyDB {
      * @param theBitmap the image you want to save as a Bitmap
      * @return returns the full path(file system address) of the saved image
      */
-    public String putImage(String theFolder, String theImageName, Bitmap theBitmap) {
-        if (theFolder == null || theImageName == null || theBitmap == null)
-            return null;
-
-        this.DEFAULT_APP_IMAGEDATA_DIRECTORY = theFolder;
-        String mFullPath = setupFullPath(theImageName);
-
-        if (!mFullPath.equals("")) {
-            lastImagePath = mFullPath;
-            saveBitmap(mFullPath, theBitmap);
-        }
-
-        return mFullPath;
-    }
-
 
     /**
      * Saves 'theBitmap' into 'fullPath'
@@ -99,27 +84,12 @@ public class TinyDB {
      * @param theBitmap the image you want to save as a Bitmap
      * @return true if image was saved, false otherwise
      */
-    public boolean putImageWithFullPath(String fullPath, Bitmap theBitmap) {
-        return !(fullPath == null || theBitmap == null) && saveBitmap(fullPath, theBitmap);
-    }
 
     /**
      * Creates the path for the image with name 'imageName' in DEFAULT_APP.. directory
      * @param imageName name of the image
      * @return the full path of the image. If it failed to create directory, return empty string
      */
-    private String setupFullPath(String imageName) {
-        File mFolder = new File(Environment.getExternalStorageDirectory(), DEFAULT_APP_IMAGEDATA_DIRECTORY);
-
-        if (isExternalStorageReadable() && isExternalStorageWritable() && !mFolder.exists()) {
-            if (!mFolder.mkdirs()) {
-                Log.e("ERROR", "Failed to setup folder");
-                return "";
-            }
-        }
-
-        return mFolder.getPath() + '/' + imageName;
-    }
 
     /**
      * Saves the Bitmap as a PNG file at path 'fullPath'
@@ -127,52 +97,6 @@ public class TinyDB {
      * @param bitmap the image as a Bitmap
      * @return true if it successfully saved, false otherwise
      */
-    private boolean saveBitmap(String fullPath, Bitmap bitmap) {
-        if (fullPath == null || bitmap == null)
-            return false;
-
-        boolean fileCreated = false;
-        boolean bitmapCompressed = false;
-        boolean streamClosed = false;
-
-        File imageFile = new File(fullPath);
-
-        if (imageFile.exists())
-            if (!imageFile.delete())
-                return false;
-
-        try {
-            fileCreated = imageFile.createNewFile();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        FileOutputStream out = null;
-        try {
-            out = new FileOutputStream(imageFile);
-            bitmapCompressed = bitmap.compress(CompressFormat.PNG, 100, out);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            bitmapCompressed = false;
-
-        } finally {
-            if (out != null) {
-                try {
-                    out.flush();
-                    out.close();
-                    streamClosed = true;
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    streamClosed = false;
-                }
-            }
-        }
-
-        return (fileCreated && bitmapCompressed && streamClosed);
-    }
 
     // Getters
 
@@ -585,26 +509,30 @@ public class TinyDB {
         }
     }
 
-    public void putSubjectDetails(String key, ArrayList<SubjectDetails> object){
+    public void putSubjectDetails(String key, ArrayList<ArrayList<SubjectDetails>> object){
         Gson gson = new Gson();
         String json = gson.toJson(object);
         preferences.edit().putString(key,json).apply();
     }
 
-    public ArrayList<SubjectDetails> getSubjectDetails(String key){
+    public ArrayList<ArrayList<SubjectDetails>> getSubjectDetails(String key){
         Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<SubjectDetails>>(){}.getType();
+        Type type = new TypeToken<ArrayList<ArrayList<SubjectDetails>>>(){}.getType();
         return gson.fromJson(preferences.getString(key,null),type);
     }
-
-
-    public boolean isFileNotExist(String path){
-        File file = new File(path);
-        if(!file.exists())
-            return true;
-        else
-            return false;
+    public Choices getChoices(String key){
+        Gson gson = new Gson();
+        Type type = new TypeToken<Choices>(){}.getType();
+        return gson.fromJson(preferences.getString(key,null),type);
     }
+    public void setChoices(String key, Choices object){
+        Gson gson = new Gson();
+        String json = gson.toJson(object);
+        preferences.edit().putString(key,json).apply();
+    }
+
+
+
 
 
 }
