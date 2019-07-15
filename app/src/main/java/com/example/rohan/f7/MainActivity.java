@@ -70,20 +70,20 @@ public class MainActivity extends AppCompatActivity {
     };
     String[] subject={
            "COMPUTER NETWORKS",
-            "Technology & Culture",
-            "Technology & Culture",
+            "Technology and Culture",
+            "Technology and Culture",
             "PRINCIPLES OF MANAGEMENT",
             "Materials Science",
             "Laser Technology and Applications",
             "COMPUTER BASED NUMERICAL TECHNIQUES",
-            "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
+            "Matrix Computations",
             "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
             "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
             "LOGICAL REASONING AND INEQUALITIES",
             "Quantum Mechanics for Engineers",
-            "Technology & Culture",
-            "Technology & Culture",
-            "Technology & Culture",
+            "Sociology of Youth",
+            "Technology and Culture",
+            "Technology and Culture",
             "Strategic Human Resource Management",
             "PRINCIPLES OF MANAGEMENT",
             "SOFTWARE ENGINEERING LAB"
@@ -200,9 +200,9 @@ public class MainActivity extends AppCompatActivity {
     String[] subject2={
             "Open Source Software Lab",
             "COMPUTER NETWORKS",
-            "Technology & Culture",
-            "Technology & Culture",
-            "Technology & Culture",
+            "Sociology of Youth",
+            "Technology and Culture",
+            "Technology and Culture",
             "Strategic Human Resource Management",
             "SOFTWARE ENGINEERING",
             "ARTIFICIAL INTELLIGENCE",
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
             "Materials Science",
             "Laser Technology and Applications",
             "COMPUTER BASED NUMERICAL TECHNIQUES",
-            "MA331",
+            "Matrix Computations",
             "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
             "Strategic Human Resource Management"
     };
@@ -397,7 +397,7 @@ public class MainActivity extends AppCompatActivity {
             "Quantum Mechanics for Engineers",
             "SOFTWARE ENGINEERING",
             "ARTIFICIAL INTELLIGENCE",
-            "NHS521",
+            "Sociology of Youth",
             "SOFTWARE ENGINEERING",
             "ARTIFICIAL INTELLIGENCE",
             "ARTIFICIAL INTELLIGENCE LAB"
@@ -473,7 +473,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     String [] type5={
-            "LEC",
+            "LAB",
             "LEC",
             "LEC"
     };
@@ -571,7 +571,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (tinyDB.getSubjectDetails("SEMESTER_5")!=null)
         {
-            Toast.makeText(this, ""+tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(0).getSubjectName(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(0).getSubjectName(), Toast.LENGTH_SHORT).show();
         }
 
         if (tinyDB.getChoices("ELECTIVES")==null){
