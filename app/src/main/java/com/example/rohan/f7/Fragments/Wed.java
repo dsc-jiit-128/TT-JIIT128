@@ -57,20 +57,25 @@ public class Wed extends Fragment {
                 if (tinyDB.getChoices("ELECTIVES")!=null)
                 {
                     for (int i=0;i<tinyDB.getSubjectDetails("SEMESTER_5").get(2).size();i++){
-                        if (tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectValue().equals("CORE"))
+                        if (tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getBatchName().contains(tinyDB.getString("BATCH")))
                         {
-                            subjectDetails.add(tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i));
-                        }else{
-                            Choices choices = new Choices();
-                            choices = tinyDB.getChoices("ELECTIVES");
-                            if (tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective1())
-                                    || tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective2())
-                                    || tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective3())
-                                    || tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective4()))
+                            if (tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectValue().equals("CORE"))
                             {
                                 subjectDetails.add(tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i));
+                            }else{
+                                Choices choices = new Choices();
+                                choices = tinyDB.getChoices("ELECTIVES");
+                                if (tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective1())
+                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective2())
+                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective3())
+                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective4()))
+                                {
+                                    subjectDetails.add(tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i));
+                                }
                             }
                         }
+
+
                     }
                     if (subjectDetails==null){
                         view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);

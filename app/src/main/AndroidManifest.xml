@@ -6,12 +6,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icon_app_f7"
+        android:icon="@drawable/appiconbatch"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/icon_app_f7"
+        android:roundIcon="@drawable/appiconbatch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WebKiosk"></activity>
+        <activity android:name=".ChooseElective"></activity>
+        <activity android:name=".WebKiosk" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

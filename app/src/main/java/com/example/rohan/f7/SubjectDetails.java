@@ -6,19 +6,30 @@ public class SubjectDetails {
     public String subjectTiming;
     public String subjectFaculty;
     public String subjectVenue;
-    public String subjectValue
-    ;
+    public String subjectValue;
+    public String batchName;
 
-    public SubjectDetails(String subjectType, String subjectName, String subjectTiming, String subjectFaculty, String subjectVenue, String subjectValue) {
+
+    public SubjectDetails(String subjectType, String subjectName, String subjectTiming, String subjectFaculty, String subjectVenue, String subjectValue, String batchName) {
         this.subjectType = subjectType;
         this.subjectName = subjectName;
         this.subjectTiming = subjectTiming;
         this.subjectFaculty = subjectFaculty;
         this.subjectVenue = subjectVenue;
         this.subjectValue = subjectValue;
+        this.batchName = batchName;
+
     }
     public SubjectDetails(){
 
+    }
+
+    public String getBatchName() {
+        return batchName;
+    }
+
+    public void setBatchName(String batchName) {
+        this.batchName = batchName;
     }
 
     public String getSubjectValue() {

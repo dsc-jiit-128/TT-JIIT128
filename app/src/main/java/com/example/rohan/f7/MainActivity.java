@@ -1,28 +1,22 @@
 package com.example.rohan.f7;
 
-import android.content.ClipData;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +26,6 @@ import com.example.rohan.f7.Fragments.Sat;
 import com.example.rohan.f7.Fragments.Thu;
 import com.example.rohan.f7.Fragments.Tue;
 import com.example.rohan.f7.Fragments.Wed;
-import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,9 +35,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-
-import javax.xml.transform.sax.SAXTransformerFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,9 +66,9 @@ public class MainActivity extends AppCompatActivity {
             "Materials Science",
             "Laser Technology and Applications",
             "COMPUTER BASED NUMERICAL TECHNIQUES",
-            "Matrix Computations",
-            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
             "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
+            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
+            "Matrix Computations",
             "LOGICAL REASONING AND INEQUALITIES",
             "Quantum Mechanics for Engineers",
             "Sociology of Youth",
@@ -119,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             "AV",
             "PKS",
             "PINKEY",
-            "NFMATHS1",
+            "AMS",
             "AMITA",
             "NEHA",
             "VM",
@@ -128,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             "RG",
             "PRV",
             "DV",
-            "SHRUTI/NFCS2"
+            "SHRUTI/NITIN/SANDHYA"
 
     };
     String[] timing={
@@ -152,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             "1:35-3:20"
           };
     String[] venue={
-            "254",
+            "228",
             "127",
             "126",
             "121",
@@ -172,9 +162,13 @@ public class MainActivity extends AppCompatActivity {
             "35"
     };
 
+    String[] batch={
+            "F7F8"
+
+    };
+
     String[] type2={
             "LAB",
-            "LEC",
             "LEC",
             "LEC",
             "LEC",
@@ -203,22 +197,21 @@ public class MainActivity extends AppCompatActivity {
             "Sociology of Youth",
             "PLANNING AND ECONOMIC DEVELOPMENT",
             "Technology and Culture",
-            "Strategic Human Resource Management",
             "SOFTWARE ENGINEERING",
             "ARTIFICIAL INTELLIGENCE",
             "MATERIALS SCIENCE",
             "Laser Technology and Applications",
             "COMPUTER BASED NUMERICAL TECHNIQUES",
-            "Matrix Computations",
-            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
             "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
+            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
+            "Matrix Computations",
             "LOGICAL REASONING AND INEQUALITIES",
             "Quantum Mechanics for Engineers",
             "Quantum Mechanics for Engineers",
             "Materials Science",
             "Laser Technology and Applications",
             "COMPUTER BASED NUMERICAL TECHNIQUES",
-            "Matrix Computations",
+            "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
             "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
             "Strategic Human Resource Management"
     };
@@ -244,24 +237,22 @@ public class MainActivity extends AppCompatActivity {
             "ELECTIVE",
             "ELECTIVE",
             "ELECTIVE",
-            "ELECTIVE",
             "ELECTIVE"
 
     };
     String [] faculty2={
-            "HM/RUPESH/CHETNA",
+            "HM/RUPESH/AMRIT",
             "RUPESH",
             "ALKA",
             "AA",
             "RG",
-            "PRV",
-            "NFCS2",
-            "OMPRAKASH",
+            "NITIN",
+            "AM",
             "SD",
             "AV",
             "PKS",
             "PINKEY",
-            "NFMATHS1",
+            "AMS",
             "AMITA",
             "NEHA",
             "VM",
@@ -270,13 +261,12 @@ public class MainActivity extends AppCompatActivity {
             "AV",
             "PKS",
             "PINKEY",
-            "NFMATHS1",
-            "PRV"
+            "PRIYA",
+            "RG"
     };
     String [] timing2={
             "9:00-10:45",
             "10:50-11:40",
-            "11:45-12:35",
             "11:45-12:35",
             "11:45-12:35",
             "11:45-12:35",
@@ -301,20 +291,19 @@ public class MainActivity extends AppCompatActivity {
     String [] venue2={
             "35",
             "111",
-            "111",
+            "244(A)",
             "226",
             "226",
-            "118",
             "226",
-            "118",
+            "118(B)",
             "217",
             "226",
             "228",
             "111",
-            "118",
+            "118(A)",
             "123",
             "137",
-            "244",
+            "244(A)",
             "244(A)",
             "244(B)",
             "118(A)",
@@ -323,50 +312,76 @@ public class MainActivity extends AppCompatActivity {
             "113",
             "123"
     };
+    String[] batch2={
+            "F7F8"
+
+    };
 
     String [] type3={
             "LAB",
             "TUTE",
             "TUTE",
+            "TUTE",
             "LAB",
-            "TUTE"
+            "TUTE",
+            "LAB"
     };
     String [] subject3={
             "Information Security Lab",
-            "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
+            "SOFTWARE ENGINEERING",
+            "Matrix Computations",
             "LOGICAL REASONING AND INEQUALITIES",
             "COMPUTER NETWORKS LAB",
-            "COMPUTER NETWORKS"
+            "COMPUTER NETWORKS",
+            "Information Security Lab"
     };
     String [] value3={
             "CORE",
             "ELECTIVE",
             "ELECTIVE",
             "ELECTIVE",
-            "ELECTIVE"
+            "ELECTIVE",
+            "ELECTIVE",
+            "CORE"
 
 };
 
     String [] faculty3={
             "KM",
+            "AMRIT PAL",
             "AMITA",
             "NEHA",
             "BDJ/SB/NEERAJ",
-            "RUPESH"
+            "RUPESH",
+            "NITIN"
     };
     String [] timing3={
             "9:00-10:45",
+            "10:50-11:40",
             "11:45-12:35",
             "11:45-12:35",
             "1:35-3:20",
-            "3:25-4:15"
+            "3:25-4:15",
+            "3:25-5:10"
     };
     String [] venue3={
             "MML",
+            "225",
             "121",
             "226",
             "151",
-            "229"
+            "229",
+            "MML"
+    };
+
+    String[] batch3={
+            "F7",
+            "F8",
+            "F7F8",
+            "F7F8",
+            "F7F8",
+            "F7",
+            "F8"
     };
     String [] type4={
             "LEC",
@@ -386,13 +401,13 @@ public class MainActivity extends AppCompatActivity {
             "LAB"
     };
     String [] subject4={
-            "COMPUTER NETWORKS",
+            "Strategic Human Resource Management",
             "Materials Science",
             "Laser Technology and Applications",
             "COMPUTER BASED NUMERICAL TECHNIQUES",
-            "Matrix Computations",
-            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
             "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
+            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
+            "Matrix Computations",
             "LOGICAL REASONING AND INEQUALITIES",
             "Quantum Mechanics for Engineers",
             "SOFTWARE ENGINEERING",
@@ -421,21 +436,21 @@ public class MainActivity extends AppCompatActivity {
 
     };
     String [] faculty4={
-            "RUPESH",
+            "RG",
             "SD",
             "AV",
             "PKS",
             "PINKEY",
-            "NFMATHS1",
+            "AMS",
             "AMITA",
             "NEHA",
             "VM",
-            "NFCS2",
-            "OMPRAKASH",
+            "NITIN",
+            "AM",
             "ALKA",
-            "NFCS2",
-            "NFCS1",
-            "NEHA"
+            "NITIN",
+            "AM",
+            "AM/KAJOL"
     };
     String [] timing4={
             "9:00-9:50",
@@ -451,11 +466,11 @@ public class MainActivity extends AppCompatActivity {
             "10:50-11:40",
             "12:40-1:30",
             "1:35-2:25",
-            "2:30-3:20",
+            "1:35-2:25",
             "3:25-5:10"
     };
     String [] venue4={
-            "226",
+            "153",
             "217",
             "226",
             "228",
@@ -468,40 +483,77 @@ public class MainActivity extends AppCompatActivity {
             "118(A)",
             "116",
             "126",
-            "126",
+            "113",
             "151"
     };
+    String[] batch4={
+            "F7F8",
+            "F8F8",
+            "F7F8",
+            "F7F8",
+            "F7F8",
+            "F8F8",
+            "F7F8",
+            "F7F8",
+            "F7F8",
+            "F7F8",
+            "F7F8",
+            "F7F8",
+            "F7",
+            "F7F8",
+            "F7F8"
 
+    };
     String [] type5={
-            "LAB",
+            "LEC",
+            "LEC",
+            "TUTE",
             "LEC",
             "LEC"
     };
     String [] subject5={
-            "ARTIFICIAL INTELLIGENCE LAB",
+            "ARTIFICIAL INTELLIGENCE",
             "SOFTWARE ENGINEERING",
+            "COMPUTER NETWORKS",
+            "COMPUTER NETWORKS",
             "PRINCIPLES OF MANAGEMENT"
     };
     String [] value5={
+            "ELECTIVE",
+            "ELECTIVE",
             "ELECTIVE",
             "ELECTIVE",
             "ELECTIVE"
     };
 
     String [] faculty5={
-            "OMPRAKASH",
-            "NFCS2",
+            "AM",
+            "NITIN",
+            "RUPESH",
+            "RUPESH",
             "DV"
     };
     String [] timing5={
             "9:00-9:50",
             "9:00-9:50",
+            "9:55-10:45",
+            "10:50-11:40",
             "1:35-2:25"
     };
     String [] venue5={
             "228",
             "118(B)",
+            "127",
+            "226",
             "217"
+    };
+    String[] batch5={
+            "F7F8",
+            "F7F8",
+            "F8",
+            "F7F8",
+            "F7F8"
+
     };
 
     ArrayList<ArrayList<SubjectDetails>> subjectDetailsArrayList= new ArrayList<>();
@@ -516,6 +568,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -576,9 +629,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (tinyDB.getChoices("ELECTIVES")==null){
             Toast.makeText(this, "CHOOSE ELECTIVES", Toast.LENGTH_SHORT).show();
-
-            ChoicesDialog choicesDialog= new ChoicesDialog(this);
-            choicesDialog.show();
+            startActivity(new Intent(MainActivity.this, ChooseElective.class));
+            finish();
 
         }
 
@@ -595,7 +647,8 @@ public class MainActivity extends AppCompatActivity {
                     timing[i],
                     faculty[i],
                     venue[i],
-                    value[i]);
+                    value[i],
+                    batch[0]);
             MONDAY.add(subjectDetails);
         }
         ArrayList<SubjectDetails> TUESDAY = new ArrayList<>();
@@ -607,7 +660,8 @@ public class MainActivity extends AppCompatActivity {
                     timing2[i],
                     faculty2[i],
                     venue2[i],
-                    value2[i]);
+                    value2[i],
+                    batch2[0]);
             TUESDAY.add(subjectDetails);
         }
         ArrayList<SubjectDetails> WEDNESDAY = new ArrayList<>();
@@ -619,7 +673,8 @@ public class MainActivity extends AppCompatActivity {
                     timing3[i],
                     faculty3[i],
                     venue3[i],
-                    value3[i]);
+                    value3[i],
+                    batch3[i]);
             WEDNESDAY.add(subjectDetails);
         }
         ArrayList<SubjectDetails> THURSDAY = new ArrayList<>();
@@ -631,7 +686,8 @@ public class MainActivity extends AppCompatActivity {
                     timing4[i],
                     faculty4[i],
                     venue4[i],
-                    value4[i]);
+                    value4[i],
+                    batch4[i]);
             THURSDAY.add(subjectDetails);
         }
         ArrayList<SubjectDetails> FRIDAY = new ArrayList<>();
@@ -643,7 +699,8 @@ public class MainActivity extends AppCompatActivity {
                     timing5[i],
                     faculty5[i],
                     venue5[i],
-                    value5[i]);
+                    value5[i],
+                    batch5[i]);
             FRIDAY.add(subjectDetails);
         }
         ArrayList<SubjectDetails> SATURDAY = new ArrayList<>();
@@ -683,8 +740,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
         if (id==R.id.changeElective){
-            ChoicesDialog choicesDialog = new ChoicesDialog(this);
-            choicesDialog.show();
+           startActivity(new Intent(MainActivity.this, ChooseElective.class));
+           finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -764,6 +821,24 @@ public class MainActivity extends AppCompatActivity {
         public int getCount() {
 
             return 6;
+        }
+    }
+    void swapSubjects()
+    {
+        for(int i=0; i<faculty.length;i++)
+        {
+            if (faculty[i].equals("Pinkey"))
+            {
+                for (int j=0;j<faculty.length;j++)
+                {
+                    if (faculty[j].equals("Amita"))
+                    {
+                        String temp = subject[j];
+                        subject[j]= subject[i];
+                        subject[i]= temp;
+                    }
+                }
+            }
         }
     }
 }
