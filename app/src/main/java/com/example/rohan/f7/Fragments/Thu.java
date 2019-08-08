@@ -78,7 +78,7 @@ public class Thu extends Fragment {
 
 
                     }
-                    if (subjectDetails==null){
+                    if (subjectDetails.size()==0){
                         view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
                     }
 

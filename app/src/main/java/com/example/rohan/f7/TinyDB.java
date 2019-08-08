@@ -514,10 +514,20 @@ public class TinyDB {
         String json = gson.toJson(object);
         preferences.edit().putString(key,json).apply();
     }
+    public void putSubjectDetailsOfADay(String key, ArrayList<SubjectDetails> object){
+        Gson gson = new Gson();
+        String json = gson.toJson(object);
+        preferences.edit().putString(key,json).apply();
+    }
 
     public ArrayList<ArrayList<SubjectDetails>> getSubjectDetails(String key){
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<ArrayList<SubjectDetails>>>(){}.getType();
+        return gson.fromJson(preferences.getString(key,null),type);
+    }
+    public ArrayList<SubjectDetails> getSubjectDetailsOfADay(String key){
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<SubjectDetails>>(){}.getType();
         return gson.fromJson(preferences.getString(key,null),type);
     }
     public Choices getChoices(String key){

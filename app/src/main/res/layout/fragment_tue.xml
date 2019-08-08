@@ -12,6 +12,7 @@
         android:textSize="24dp"
         android:layout_marginTop="16dp"
         android:id="@+id/noClassMsg"
+        android:visibility="gone"
         android:textColor="#ffffff"
         android:gravity="center_horizontal"
         />
