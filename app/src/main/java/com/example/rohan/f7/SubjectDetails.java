@@ -8,9 +8,10 @@ public class SubjectDetails {
     public String subjectVenue;
     public String subjectValue;
     public String batchName;
+    public String subjectCode;
 
 
-    public SubjectDetails(String subjectType, String subjectName, String subjectTiming, String subjectFaculty, String subjectVenue, String subjectValue, String batchName) {
+    public SubjectDetails(String subjectType, String subjectName, String subjectTiming, String subjectFaculty, String subjectVenue, String subjectValue, String batchName, String subjectCode) {
         this.subjectType = subjectType;
         this.subjectName = subjectName;
         this.subjectTiming = subjectTiming;
@@ -18,6 +19,7 @@ public class SubjectDetails {
         this.subjectVenue = subjectVenue;
         this.subjectValue = subjectValue;
         this.batchName = batchName;
+        this.subjectCode = subjectCode;
 
     }
     public SubjectDetails(){
@@ -78,5 +80,12 @@ public class SubjectDetails {
 
     public void setSubjectVenue(String subjectVenue) {
         this.subjectVenue = subjectVenue;
+    }
+    public String getSubjectCode() {
+        return subjectCode;
+    }
+
+    public void setSubjectCode(String subjectCode) {
+        this.subjectCode = subjectCode;
     }
 }

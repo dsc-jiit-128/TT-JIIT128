@@ -51,28 +51,31 @@ public class Wed extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         TinyDB tinyDB = new TinyDB(getActivity());
         try{
-            if (tinyDB.getSubjectDetails("SEMESTER_5").get(2)!=null){
+            if (tinyDB.getSubjectDetails("3RD_YEAR").get(2)!=null){
 
                 ArrayList<SubjectDetails> subjectDetails = new ArrayList<>();
                 if (tinyDB.getChoices("ELECTIVES")!=null)
                 {
-                    for (int i=0;i<tinyDB.getSubjectDetails("SEMESTER_5").get(2).size();i++){
-                        if (tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getBatchName().contains(tinyDB.getString("BATCH")))
+                    for (int i=0;i<tinyDB.getSubjectDetails("3RD_YEAR").get(2).size();i++){
+                        if (tinyDB.getSubjectDetails("3RD_YEAR").get(2).get(i).getBatchName().contains(tinyDB.getString("BATCH"))
+                        || tinyDB.getSubjectDetails("3RD_YEAR").get(2).get(i).getBatchName().contains(tinyDB.getString("ALL")))
                         {
-                            if (tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectValue().equals("CORE"))
-                            {
-                                subjectDetails.add(tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i));
-                            }else{
-                                Choices choices = new Choices();
-                                choices = tinyDB.getChoices("ELECTIVES");
-                                if (tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective1())
-                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective2())
-                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective3())
-                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective4()))
-                                {
-                                    subjectDetails.add(tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i));
-                                }
-                            }
+                            subjectDetails.add(tinyDB.getSubjectDetails("3RD_YEAR").get(2).get(i));
+
+//                            if (tinyDB.getSubjectDetails("3RD_YEAR").get(2).get(i).getSubjectValue().equals("CORE"))
+//                            {
+//                                subjectDetails.add(tinyDB.getSubjectDetails("3RD_YEAR").get(2).get(i));
+//                            }else{
+//                                Choices choices = new Choices();
+//                                choices = tinyDB.getChoices("ELECTIVES");
+//                                if (tinyDB.getSubjectDetails("3RD_YEAR").get(2).get(i).getSubjectName().contains(choices.getElective1())
+//                                        || tinyDB.getSubjectDetails("3RD_YEAR").get(2).get(i).getSubjectName().contains(choices.getElective2())
+//                                        || tinyDB.getSubjectDetails("3RD_YEAR").get(2).get(i).getSubjectName().contains(choices.getElective3())
+//                                        || tinyDB.getSubjectDetails("3RD_YEAR").get(2).get(i).getSubjectName().contains(choices.getElective4()))
+//                                {
+//                                    subjectDetails.add(tinyDB.getSubjectDetails("3RD_YEAR").get(2).get(i));
+//                                }
+//                            }
                         }
 
 
@@ -84,7 +87,7 @@ public class Wed extends Fragment {
                     recyclerAdapter=new RecyclerAdapter(subjectDetails, getContext());
                     recyclerAdapter.notifyDataSetChanged();
                 }else{
-                    recyclerAdapter=new RecyclerAdapter(tinyDB.getSubjectDetails("SEMESTER_5").get(2), getContext());
+                    recyclerAdapter=new RecyclerAdapter(tinyDB.getSubjectDetails("3RD_YEAR").get(2), getContext());
                     recyclerAdapter.notifyDataSetChanged();
                 }
 

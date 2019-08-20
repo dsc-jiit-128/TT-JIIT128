@@ -90,75 +90,23 @@ public class MainActivity extends AppCompatActivity {
         //setTimeTableToDataBase();
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("3RD_YEAR");
+        databaseReference = FirebaseDatabase.getInstance().getReference();
         final TinyDB tinyDB= new TinyDB(this);
         databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
+                    GenericTypeIndicator<ArrayList<ArrayList<SubjectDetails>>> t = new GenericTypeIndicator<ArrayList<ArrayList<SubjectDetails>>>() {
+                    };
+
+                    if (tinyDB.getSubjectDetails("3RD_YEAR")==null)
                     {
-                        subjectCodes.add(dataSnapshot1.getValue().toString());
+                        tinyDB.putSubjectDetails("3RD_YEAR",dataSnapshot.child("3RD_YEAR").getValue(t));
+
+                    }else if ((tinyDB.getSubjectDetails("3RD_YEAR")!=dataSnapshot.child("3RD_YEAR").getValue(t))){
+                        tinyDB.putSubjectDetails("3RD_YEAR",dataSnapshot.child("3RD_YEAR").getValue(t));
 
                     }
-
-                    InputStream is = getResources().openRawResource(R.raw.apptimetable);
-                    BufferedReader reader = new BufferedReader(
-                            new InputStreamReader(is, Charset.forName("UTF-8")));
-                    String line = "";
-
-                    try {
-                        while ((line = reader.readLine()) != null) {
-                            // Split the line into different tokens (using the comma as a separator).
-                            String[] tokens = line.split(",");
-
-                            ArrayList<SubjectDetails> subjectDetails = new ArrayList<>();
-                            // Read the data and store it in the WellData POJO.
-
-                            for(int i=1;i<tokens.length;i++)
-                            {
-                                String s = tokens[i];
-                                String subjectType = s.substring(0,1);
-                                if (subjectType.equals("L"))
-                                {
-                                    subjectType = "LEC";
-                                }else if(subjectType.equals("T"))
-                                {
-                                    subjectType = "TUTE";
-                                }else{
-                                    subjectType = "LAB";
-                                }
-                                s = s.substring(1);
-                                String subjectBatch = s.substring(0, s.indexOf("(")+1);
-                                s = s.substring(s.indexOf("(")+1);
-                                String subjectName = s.substring(0, s.indexOf(")")+1);
-                                subjectName=subjectName.replace(")", "");
-                                subjectName = setSubjectName(subjectName);
-                                s = s.substring(s.indexOf(")")+1);
-                                String subjectVenue = s.substring(0, s.indexOf('/')+1);
-                                s = s.substring(s.indexOf('/')+1);
-                                String subjectFaculty = s.substring(0, s.indexOf(" ")+1);
-                                s = s.substring(s.indexOf(" ")+1);
-                                String subjectTime = s;
-
-                                SubjectDetails subjectDetail = new SubjectDetails(subjectType, subjectName, subjectTime, subjectFaculty, subjectVenue,"CORE", subjectBatch);
-                                subjectDetails.add(subjectDetail);
-
-
-
-                            }
-                            tinyDB.putSubjectDetailsOfADay(tokens[0], subjectDetails);
-
-                            Log.d("MainActivity" ,"Just Created "+tokens[0] );
-                        }
-                    } catch (IOException e1) {
-                        Log.e("MainActivity", "Error" + line, e1);
-                        e1.printStackTrace();
-                    }
-
-
-
-
                 }
 
                 @Override

@@ -10,11 +10,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.rohan.f7.Choices;
 import com.example.rohan.f7.ClassDetail;
@@ -28,25 +26,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.opencsv.CSVReader;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.support.constraint.Constraints.TAG;
 
 
 public class Mon extends Fragment {
     FirebaseDatabase firebaseDatabase;
+    List<ClassDetail> classDetails;
     DatabaseReference databaseReference;
     RecyclerView recyclerView;
+    List<ClassDetail> offline=new ArrayList<>();
+    SQLite sqLite;
     private RecyclerAdapter recyclerAdapter;
 
 
@@ -56,40 +47,41 @@ public class Mon extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mon, container, false);
 
-
+        sqLite = new SQLite(getContext());
 
         recyclerView=view.findViewById(R.id.recycle);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+
         TinyDB tinyDB = new TinyDB(getActivity());
-
-
-
-
-
         try{
-            if (tinyDB.getSubjectDetailsOfADay("Mon")!=null){
+            if (tinyDB.getSubjectDetails("3RD_YEAR").get(0)!=null){
 
                 ArrayList<SubjectDetails> subjectDetails = new ArrayList<>();
                 if (tinyDB.getChoices("ELECTIVES")!=null)
                 {
-                    for (int i=0;i<tinyDB.getSubjectDetailsOfADay("Mon").size();i++){
-                        if (tinyDB.getSubjectDetailsOfADay("Mon").get(i).getBatchName().contains(tinyDB.getString("BATCH")))
+                    for (int i=0;i<tinyDB.getSubjectDetails("3RD_YEAR").get(0).size();i++){
+                        if (tinyDB.getSubjectDetails("3RD_YEAR").get(0).get(i).getBatchName().contains(tinyDB.getString("BATCH"))
+                                || tinyDB.getSubjectDetails("3RD_YEAR").get(0).get(i).getBatchName().contains(tinyDB.getString("ALL")))
                         {
-                            if (tinyDB.getSubjectDetailsOfADay("Mon").get(i).getSubjectValue().equals("CORE"))
-                            {
-                                subjectDetails.add(tinyDB.getSubjectDetailsOfADay("Mon").get(i));
-                            }else{
-                                Choices choices = new Choices();
-                                choices = tinyDB.getChoices("ELECTIVES");
-                                if (tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectName().contains(choices.getElective1())
-                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectName().contains(choices.getElective2())
-                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectName().contains(choices.getElective3())
-                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectName().contains(choices.getElective4()))
-                                {
-                                    subjectDetails.add(tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i));
-                                }
-                            }
+                            subjectDetails.add(tinyDB.getSubjectDetails("3RD_YEAR").get(0).get(i));
+
+//                            if (tinyDB.getSubjectDetails("3RD_YEAR").get(0).get(i).getSubjectValue().equals("CORE"))
+//                            {
+//                                subjectDetails.add(tinyDB.getSubjectDetails("3RD_YEAR").get(0).get(i));
+//                            }else{
+//                                Choices choices = new Choices();
+//                                choices = tinyDB.getChoices("ELECTIVES");
+//                                if (tinyDB.getSubjectDetails("3RD_YEAR").get(0).get(i).getSubjectName().contains(choices.getElective1())
+//                                        || tinyDB.getSubjectDetails("3RD_YEAR").get(0).get(i).getSubjectName().contains(choices.getElective2())
+//                                        || tinyDB.getSubjectDetails("3RD_YEAR").get(0).get(i).getSubjectName().contains(choices.getElective3())
+//                                        || tinyDB.getSubjectDetails("3RD_YEAR").get(0).get(i).getSubjectName().contains(choices.getElective4()))
+//                                {
+//                                    subjectDetails.add(tinyDB.getSubjectDetails("3RD_YEAR").get(0).get(i));
+//                                }
+//                            }
                         }
 
                     }
@@ -100,7 +92,7 @@ public class Mon extends Fragment {
                     recyclerAdapter=new RecyclerAdapter(subjectDetails, getContext());
                     recyclerAdapter.notifyDataSetChanged();
                 }else{
-                    recyclerAdapter=new RecyclerAdapter(tinyDB.getSubjectDetails("SEMESTER_5").get(0), getContext());
+                    recyclerAdapter=new RecyclerAdapter(tinyDB.getSubjectDetails("3RD_YEAR").get(0), getContext());
                     recyclerAdapter.notifyDataSetChanged();
                 }
 
