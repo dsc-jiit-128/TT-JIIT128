@@ -11,7 +11,11 @@
         android:roundIcon="@drawable/appiconbatch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChooseElective"></activity>
+        <activity
+            android:name=".MyNotesActivity"
+            android:label="@string/title_activity_my_notes"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ChooseElective" />
         <activity android:name=".WebKiosk" />
         <activity
             android:name=".MainActivity"

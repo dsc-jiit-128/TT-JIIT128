@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/sidenavbar">
+    android:padding="4dp"
+    android:background="@drawable/bglayout">
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
         android:layout_centerInParent="true"
         android:id="@+id/batch"
         android:padding="24dp"
-        android:background="@drawable/choicesbg">
+        android:background="@drawable/savebuttonbg">
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,15 +29,16 @@
             android:layout_gravity="center"/>
     </RadioGroup>
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/batch"
         android:layout_marginTop="8dp"
-        android:background="#80000000"
         android:text="SAVE"
+        android:background="@drawable/savebuttonbg"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"
         android:id="@+id/savebatch"
         android:textSize="24dp"
-        android:textColor="#ffffff"
         />
 
 
