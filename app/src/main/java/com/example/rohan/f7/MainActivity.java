@@ -592,10 +592,14 @@ public class MainActivity extends AppCompatActivity {
         else{
             mViewPager.setCurrentItem(dayofweek-2,true);
         }
-        //setTimeTableToDataBase();
+//      setTimeTableToDataBase();
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        databaseReference.keepSynced(true);
+
+
         final TinyDB tinyDB= new TinyDB(this);
         databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -714,6 +718,7 @@ public class MainActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("SEMESTER_5").setValue(subjectDetailsArrayList);
+        databaseReference.keepSynced(true);
 
     }
 
