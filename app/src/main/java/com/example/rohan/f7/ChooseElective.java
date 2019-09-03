@@ -101,6 +101,7 @@ public class ChooseElective extends AppCompatActivity {
                         && choices.getElective4()!=null)
                 {
                     new TinyDB(getApplicationContext()).setChoices("ELECTIVES", choices);
+
                     startActivity(new Intent(ChooseElective.this, MainActivity.class));
                     finish();
 
