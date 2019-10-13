@@ -11,14 +11,16 @@
         android:textSize="24dp"
         android:layout_marginTop="16dp"
         android:id="@+id/noClassMsg"
+        android:visibility="gone"
+
         android:textColor="#ffffff"
         android:gravity="center_horizontal"
         />
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recycle"></android.support.v7.widget.RecyclerView>
+        android:id="@+id/recycle"></androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

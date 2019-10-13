@@ -3,15 +3,19 @@ package com.example.rohan.f7;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.browser.customtabs.CustomTabsIntent;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,526 +42,10 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    String[] type={
-            "LEC",
-            "TUTE",
-            "TUTE",
-            "TUTE",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LAB"
-    };
-    String[] subject={
-           "COMPUTER NETWORKS",
-            "Technology and Culture",
-            "PLANNING AND ECONOMIC DEVELOPMENT",
-            "PRINCIPLES OF MANAGEMENT",
-            "Materials Science",
-            "Laser Technology and Applications",
-            "COMPUTER BASED NUMERICAL TECHNIQUES",
-            "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
-            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
-            "Matrix Computations",
-            "LOGICAL REASONING AND INEQUALITIES",
-            "Quantum Mechanics for Engineers",
-            "Sociology of Youth",
-            "PLANNING AND ECONOMIC DEVELOPMENT",
-            "Technology and Culture",
-            "Strategic Human Resource Management",
-            "PRINCIPLES OF MANAGEMENT",
-            "SOFTWARE ENGINEERING LAB"
 
-    };
-    String[] value={
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE"
-
-    };
-    String[] faculty={
-            "RUPESH",
-            "RG",
-            "AA",
-            "DV",
-            "SD",
-            "AV",
-            "PKS",
-            "PINKEY",
-            "AMS",
-            "AMITA",
-            "NEHA",
-            "VM",
-            "ALKA",
-            "AA",
-            "RG",
-            "PRV",
-            "DV",
-            "SHRUTI/NITIN/SANDHYA"
-
-    };
-    String[] timing={
-            "9:00-9:50",
-            "9:55-10:45",
-            "9:55-10:45",
-            "9:55-10:45",
-            "10:50-11:40",
-            "10:50-11:40",
-            "10:50-11:40",
-            "10:50-11:40",
-            "10:50-11:40",
-            "10:50-11:40",
-            "10:50-11:40",
-            "10:50-11:40",
-            "11:45-12:35",
-            "11:45-12:35",
-            "11:45-12:35",
-            "11:45-12:35",
-            "12:40-1:30",
-            "1:35-3:20"
-          };
-    String[] venue={
-            "228",
-            "127",
-            "126",
-            "121",
-            "118(A)",
-            "118(B)",
-            "244(A)",
-            "244(B)",
-            "111",
-            "217",
-            "226",
-            "228",
-            "111",
-            "217",
-            "226",
-            "228",
-            "111",
-            "35"
-    };
-
-    String[] batch={
-            "F7F8"
-
-    };
-
-    String[] type2={
-            "LAB",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "TUTE",
-            "TUTE",
-            "TUTE",
-            "TUTE",
-            "TUTE",
-            "TUTE",
-            "TUTE"
-    };
-    String[] subject2={
-            "Open Source Software Lab",
-            "COMPUTER NETWORKS",
-            "Sociology of Youth",
-            "PLANNING AND ECONOMIC DEVELOPMENT",
-            "Technology and Culture",
-            "SOFTWARE ENGINEERING",
-            "ARTIFICIAL INTELLIGENCE",
-            "MATERIALS SCIENCE",
-            "Laser Technology and Applications",
-            "COMPUTER BASED NUMERICAL TECHNIQUES",
-            "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
-            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
-            "Matrix Computations",
-            "LOGICAL REASONING AND INEQUALITIES",
-            "Quantum Mechanics for Engineers",
-            "Quantum Mechanics for Engineers",
-            "Materials Science",
-            "Laser Technology and Applications",
-            "COMPUTER BASED NUMERICAL TECHNIQUES",
-            "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
-            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
-            "Strategic Human Resource Management"
-    };
-    String [] value2={
-            "CORE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE"
-
-    };
-    String [] faculty2={
-            "HM/RUPESH/AMRIT",
-            "RUPESH",
-            "ALKA",
-            "AA",
-            "RG",
-            "NITIN",
-            "AM",
-            "SD",
-            "AV",
-            "PKS",
-            "PINKEY",
-            "AMS",
-            "AMITA",
-            "NEHA",
-            "VM",
-            "VM",
-            "SD",
-            "AV",
-            "PKS",
-            "PINKEY",
-            "PRIYA",
-            "RG"
-    };
-    String [] timing2={
-            "9:00-10:45",
-            "10:50-11:40",
-            "11:45-12:35",
-            "11:45-12:35",
-            "11:45-12:35",
-            "12:40-1:30",
-            "12:40-1:30",
-            "1:35-2:25",
-            "1:35-2:25",
-            "1:35-2:25",
-            "1:35-2:25",
-            "1:35-2:25",
-            "1:35-2:25",
-            "1:35-2:25",
-            "1:35-2:25",
-            "2:30-3:20",
-            "2:30-3:20",
-            "2:30-3:20",
-            "2:30-3:20",
-            "2:30-3:20",
-            "2:30-3:20",
-            "3:25-4:15"
-    };
-    String [] venue2={
-            "35",
-            "111",
-            "244(A)",
-            "226",
-            "226",
-            "226",
-            "118(B)",
-            "217",
-            "226",
-            "228",
-            "111",
-            "118(A)",
-            "123",
-            "137",
-            "244(A)",
-            "244(A)",
-            "244(B)",
-            "118(A)",
-            "228",
-            "111",
-            "113",
-            "123"
-    };
-    String[] batch2={
-            "F7F8"
-
-    };
-
-    String [] type3={
-            "LAB",
-            "TUTE",
-            "TUTE",
-            "TUTE",
-            "LAB",
-            "TUTE",
-            "LAB"
-    };
-    String [] subject3={
-            "Information Security Lab",
-            "SOFTWARE ENGINEERING",
-            "Matrix Computations",
-            "LOGICAL REASONING AND INEQUALITIES",
-            "COMPUTER NETWORKS LAB",
-            "COMPUTER NETWORKS",
-            "Information Security Lab"
-    };
-    String [] value3={
-            "CORE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "CORE"
-
-};
-
-    String [] faculty3={
-            "KM",
-            "AMRIT PAL",
-            "AMITA",
-            "NEHA",
-            "BDJ/SB/NEERAJ",
-            "RUPESH",
-            "NITIN"
-    };
-    String [] timing3={
-            "9:00-10:45",
-            "10:50-11:40",
-            "11:45-12:35",
-            "11:45-12:35",
-            "1:35-3:20",
-            "3:25-4:15",
-            "3:25-5:10"
-    };
-    String [] venue3={
-            "MML",
-            "225",
-            "121",
-            "226",
-            "151",
-            "229",
-            "MML"
-    };
-
-    String[] batch3={
-            "F7",
-            "F8",
-            "F7F8",
-            "F7F8",
-            "F7F8",
-            "F7",
-            "F8"
-    };
-    String [] type4={
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "LEC",
-            "TUTE",
-            "TUTE",
-            "TUTE",
-            "LAB"
-    };
-    String [] subject4={
-            "Strategic Human Resource Management",
-            "Materials Science",
-            "Laser Technology and Applications",
-            "COMPUTER BASED NUMERICAL TECHNIQUES",
-            "STATISTICAL INFORMATION THEORY WITH APPLICATIONS",
-            "DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH",
-            "Matrix Computations",
-            "LOGICAL REASONING AND INEQUALITIES",
-            "Quantum Mechanics for Engineers",
-            "SOFTWARE ENGINEERING",
-            "ARTIFICIAL INTELLIGENCE",
-            "Sociology of Youth",
-            "SOFTWARE ENGINEERING",
-            "ARTIFICIAL INTELLIGENCE",
-            "ARTIFICIAL INTELLIGENCE LAB"
-    };
-    String [] value4={
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE"
-
-    };
-    String [] faculty4={
-            "RG",
-            "SD",
-            "AV",
-            "PKS",
-            "PINKEY",
-            "AMS",
-            "AMITA",
-            "NEHA",
-            "VM",
-            "NITIN",
-            "AM",
-            "ALKA",
-            "NITIN",
-            "AM",
-            "AM/KAJOL"
-    };
-    String [] timing4={
-            "9:00-9:50",
-            "9:55-10:45",
-            "9:55-10:45",
-            "9:55-10:45",
-            "9:55-10:45",
-            "9:55-10:45",
-            "9:55-10:45",
-            "9:55-10:45",
-            "9:55-10:45",
-            "10:50-11:40",
-            "10:50-11:40",
-            "12:40-1:30",
-            "1:35-2:25",
-            "1:35-2:25",
-            "3:25-5:10"
-    };
-    String [] venue4={
-            "153",
-            "217",
-            "226",
-            "228",
-            "111",
-            "244(A)",
-            "244(B)",
-            "118(A)",
-            "148",
-            "228",
-            "118(A)",
-            "116",
-            "126",
-            "113",
-            "151"
-    };
-    String[] batch4={
-            "F7F8",
-            "F8F8",
-            "F7F8",
-            "F7F8",
-            "F7F8",
-            "F8F8",
-            "F7F8",
-            "F7F8",
-            "F7F8",
-            "F7F8",
-            "F7F8",
-            "F7F8",
-            "F7",
-            "F7F8",
-            "F7F8"
-
-    };
-    String [] type5={
-            "LEC",
-            "LEC",
-            "TUTE",
-            "LEC",
-            "LEC"
-    };
-    String [] subject5={
-            "ARTIFICIAL INTELLIGENCE",
-            "SOFTWARE ENGINEERING",
-            "COMPUTER NETWORKS",
-            "COMPUTER NETWORKS",
-            "PRINCIPLES OF MANAGEMENT"
-    };
-    String [] value5={
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE",
-            "ELECTIVE"
-    };
-
-    String [] faculty5={
-            "AM",
-            "NITIN",
-            "RUPESH",
-            "RUPESH",
-            "DV"
-    };
-    String [] timing5={
-            "9:00-9:50",
-            "9:00-9:50",
-            "9:55-10:45",
-            "10:50-11:40",
-            "1:35-2:25"
-    };
-    String [] venue5={
-            "228",
-            "118(B)",
-            "127",
-            "226",
-            "217"
-    };
-    String[] batch5={
-            "F7F8",
-            "F7F8",
-            "F8",
-            "F7F8",
-            "F7F8"
-
-    };
-
-    ArrayList<ArrayList<SubjectDetails>> subjectDetailsArrayList= new ArrayList<>();
     DatabaseReference databaseReference;
+
+    AdView adView;
 
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -572,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        adView = findViewById(R.id.bannerAd);
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+
+        AdRequest adRequest= new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -592,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         else{
             mViewPager.setCurrentItem(dayofweek-2,true);
         }
-        //setTimeTableToDataBase();
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -637,85 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setTimeTableToDataBase() {
-        ArrayList<SubjectDetails> MONDAY = new ArrayList<>();
-        for (int i=0;i<subject.length;i++)
-        {
-            SubjectDetails subjectDetails = new SubjectDetails(
-                    type[i],
-                    subject[i],
-                    timing[i],
-                    faculty[i],
-                    venue[i],
-                    value[i],
-                    batch[0]);
-            MONDAY.add(subjectDetails);
-        }
-        ArrayList<SubjectDetails> TUESDAY = new ArrayList<>();
-        for (int i=0;i<subject2.length;i++)
-        {
-            SubjectDetails subjectDetails = new SubjectDetails(
-                    type2[i],
-                    subject2[i],
-                    timing2[i],
-                    faculty2[i],
-                    venue2[i],
-                    value2[i],
-                    batch2[0]);
-            TUESDAY.add(subjectDetails);
-        }
-        ArrayList<SubjectDetails> WEDNESDAY = new ArrayList<>();
-        for (int i=0;i<subject3.length;i++)
-        {
-            SubjectDetails subjectDetails = new SubjectDetails(
-                    type3[i],
-                    subject3[i],
-                    timing3[i],
-                    faculty3[i],
-                    venue3[i],
-                    value3[i],
-                    batch3[i]);
-            WEDNESDAY.add(subjectDetails);
-        }
-        ArrayList<SubjectDetails> THURSDAY = new ArrayList<>();
-        for (int i=0;i<subject4.length;i++)
-        {
-            SubjectDetails subjectDetails = new SubjectDetails(
-                    type4[i],
-                    subject4[i],
-                    timing4[i],
-                    faculty4[i],
-                    venue4[i],
-                    value4[i],
-                    batch4[i]);
-            THURSDAY.add(subjectDetails);
-        }
-        ArrayList<SubjectDetails> FRIDAY = new ArrayList<>();
-        for (int i=0;i<subject5.length;i++)
-        {
-            SubjectDetails subjectDetails = new SubjectDetails(
-                    type5[i],
-                    subject5[i],
-                    timing5[i],
-                    faculty5[i],
-                    venue5[i],
-                    value5[i],
-                    batch5[i]);
-            FRIDAY.add(subjectDetails);
-        }
-        ArrayList<SubjectDetails> SATURDAY = new ArrayList<>();
 
-        subjectDetailsArrayList.add(MONDAY);
-        subjectDetailsArrayList.add(TUESDAY);
-        subjectDetailsArrayList.add(WEDNESDAY);
-        subjectDetailsArrayList.add(THURSDAY);
-        subjectDetailsArrayList.add(FRIDAY);
-        subjectDetailsArrayList.add(SATURDAY);
-
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("SEMESTER_5").setValue(subjectDetailsArrayList);
-
-    }
 
 
     @Override
@@ -736,8 +151,6 @@ public class MainActivity extends AppCompatActivity {
             CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
             CustomTabsIntent customTabsIntent = builder.build();
             customTabsIntent.launchUrl(this, Uri.parse("https://webkiosk.jiit.ac.in/"));
-
-
         }
         if (id==R.id.changeElective){
            startActivity(new Intent(MainActivity.this, ChooseElective.class));
@@ -823,22 +236,5 @@ public class MainActivity extends AppCompatActivity {
             return 6;
         }
     }
-    void swapSubjects()
-    {
-        for(int i=0; i<faculty.length;i++)
-        {
-            if (faculty[i].equals("Pinkey"))
-            {
-                for (int j=0;j<faculty.length;j++)
-                {
-                    if (faculty[j].equals("Amita"))
-                    {
-                        String temp = subject[j];
-                        subject[j]= subject[i];
-                        subject[i]= temp;
-                    }
-                }
-            }
-        }
-    }
+
 }

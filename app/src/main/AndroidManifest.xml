@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.rohan.f7">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,10 +12,9 @@
         android:roundIcon="@drawable/appiconbatch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MyNotesActivity"
-            android:label="@string/title_activity_my_notes"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
         <activity android:name=".ChooseElective" />
         <activity android:name=".WebKiosk" />
         <activity
