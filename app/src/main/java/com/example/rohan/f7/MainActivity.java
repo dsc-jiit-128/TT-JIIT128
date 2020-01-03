@@ -88,46 +88,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        final TinyDB tinyDB= new TinyDB(this);
-        databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                    GenericTypeIndicator<ArrayList<ArrayList<SubjectDetails>>> t = new GenericTypeIndicator<ArrayList<ArrayList<SubjectDetails>>>() {
-                    };
-
-                    if (tinyDB.getSubjectDetails("SEMESTER_5")==null)
-                    {
-                        tinyDB.putSubjectDetails("SEMESTER_5",dataSnapshot.child("SEMESTER_5").getValue(t));
-
-                    }else if ((tinyDB.getSubjectDetails("SEMESTER_5")!=dataSnapshot.child("SEMESTER_5").getValue(t))){
-                        tinyDB.putSubjectDetails("SEMESTER_5",dataSnapshot.child("SEMESTER_5").getValue(t));
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-
-                }
-            });
-
-
-        if (tinyDB.getSubjectDetails("SEMESTER_5")!=null)
-        {
-            //Toast.makeText(this, ""+tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(0).getSubjectName(), Toast.LENGTH_SHORT).show();
-        }
-
-        if (tinyDB.getChoices("ELECTIVES")==null){
-            Toast.makeText(this, "CHOOSE ELECTIVES", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(MainActivity.this, ChooseElective.class));
-            finish();
-
-        }
-
-
     }
 
 

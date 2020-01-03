@@ -1,115 +1,85 @@
 package com.example.rohan.f7;
 
-import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 public class ChooseElective extends AppCompatActivity {
+
+    DatabaseReference df;
+    RecyclerView recyclerView;
+    RecyclerAdapterForSubject recyclerAdapterForSubject;
+    Button saveSubjects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_elective);
+        saveSubjects = findViewById(R.id.save);
+        recyclerView = findViewById(R.id.subjects_to_choose);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         if (new TinyDB(this).getString("BATCH")=="")
         {
             ChoicesDialog choicesDialog = new ChoicesDialog(this);
             choicesDialog.show();
         }
-        RadioGroup elective1 = findViewById(R.id.elective1);
-        RadioGroup elective2 = findViewById(R.id.elective2);
-        RadioGroup elective3 = findViewById(R.id.elective3);
-        RadioGroup elective4 = findViewById(R.id.elective4);
-        Button saveElective = findViewById(R.id.saveElectives);
-        final Choices choices = new Choices();
-
-
-        elective1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            public void onCheckedChanged(RadioGroup group, int checkedId)
-            {
-                // This will get the radiobutton that has changed in its check state
-                RadioButton checkedRadioButton = (RadioButton)group.findViewById(checkedId);
-                // This puts the value (true/false) into the variable
-                boolean isChecked = checkedRadioButton.isChecked();
-                // If the radiobutton that has changed in check state is now checked...
-                if (isChecked)
-                {
-                    // Changes the textview's text to "Checked: example radiobutton text"
-                    choices.setElective1(String.valueOf(checkedRadioButton.getText()));
-                }
-            }
-        });
-        elective2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            public void onCheckedChanged(RadioGroup group, int checkedId)
-            {
-                // This will get the radiobutton that has changed in its check state
-                RadioButton checkedRadioButton = (RadioButton)group.findViewById(checkedId);
-                // This puts the value (true/false) into the variable
-                boolean isChecked = checkedRadioButton.isChecked();
-                // If the radiobutton that has changed in check state is now checked...
-                if (isChecked)
-                {
-                    // Changes the textview's text to "Checked: example radiobutton text"
-                    choices.setElective2(String.valueOf(checkedRadioButton.getText()));
-                }
-            }
-        });
-        elective3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            public void onCheckedChanged(RadioGroup group, int checkedId)
-            {
-                // This will get the radiobutton that has changed in its check state
-                RadioButton checkedRadioButton = (RadioButton)group.findViewById(checkedId);
-                // This puts the value (true/false) into the variable
-                boolean isChecked = checkedRadioButton.isChecked();
-                // If the radiobutton that has changed in check state is now checked...
-                if (isChecked)
-                {
-                    // Changes the textview's text to "Checked: example radiobutton text"
-                    choices.setElective3(String.valueOf(checkedRadioButton.getText()));
-                }
-            }
-        });
-        elective4.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            public void onCheckedChanged(RadioGroup group, int checkedId)
-            {
-                // This will get the radiobutton that has changed in its check state
-                RadioButton checkedRadioButton = (RadioButton)group.findViewById(checkedId);
-                // This puts the value (true/false) into the variable
-                boolean isChecked = checkedRadioButton.isChecked();
-                // If the radiobutton that has changed in check state is now checked...
-                if (isChecked)
-                {
-                    // Changes the textview's text to "Checked: example radiobutton text"
-                    choices.setElective4(String.valueOf(checkedRadioButton.getText()));
-                }
-            }
-        });
-        saveElective.setOnClickListener(new View.OnClickListener() {
+        df = FirebaseDatabase.getInstance().getReference("3RD_YEAR");
+        final ArrayList<String[]> list = new ArrayList<>();
+        df.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                if (choices.getElective1()!=null
-                        && choices.getElective2()!=null
-                        && choices.getElective3()!=null
-                        && choices.getElective4()!=null)
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int x = list.size();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
                 {
-                    new TinyDB(getApplicationContext()).setChoices("ELECTIVES", choices);
-                    startActivity(new Intent(ChooseElective.this, MainActivity.class));
-                    finish();
+                    String[] s = new String[2];
+                    s[0] = dataSnapshot1.child("0").getValue(String.class);
+                    s[1] = dataSnapshot1.child("1").getValue(String.class);
 
-                }else
-                {
-                    Toast.makeText(getApplicationContext(), "Fill all required choices. ", Toast.LENGTH_SHORT).show();
+                    list.add(s);
+
                 }
+                Log.d("TAG", "onDataChange: "+list);
+                if (list.size()>x)
+                {
+                    recyclerAdapterForSubject = new RecyclerAdapterForSubject(list, getApplicationContext());
+                    recyclerAdapterForSubject.notifyDataSetChanged();
+                    recyclerView.setAdapter(recyclerAdapterForSubject);
+                    findViewById(R.id.progress_circular).setVisibility(View.GONE);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+        saveSubjects.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ChooseElective.this, ""+new TinyDB(getApplicationContext()).getSubjectNames("SUBJECTS"), Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
     }
 }

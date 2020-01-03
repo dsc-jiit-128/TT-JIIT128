@@ -3,4 +3,112 @@
     <color name="colorPrimary">#0F67A4</color>
     <color name="colorPrimaryDark">#0F67A4</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <color name="colorPrimary2">#e2be12</color>
+    <color name="colorPrimaryDark2">#767600</color>
+    <color name="colorAccent2">#D81B60</color>
+    <color name="colorDarkYellow">#ffbf00</color>
+    <color name="colorGreenAndroidTheme">#008577</color>
+    <color name="colorDeepBlue">#8000ff</color>
+    <color name="colorLightBlue">#0080ff</color>
+    <color name="colorGrayGreen">#00574B</color>
+
+    <color name="blue_primaryLight">#00E5FF</color>
+    <color name="blue_primary">#00B8D4</color>
+    <color name="blue_0">#2196f3</color>
+    <color name="black">#000</color>
+    <color name="red">#ff0000</color>
+    <color name="purple">#800080</color>
+
+    <color name="grey_1">#FAFAFA</color>
+    <color name="grey_2">#F5F5F5</color>
+    <color name="grey_3">#EEEEEE</color>
+    <color name="grey_4">#E0E0E0</color>
+    <color name="grey_5">#BDBDBD</color>
+    <color name="grey_6">#9E9E9E</color>
+    <color name="grey_7">#757575</color>
+    <color name="grey_8">#616161</color>
+    <color name="grey_9">#424242</color>
+    <color name="grey_10">#212121</color>
+    <color name="grey_11">#f2f2f2</color>
+    <color name="trans">#aa1E2B30</color>
+    <color name="green">#00cc00</color>
+    <color name="red_dark">#b30000</color>
+
+    <color name="red_1">#FFEBEE</color>
+    <color name="red_2">#FFCDD2</color>
+    <color name="red_3">#EF9A9A</color>
+    <color name="red_4">#E57373</color>
+    <color name="red_5">#EF5350</color>
+    <color name="red_6">#90F44336</color>
+    <color name="red_7">#E53935</color>
+    <color name="red_8">#D32F2F</color>
+    <color name="red_9">#C62828</color>
+    <color name="red_10">#90B71C1C</color>
+
+    <color name="red_11">#FF8A80</color>
+    <color name="red_12">#FF5252</color>
+    <color name="red_13">#FF1744</color>
+    <color name="red_14">#D50000</color>
+
+    <color name="purple_1">#E1BEE7</color>
+    <color name="purple_2">#CE93D8</color>
+    <color name="purple_3">#BA68C8</color>
+    <color name="purple_4">#AB47BC</color>
+    <color name="purple_5">#9C27B0</color>
+    <color name="purple_6">#8E24AA</color>
+    <color name="purple_7">#7B1FA2</color>
+    <color name="purple_8">#6A1B9A</color>
+    <color name="purple_9">#4A148C</color>
+    <color name="purple_10">#AA00FF</color>
+    <color name="purple_11">#430571</color>
+
+    <color name="yellow_1">#FFF8E1</color>
+    <color name="yellow_2">#FFECB3</color>
+    <color name="yellow_3">#FFE082</color>
+    <color name="yellow_4">#FFD54F</color>
+    <color name="yellow_5">#FFCA28</color>
+    <color name="yellow_6">#FFC107</color>
+    <color name="yellow_7">#F8A51B</color>
+    <color name="yellow_8">#FFA000</color>
+    <color name="yellow_9">#90FF8F00</color>
+    <color name="yellow_10">#80FF6F00</color>
+    <color name="orange">#90FF9800</color>
+
+    <color name="cyan_1">#E0F2F1</color>
+    <color name="cyan_2">#B2DFDB</color>
+    <color name="cyan_3">#80CBC4</color>
+    <color name="cyan_4">#4DB6AC</color>
+    <color name="cyan_5">#26A69A</color>
+    <color name="cyan_6">#009688</color>
+    <color name="cyan_7">#00897B</color>
+    <color name="cyan_8">#00796B</color>
+    <color name="cyan_9">#00695C</color>
+    <color name="cyan_11">#A7FFEB</color>
+    <color name="cyan_12">#64FFDA</color>
+    <color name="cyan_13">#1DE9B6</color>
+    <color name="cyan_14">#00BFA5</color>
+
+    <color name="green_1">#C8E6C9</color>
+    <color name="green_2">#A5D6A7</color>
+    <color name="green_3">#81C784</color>
+    <color name="green_4">#66BB6A</color>
+    <color name="green_5">#4CAF50</color>
+    <color name="green_6">#43A047</color>
+    <color name="green_7">#388E3C</color>
+    <color name="green_8">#2E7D32</color>
+    <color name="green_9">#1B5E20</color>
+    <color name="green_10">#558B2F</color>
+    <color name="green_11">#33691E</color>
+
+    <color name="error">#B00020</color>
+
+    <color name="greY_1_1">#C6C6C6</color>
+    <color name="grey_2_1">#BFBFBF</color>
+    <color name="grey_1_3">#BFBFBF</color>
+    <color name="grey_1_4">#6D6D6D</color>
+    <color name="grey_1_5">#222222</color>
+
+
 </resources>
