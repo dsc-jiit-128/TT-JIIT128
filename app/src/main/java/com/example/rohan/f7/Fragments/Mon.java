@@ -5,9 +5,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +21,11 @@ import com.example.rohan.f7.RecyclerAdapter;
 import com.example.rohan.f7.SQLite;
 import com.example.rohan.f7.SubjectDetails;
 import com.example.rohan.f7.TinyDB;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +36,7 @@ public class Mon extends Fragment {
     List<ClassDetail> classDetails;
     DatabaseReference databaseReference;
     RecyclerView recyclerView;
-    List<ClassDetail> offline=new ArrayList<>();
+    List<ClassDetail> offline = new ArrayList<>();
     SQLite sqLite;
     private RecyclerAdapter recyclerAdapter;
 
@@ -42,72 +47,71 @@ public class Mon extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mon, container, false);
 
-        sqLite = new SQLite(getContext());
 
-        recyclerView=view.findViewById(R.id.recycle);
+        recyclerView = view.findViewById(R.id.recycle);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-
         TinyDB tinyDB = new TinyDB(getActivity());
-        try{
-            if (tinyDB.getSubjectDetails("SEMESTER_5").get(0)!=null){
 
-                ArrayList<SubjectDetails> subjectDetails = new ArrayList<>();
-                if (tinyDB.getChoices("ELECTIVES")!=null)
-                {
-                    for (int i=0;i<tinyDB.getSubjectDetails("SEMESTER_5").get(0).size();i++){
-                        if (tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getBatchName().contains(tinyDB.getString("BATCH")))
-                        {
-                            if (tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectValue().equals("CORE"))
-                            {
-                                subjectDetails.add(tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i));
-                            }else{
-                                Choices choices = new Choices();
-                                choices = tinyDB.getChoices("ELECTIVES");
-                                if (tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectName().contains(choices.getElective1())
-                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectName().contains(choices.getElective2())
-                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectName().contains(choices.getElective3())
-                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i).getSubjectName().contains(choices.getElective4()))
-                                {
-                                    subjectDetails.add(tinyDB.getSubjectDetails("SEMESTER_5").get(0).get(i));
-                                }
-                            }
-                        }
+
+        ArrayList<String> subjects = tinyDB.getSubjects("0");
+        ArrayList<SubjectDetails> classDetailArrayList = new ArrayList<>();
+        if (subjects != null) {
+            try {
+                for (int i = 0; i < subjects.size(); i++) {
+                    String type, timeslot, faculty, subject, room;
+                    String s = subjects.get(i);
+                    timeslot = s.substring(0, s.indexOf("-"));
+                    s = s.substring(s.indexOf("+") + 1);
+                    try {
+                        type = s.substring(0, s.indexOf("("));
+
+                    } catch (Exception e) {
+                        type = "-";
+                    }
+                    try {
+                        s = s.substring(s.indexOf("(") + 1);
+
+                        subject = s.substring(0, s.indexOf(")"));
+
+                        s = s.substring(s.indexOf("-") + 1);
+
+                        room = s.substring(0, s.indexOf("/"));
+
+                        s = s.substring(s.indexOf("/") + 1);
+
+                        faculty = s;
+
+                    } catch (Exception e) {
+                        subject = "-";
+                        room = "-";
+                        faculty = "-";
 
                     }
-                    if (subjectDetails==null){
-                        view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
-                    }
 
-                    recyclerAdapter=new RecyclerAdapter(subjectDetails, getContext());
-                    recyclerAdapter.notifyDataSetChanged();
-                }else{
-                    recyclerAdapter=new RecyclerAdapter(tinyDB.getSubjectDetails("SEMESTER_5").get(0), getContext());
-                    recyclerAdapter.notifyDataSetChanged();
+                    classDetailArrayList.add(new SubjectDetails(type, subject, timeslot, faculty, room, "", ""));
+
+
                 }
-
-
-                recyclerView.setAdapter(recyclerAdapter);
-            }else{
-                view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
+            } catch (Exception e) {
             }
-
-        }catch (Exception e){
-            view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
+            recyclerAdapter = new RecyclerAdapter(classDetailArrayList,getContext());
+            recyclerAdapter.notifyDataSetChanged();
+            recyclerView.setAdapter(recyclerAdapter);
         }
 
 
         return view;
     }
+
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-
 
 
 }

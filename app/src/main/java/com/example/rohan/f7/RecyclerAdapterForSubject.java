@@ -1,21 +1,34 @@
 package com.example.rohan.f7;
 
+import android.content.ClipData;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 
-public class RecyclerAdapterForSubject extends RecyclerView.Adapter<RecyclerAdapterForSubject.MyHolder> {
+public class RecyclerAdapterForSubject extends SelectableAdapter<RecyclerAdapterForSubject.MyHolder> {
 
-    ArrayList<String[]> subjects;
+    List<Model> subjects;
     Context context;
-    public RecyclerAdapterForSubject(ArrayList<String[]> subjectName, Context context)
+
+
+
+
+    public RecyclerAdapterForSubject(List<Model> subjectName, Context context)
     {
         this.subjects=subjectName;
         this.context=context;
@@ -25,82 +38,91 @@ public class RecyclerAdapterForSubject extends RecyclerView.Adapter<RecyclerAdap
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.subject_selection, parent, false);
+
         return new MyHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MyHolder holder, final int position) {
+        final Model model = subjects.get(position);
 
-        String[] subj;
 
-        subj = subjects.get(position);
+        holder.subjectName.setText(model.getText());
+        holder.view.setBackgroundColor(model.isSelected() ? Color.CYAN : Color.WHITE);
+        holder.subjectName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        String s = subj[0]+" - "+subj[1];
+                model.setSelected(!model.isSelected());
 
-        holder.subjectName.setText(s);
+                holder.view.setBackgroundColor(model.isSelected() ? Color.CYAN : Color.WHITE);
+
+                String x = holder.subjectName.getText().toString();
+                TinyDB tinyDB = new TinyDB(context);
+                ArrayList<String> subjects = tinyDB.getSubjectNames("SUBJECTS");
+
+                if (model.isSelected())
+                {
+                    if (subjects!=null && !subjects.contains(x))
+                    {
+                        subjects.add(x);
+                        tinyDB.putSubjects("SUBJECTS", subjects);
+
+                    }
+                    assert subjects != null;
+                    Toast.makeText(context, "added "+ x +" in "+ subjects, Toast.LENGTH_LONG).show();
+                }else{
+                    subjects.remove(x);
+                    tinyDB.putSubjects("SUBJECTS", subjects);
+                    Toast.makeText(context, "removed "+ x +" from "+ subjects, Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        });
+
 
 
     }
 
     @Override
     public int getItemCount() {
-        int arr=0;
-        try {
-            if(subjects.size()==0)
-            {
-                arr=0;
-            }else
-            {
-                arr=subjects.size();
-            }
-        }catch (Exception ignored){
 
-        }
-        return arr;
+        return subjects.size();
     }
 
-    public class MyHolder extends RecyclerView.ViewHolder {
+    public static class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView subjectName;
-        int x = 0;
+        View view;
+        ImageView addSubject, deleteSubject;
+
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             subjectName = itemView.findViewById(R.id.subjectName);
-            subjectName.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ArrayList<String> s = new TinyDB(context).getSubjectNames("SUBJECTS");
 
-                    if (x==0)
-                    {
-                        subjectName.setBackground(context.getDrawable(R.drawable.btn_bg_red));
-                        x++;
-                        if (s == null)
-                        {
-                            s = new ArrayList<>();
-                            s.add(subjectName.getText().toString());
+            view= itemView;
 
-                        }else{
-                            if (!s.contains(subjectName.getText().toString()))
-                            {
-                                s.add(subjectName.getText().toString());
-                            }
-                        }
+            //itemView.setOnClickListener(this);
+
+            subjectName.setOnClickListener(this);
 
 
-                    }else{
-                        subjectName.setBackground(context.getDrawable(R.drawable.btn_bg_yellow));
-                        x=0;
-                        if (s.contains(subjectName.getText().toString()))
-                        {
-                            s.remove(subjectName.getText().toString());
-                        }
-                    }
 
-                    new TinyDB(context).putSubjectNames("SUBJECTS", s);
-
-
-                }
-            });
         }
+
+        @Override
+        public void onClick(View view) {
+
+
+
+        }
+
+
+
     }
+
+
+
+
+
 }

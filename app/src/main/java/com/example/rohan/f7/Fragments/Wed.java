@@ -46,52 +46,50 @@ public class Wed extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         TinyDB tinyDB = new TinyDB(getActivity());
-        try{
-            if (tinyDB.getSubjectDetails("SEMESTER_5").get(2)!=null){
+        ArrayList<String> subjects = tinyDB.getSubjects("2");
+        ArrayList<SubjectDetails> classDetailArrayList = new ArrayList<>();
+        if (subjects != null) {
+            try {
+                for (int i = 0; i < subjects.size(); i++) {
+                    String type, timeslot, faculty, subject, room;
+                    String s = subjects.get(i);
+                    timeslot = s.substring(0, s.indexOf("-"));
+                    s = s.substring(s.indexOf("+") + 1);
+                    try {
+                        type = s.substring(0, s.indexOf("("));
 
-                ArrayList<SubjectDetails> subjectDetails = new ArrayList<>();
-                if (tinyDB.getChoices("ELECTIVES")!=null)
-                {
-                    for (int i=0;i<tinyDB.getSubjectDetails("SEMESTER_5").get(2).size();i++){
-                        if (tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getBatchName().contains(tinyDB.getString("BATCH")))
-                        {
-                            if (tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectValue().equals("CORE"))
-                            {
-                                subjectDetails.add(tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i));
-                            }else{
-                                Choices choices = new Choices();
-                                choices = tinyDB.getChoices("ELECTIVES");
-                                if (tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective1())
-                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective2())
-                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective3())
-                                        || tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i).getSubjectName().contains(choices.getElective4()))
-                                {
-                                    subjectDetails.add(tinyDB.getSubjectDetails("SEMESTER_5").get(2).get(i));
-                                }
-                            }
-                        }
+                    } catch (Exception e) {
+                        type = "-";
+                    }
+                    try {
+                        s = s.substring(s.indexOf("(") + 1);
 
+                        subject = s.substring(0, s.indexOf(")"));
+
+                        s = s.substring(s.indexOf("-") + 1);
+
+                        room = s.substring(0, s.indexOf("/"));
+
+                        s = s.substring(s.indexOf("/") + 1);
+
+                        faculty = s;
+
+                    } catch (Exception e) {
+                        subject = "-";
+                        room = "-";
+                        faculty = "-";
 
                     }
-                    if (subjectDetails==null){
-                        view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
-                    }
 
-                    recyclerAdapter=new RecyclerAdapter(subjectDetails, getContext());
-                    recyclerAdapter.notifyDataSetChanged();
-                }else{
-                    recyclerAdapter=new RecyclerAdapter(tinyDB.getSubjectDetails("SEMESTER_5").get(2), getContext());
-                    recyclerAdapter.notifyDataSetChanged();
+                    classDetailArrayList.add(new SubjectDetails(type, subject, timeslot, faculty, room, "", ""));
+
+
                 }
-
-
-                recyclerView.setAdapter(recyclerAdapter);
-            }else{
-                view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
+            } catch (Exception e) {
             }
-
-        }catch (Exception e){
-            view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
+            recyclerAdapter = new RecyclerAdapter(classDetailArrayList,getContext());
+            recyclerAdapter.notifyDataSetChanged();
+            recyclerView.setAdapter(recyclerAdapter);
         }
         return view;
     }
