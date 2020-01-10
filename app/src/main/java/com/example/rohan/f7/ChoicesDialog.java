@@ -33,6 +33,8 @@ public class ChoicesDialog extends Dialog implements View.OnClickListener {
         setContentView(R.layout.choices_dialog);
         batch = findViewById(R.id.batch);
 
+        batch.setText(new TinyDB(getContext()).getString("BATCH"));
+
         for (int u =0; u<16; u++)
         {
             arrayList.add(s[u]);

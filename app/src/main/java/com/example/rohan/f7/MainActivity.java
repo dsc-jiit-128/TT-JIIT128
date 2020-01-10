@@ -16,6 +16,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,7 +45,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
 
-    DatabaseReference databaseReference;
+    DatabaseReference df;
 
     AdView adView;
 
@@ -56,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (new TinyDB(this).getString("BATCH").equals("") || new TinyDB(this).getSubjectNames("SUBJECTCODES")==null)
+        {
+            startActivity(new Intent(this, SubjectSelectionActivity.class));
+            finish();
+        }
+
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -92,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
 
 
@@ -117,8 +126,74 @@ public class MainActivity extends AppCompatActivity {
             customTabsIntent.launchUrl(this, Uri.parse("https://webkiosk.jiit.ac.in/"));
         }
         if (id==R.id.changeElective){
-           startActivity(new Intent(MainActivity.this, ChooseElective.class));
+           startActivity(new Intent(MainActivity.this, SubjectSelectionActivity.class));
            finish();
+        }
+        if (id==R.id.refresh){
+            for (int i=0;i<5;i++)
+            {
+                final ArrayList<String> finalSubjects = new ArrayList<>();
+
+                df = FirebaseDatabase.getInstance().getReference("SEMESTER_5").child(""+i+"").child("slots");
+
+
+                final int finalI = i;
+                df.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
+                        {
+                            String s = dataSnapshot1.getValue(String.class);
+                            assert s != null;
+                            try {
+                                s=s.trim().replaceAll("\\s", "");
+                                s=s.replaceAll("\n", "");
+                                String st = s.trim().substring(s.indexOf("(")+1, s.indexOf(")"));
+                                String bt = s.trim().substring(s.indexOf("+"+1), s.indexOf("("));
+                                //Log.d("TAG", "onDataChange: "+st.replaceAll("\\s", ""));
+                                st = st.replaceAll("\\s", "");
+
+                                String batch = new TinyDB(getApplicationContext()).getString("BATCH");
+                                //Log.d("TAG", "onDataChange: "+s);
+                                if (s.contains("ALL") || bt.contains(batch))
+                                {
+                                    if (st.equals("B12HS613"))
+                                    {
+                                        st = "19B12HS613";
+                                        //Toast.makeText(SubjectSelectionActivity.this, "hua", Toast.LENGTH_SHORT).show();
+                                    }
+                                    if (new TinyDB(getApplicationContext()).getSubjectNames("SUBJECTCODES").contains(st))
+                                    {
+                                        Log.d("TAG", "onDataChange: "+s);
+                                        finalSubjects.add(s);
+                                    }else if (st.contains("T&P"))
+                                    {
+                                        finalSubjects.add(s);
+                                    }
+                                }
+
+                            }catch (Exception e)
+                            {
+                                //Log.d("TAG", "onDataChange: "+s);
+                                finalSubjects.add(s);
+
+                            }
+                        }
+
+                        new TinyDB(getApplicationContext()).putSubjects(""+ finalI +"", finalSubjects);
+                       recreate();
+                        //Toast.makeText(SubjectSelectionActivity.this, ""+finalSubjects, Toast.LENGTH_SHORT).show();
+                        //recreate();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
         }
 
         return super.onOptionsItemSelected(item);

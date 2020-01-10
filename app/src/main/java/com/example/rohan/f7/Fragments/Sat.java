@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.rohan.f7.Choices;
 import com.example.rohan.f7.R;
@@ -95,6 +96,19 @@ public class Sat extends Fragment {
             recyclerAdapter = new RecyclerAdapter(classDetailArrayList,getContext());
             recyclerAdapter.notifyDataSetChanged();
             recyclerView.setAdapter(recyclerAdapter);
+            try {
+                view.findViewById(R.id.noClassMsg).setVisibility(View.GONE);
+            }catch (Exception e){
+
+                //Toast.makeText(getContext(), ""+e, Toast.LENGTH_SHORT).show();
+            }
+        }else{
+
+            try {
+                view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
+            }catch (Exception e){
+
+            }
         }
 
 

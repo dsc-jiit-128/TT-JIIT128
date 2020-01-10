@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
@@ -36,13 +38,11 @@ public class SubjectSelectionActivity extends AppCompatActivity {
         setFindViewById();
         df = FirebaseDatabase.getInstance().getReference("3RD_YEAR");
 
-        if (new TinyDB(this).getString("BATCH").equals(""))
-        {
+        if (new TinyDB(this).getString("BATCH").equals("")) {
             ChoicesDialog choicesDialog = new ChoicesDialog(this);
             choicesDialog.show();
         }
         final List<String> subjectCode = new ArrayList<>();
-
 
 
         df.addValueEventListener(new ValueEventListener() {
@@ -50,8 +50,7 @@ public class SubjectSelectionActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final List<String> list = new ArrayList<>();
                 subjectCode.clear();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
-                {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     String[] s = new String[2];
                     s[0] = dataSnapshot1.child("0").getValue(String.class);
                     s[1] = dataSnapshot1.child("1").getValue(String.class);
@@ -60,10 +59,8 @@ public class SubjectSelectionActivity extends AppCompatActivity {
                     subjectCode.add(s[0]);
                 }
 
-                if (list.size()==32)
-                {
-                    for (int i=0;i<32;i++)
-                    {
+                if (list.size() == 32) {
+                    for (int i = 0; i < 32; i++) {
                         subjects[i].setText(list.get(i));
                     }
                     findViewById(R.id.progress_circular).setVisibility(View.GONE);
@@ -81,17 +78,14 @@ public class SubjectSelectionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     findViewById(R.id.progress_circular).setVisibility(View.VISIBLE);
-                }catch (Exception e)
-                {
+                } catch (Exception e) {
 
                 }
                 final ArrayList<String> subjectCodeChosen = new ArrayList<>();
 
                 ArrayList<String> subjectsChosen = new ArrayList<>();
-                for (int i = 0;i<32;i++)
-                {
-                    if (subjects[i].isChecked())
-                    {
+                for (int i = 0; i < 32; i++) {
+                    if (subjects[i].isChecked()) {
                         subjectsChosen.add(String.valueOf(subjects[i].getText()));
                         subjectCodeChosen.add(subjectCode.get(i));
 
@@ -101,11 +95,10 @@ public class SubjectSelectionActivity extends AppCompatActivity {
                 new TinyDB(getApplicationContext()).putSubjectNames("SUBJECTCODES", subjectCodeChosen);
                 new TinyDB(getApplicationContext()).putSubjectNames("SUBJECTS", subjectsChosen);
 
-                for (int i=0;i<5;i++)
-                {
+                for (int i = 0; i < 5; i++) {
                     final ArrayList<String> finalSubjects = new ArrayList<>();
 
-                    df = FirebaseDatabase.getInstance().getReference("SEMESTER_5").child(""+i+"").child("slots");
+                    df = FirebaseDatabase.getInstance().getReference("SEMESTER_5").child("" + i + "").child("slots");
 
 
                     final int finalI = i;
@@ -113,46 +106,40 @@ public class SubjectSelectionActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
-                            {
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                 String s = dataSnapshot1.getValue(String.class);
                                 assert s != null;
                                 try {
-                                    s=s.trim().replaceAll("\\s", "");
-                                    s=s.replaceAll("\n", "");
-                                    String st = s.trim().substring(s.indexOf("(")+1, s.indexOf(")"));
-                                    String bt = s.trim().substring(s.indexOf("+"+1), s.indexOf("("));
+                                    s = s.trim().replaceAll("\\s", "");
+                                    s = s.replaceAll("\n", "");
+                                    String st = s.trim().substring(s.indexOf("(") + 1, s.indexOf(")"));
+                                    String bt = s.trim().substring(s.indexOf("+" + 1), s.indexOf("("));
                                     //Log.d("TAG", "onDataChange: "+st.replaceAll("\\s", ""));
                                     st = st.replaceAll("\\s", "");
 
                                     String batch = new TinyDB(getApplicationContext()).getString("BATCH");
                                     //Log.d("TAG", "onDataChange: "+s);
-                                    if (s.contains("ALL") || bt.contains(batch))
-                                    {
-                                        if (st.equals("B12HS613"))
-                                        {
+                                    if (s.contains("ALL") || bt.contains(batch)) {
+                                        if (st.equals("B12HS613")) {
                                             st = "19B12HS613";
                                             //Toast.makeText(SubjectSelectionActivity.this, "hua", Toast.LENGTH_SHORT).show();
                                         }
-                                        if (subjectCodeChosen.contains(st))
-                                        {
-                                            Log.d("TAG", "onDataChange: "+s);
+                                        if (subjectCodeChosen.contains(st)) {
+                                            Log.d("TAG", "onDataChange: " + s);
                                             finalSubjects.add(s);
-                                        }else if (st.contains("T&P"))
-                                        {
+                                        } else if (st.contains("T&P")) {
                                             finalSubjects.add(s);
                                         }
                                     }
 
-                                }catch (Exception e)
-                                {
+                                } catch (Exception e) {
                                     //Log.d("TAG", "onDataChange: "+s);
                                     finalSubjects.add(s);
 
                                 }
                             }
 
-                            new TinyDB(getApplicationContext()).putSubjects(""+ finalI +"", finalSubjects);
+                            new TinyDB(getApplicationContext()).putSubjects("" + finalI + "", finalSubjects);
                             startActivity(new Intent(SubjectSelectionActivity.this, MainActivity.class));
                             finish();
                             //Toast.makeText(SubjectSelectionActivity.this, ""+finalSubjects, Toast.LENGTH_SHORT).show();
@@ -206,6 +193,27 @@ public class SubjectSelectionActivity extends AppCompatActivity {
         subjects[29] = findViewById(R.id.subjectName29);
         subjects[30] = findViewById(R.id.subjectName30);
         subjects[31] = findViewById(R.id.subjectName31);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id==R.id.changeBatch)
+        {
+            ChoicesDialog choicesDialog = new ChoicesDialog(this);
+            choicesDialog.show();
+        }
+        return super.onOptionsItemSelected(item);
+
 
     }
 }

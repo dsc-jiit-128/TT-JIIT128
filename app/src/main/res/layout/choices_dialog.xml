@@ -3,13 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:orientation="vertical"
+    android:padding="12dp"
     android:layout_height="wrap_content"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="#ee000000">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Batch:"
+        android:textSize="18dp"
+        android:layout_marginBottom="6dp"
+        android:textColor="#ffffff"
+        />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_bg_purple"
+        android:background="@drawable/buttons_colorprimary_bg"
         android:hint="Your Batch"
         android:textColor="#ffffff"
         android:textColorHint="#90ffffff"
@@ -21,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/batch"
         android:layout_marginTop="8dp"
-        android:background="@drawable/btn_bg_green"
+        android:background="@drawable/sidenavbar"
         android:text="SAVE"
         android:id="@+id/savebatch"
         android:textSize="18dp"

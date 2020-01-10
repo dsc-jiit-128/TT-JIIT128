@@ -108,6 +108,18 @@ public class Fri extends Fragment {
             recyclerAdapter = new RecyclerAdapter(classDetailArrayList,getContext());
             recyclerAdapter.notifyDataSetChanged();
             recyclerView.setAdapter(recyclerAdapter);
+            try {
+                view.findViewById(R.id.noClassMsg).setVisibility(View.GONE);
+            }catch (Exception e){
+
+            }
+        }else{
+
+            try {
+                view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
+            }catch (Exception e){
+
+            }
         }
         return view;
     }
