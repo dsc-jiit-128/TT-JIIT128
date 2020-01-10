@@ -68,13 +68,18 @@ public class Tue extends Fragment {
 
                         subject = s.substring(0, s.indexOf(")"));
 
-                        s = s.substring(s.indexOf("-") + 1);
+                        try {
+                            s = s.substring(s.indexOf("-") + 1);
 
-                        room = s.substring(0, s.indexOf("/"));
+                            room = s.substring(0, s.indexOf("/"));
 
-                        s = s.substring(s.indexOf("/") + 1);
+                            s = s.substring(s.indexOf("/") + 1);
 
-                        faculty = s;
+                            faculty = s;
+                        }catch (Exception e){
+                            room = "-";
+                            faculty = "-";
+                        }
 
                     } catch (Exception e) {
                         subject = "-";
@@ -82,8 +87,22 @@ public class Tue extends Fragment {
                         faculty = "-";
 
                     }
+                    if (type.contains(tinyDB.getString("BATCH")) || type.contains("ALL"))
+                    {
+                        if (tinyDB.getSubjectNames("SUBJECTCODES").contains(subject) || subject.equals("-") || subject.equals("T&P") || subject.contains("NSS"))
+                        {
 
-                    classDetailArrayList.add(new SubjectDetails(type, subject, timeslot, faculty, room, "", ""));
+                            String sub;
+                            try{
+                                sub =tinyDB.getSubjectNames("SUBJECTS").get(tinyDB.getSubjectNames("SUBJECTCODES").indexOf(subject));
+                                sub = sub.substring(sub.indexOf("-")+1);
+                            }catch (Exception e){
+                                sub = subject;
+                            }
+
+                            classDetailArrayList.add(new SubjectDetails(type, sub, timeslot, faculty, room, "", ""));
+                        }
+                    }
 
 
                 }

@@ -36,13 +36,12 @@ public class SubjectSelectionActivity extends AppCompatActivity {
         setFindViewById();
         df = FirebaseDatabase.getInstance().getReference("3RD_YEAR");
 
-        if (new TinyDB(this).getString("BATCH") == null)
+        if (new TinyDB(this).getString("BATCH").equals(""))
         {
             ChoicesDialog choicesDialog = new ChoicesDialog(this);
             choicesDialog.show();
         }
         final List<String> subjectCode = new ArrayList<>();
-        final List<String> subjectCodeChosen = new ArrayList<>();
 
 
 
@@ -86,7 +85,7 @@ public class SubjectSelectionActivity extends AppCompatActivity {
                 {
 
                 }
-                subjectCodeChosen.clear();
+                final ArrayList<String> subjectCodeChosen = new ArrayList<>();
 
                 ArrayList<String> subjectsChosen = new ArrayList<>();
                 for (int i = 0;i<32;i++)
@@ -99,6 +98,7 @@ public class SubjectSelectionActivity extends AppCompatActivity {
                         //Toast.makeText(SubjectSelectionActivity.this, ""+subjects[i].getText(), Toast.LENGTH_SHORT).show();
                     }
                 }
+                new TinyDB(getApplicationContext()).putSubjectNames("SUBJECTCODES", subjectCodeChosen);
                 new TinyDB(getApplicationContext()).putSubjectNames("SUBJECTS", subjectsChosen);
 
                 for (int i=0;i<5;i++)
