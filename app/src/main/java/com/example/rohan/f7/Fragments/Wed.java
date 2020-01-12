@@ -1,39 +1,26 @@
 package com.example.rohan.f7.Fragments;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.rohan.f7.Choices;
-import com.example.rohan.f7.ClassDetail;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.rohan.f7.R;
 import com.example.rohan.f7.RecyclerAdapter;
-import com.example.rohan.f7.SQLite;
 import com.example.rohan.f7.SubjectDetails;
 import com.example.rohan.f7.TinyDB;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Wed extends Fragment {
 
-    FirebaseDatabase firebaseDatabase;
-    List<ClassDetail> classDetails;
-    DatabaseReference databaseReference;
+
     RecyclerView recyclerView;
-    List<ClassDetail> offline=new ArrayList<>();
-    SQLite sqLite;
     private RecyclerAdapter recyclerAdapter;
 
     @Override
@@ -42,7 +29,6 @@ public class Wed extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_wed, container, false);
         recyclerView=view.findViewById(R.id.recycle);
-        sqLite= new SQLite(getContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         TinyDB tinyDB = new TinyDB(getActivity());
@@ -124,12 +110,7 @@ public class Wed extends Fragment {
         }
         return view;
     }
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
+
 
 
 

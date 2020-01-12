@@ -1,8 +1,5 @@
 package com.example.rohan.f7.Fragments;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,26 +9,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rohan.f7.ClassDetail;
 import com.example.rohan.f7.R;
 import com.example.rohan.f7.RecyclerAdapter;
-import com.example.rohan.f7.SQLite;
 import com.example.rohan.f7.SubjectDetails;
 import com.example.rohan.f7.TinyDB;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Mon extends Fragment {
-    FirebaseDatabase firebaseDatabase;
-    List<ClassDetail> classDetails;
-    DatabaseReference databaseReference;
+
     RecyclerView recyclerView;
-    List<ClassDetail> offline = new ArrayList<>();
-    SQLite sqLite;
     private RecyclerAdapter recyclerAdapter;
 
 
@@ -131,12 +119,6 @@ public class Mon extends Fragment {
         return view;
     }
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
 
 
 }
