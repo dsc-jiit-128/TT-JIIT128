@@ -45,7 +45,7 @@ public class SubjectSelectionActivity extends AppCompatActivity {
         final List<String> subjectCode = new ArrayList<>();
 
 
-        df.addValueEventListener(new ValueEventListener() {
+        df.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final List<String> list = new ArrayList<>();
@@ -102,7 +102,7 @@ public class SubjectSelectionActivity extends AppCompatActivity {
 
 
                     final int finalI = i;
-                    df.addValueEventListener(new ValueEventListener() {
+                    df.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

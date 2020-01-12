@@ -195,6 +195,10 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
+        if (id==R.id.feedback){
+            startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
+            //finish();
+        }
 
         return super.onOptionsItemSelected(item);
     }
