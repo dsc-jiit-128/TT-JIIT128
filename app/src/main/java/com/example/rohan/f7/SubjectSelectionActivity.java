@@ -27,7 +27,8 @@ import mva2.adapter.MultiViewAdapter;
 
 public class SubjectSelectionActivity extends AppCompatActivity {
 
-    Switch[] subjects = new Switch[32];
+    int TOTAL_BUTTONS = 33;
+    Switch[] subjects = new Switch[TOTAL_BUTTONS];
     Button saveSubjects;
     DatabaseReference df;
 
@@ -59,8 +60,8 @@ public class SubjectSelectionActivity extends AppCompatActivity {
                     subjectCode.add(s[0]);
                 }
 
-                if (list.size() == 32) {
-                    for (int i = 0; i < 32; i++) {
+                if (list.size() == TOTAL_BUTTONS) {
+                    for (int i = 0; i < TOTAL_BUTTONS; i++) {
                         subjects[i].setText(list.get(i));
                     }
                     findViewById(R.id.progress_circular).setVisibility(View.GONE);
@@ -84,7 +85,7 @@ public class SubjectSelectionActivity extends AppCompatActivity {
                 final ArrayList<String> subjectCodeChosen = new ArrayList<>();
 
                 ArrayList<String> subjectsChosen = new ArrayList<>();
-                for (int i = 0; i < 32; i++) {
+                for (int i = 0; i < TOTAL_BUTTONS; i++) {
                     if (subjects[i].isChecked()) {
                         subjectsChosen.add(String.valueOf(subjects[i].getText()));
                         subjectCodeChosen.add(subjectCode.get(i));
@@ -193,6 +194,8 @@ public class SubjectSelectionActivity extends AppCompatActivity {
         subjects[29] = findViewById(R.id.subjectName29);
         subjects[30] = findViewById(R.id.subjectName30);
         subjects[31] = findViewById(R.id.subjectName31);
+        subjects[32] = findViewById(R.id.subjectName32);
+
 
     }
 
