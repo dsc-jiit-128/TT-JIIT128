@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:text="LEC"
                 android:textSize="15sp"
-                android:textColor="#FFFFFF"
+                android:textColor="#fafaff"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/room"
@@ -31,7 +31,7 @@
                 android:text="room"
                 android:layout_marginRight="16dp"
                 android:layout_alignParentRight="true"
-                android:textColor="#FFFFFF"
+                android:textColor="#fafaff"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/type"
         android:text="subject"
-        android:textColor="#FFFFFF"
+        android:textColor="#fafaff"
         android:textSize="17sp" />
 
     <LinearLayout
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="7dp"
-            android:textColor="#FFFFFF"
+            android:textColor="#fafaff"
             android:text="time"
             android:textSize="15sp" />
 
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="7dp"
             android:text="faculty"
-            android:textColor="#FFFFFF"
+            android:textColor="#fafaff"
             android:textSize="15sp" />
 
 

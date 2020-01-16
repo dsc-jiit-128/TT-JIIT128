@@ -109,6 +109,7 @@
     <color name="grey_1_3">#BFBFBF</color>
     <color name="grey_1_4">#6D6D6D</color>
     <color name="grey_1_5">#222222</color>
+    <color name="bg">#1e2749</color>
 
 
 </resources>
