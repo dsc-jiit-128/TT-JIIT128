@@ -94,15 +94,12 @@ public class RecyclerAdapterForSubject extends SelectableAdapter<RecyclerAdapter
     public static class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView subjectName;
         View view;
-        ImageView addSubject, deleteSubject;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             subjectName = itemView.findViewById(R.id.subjectName);
 
             view= itemView;
-
-            //itemView.setOnClickListener(this);
 
             subjectName.setOnClickListener(this);
 

@@ -3,6 +3,7 @@ package com.example.rohan.f7;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +30,7 @@ import com.example.rohan.f7.Fragments.Tue;
 import com.example.rohan.f7.Fragments.Wed;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     TinyDB tinyDB;
+    private InterstitialAd interstitialAd;
+    private AdRequest adRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         adView = findViewById(R.id.bannerAd);
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
 
-        AdRequest adRequest = new AdRequest.Builder().build();
+        adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
 
@@ -213,6 +217,18 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+            interstitialAd = new InterstitialAd(getApplicationContext());
+            interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+            interstitialAd.loadAd(adRequest);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (interstitialAd.isLoaded())
+                    {
+                        interstitialAd.show();
+                    }
+                }
+            }, 3000);
             if (position == 0) {
                 Mon t1 = new Mon();
                 return t1;
