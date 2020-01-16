@@ -38,69 +38,15 @@ public class Mon extends Fragment {
         TinyDB tinyDB = new TinyDB(getActivity());
 
 
-        ArrayList<String> subjects = tinyDB.getSubjects("0");
-        ArrayList<SubjectDetails> classDetailArrayList = new ArrayList<>();
+        ArrayList<SubjectDetails> subjects = tinyDB.getSubjectDetails("0");
         if (subjects != null) {
             try {
-                for (int i = 0; i < subjects.size(); i++) {
-                    String type, timeslot, faculty, subject, room;
-                    String s = subjects.get(i);
-                    timeslot = s.substring(0, s.indexOf("-"));
-                    s = s.substring(s.indexOf("+") + 1);
-                    try {
-                        type = s.substring(0, s.indexOf("("));
-
-                    } catch (Exception e) {
-                        type = "-";
-                    }
-                    try {
-                        s = s.substring(s.indexOf("(") + 1);
-
-                        subject = s.substring(0, s.indexOf(")"));
-
-                        try {
-                            s = s.substring(s.indexOf("-") + 1);
-
-                            room = s.substring(0, s.indexOf("/"));
-
-                            s = s.substring(s.indexOf("/") + 1);
-
-                            faculty = s;
-                        }catch (Exception e){
-                            room = "-";
-                            faculty = "-";
-                        }
-
-                    } catch (Exception e) {
-                        subject = "-";
-                        room = "-";
-                        faculty = "-";
-
-                    }
-                    if (type.contains(tinyDB.getString("BATCH")) || type.contains("ALL"))
-                    {
-                        if (tinyDB.getSubjectNames("SUBJECTCODES").contains(subject) || subject.equals("-") || subject.equals("T&P") || subject.contains("NSS"))
-                        {
-
-                            String sub;
-                            try{
-                                sub =tinyDB.getSubjectNames("SUBJECTS").get(tinyDB.getSubjectNames("SUBJECTCODES").indexOf(subject));
-                                sub = sub.substring(sub.indexOf("-")+1);
-                            }catch (Exception e){
-                                sub = subject;
-                            }
-
-                            classDetailArrayList.add(new SubjectDetails(type, sub, timeslot, faculty, room, "", ""));
-                        }
-                    }
-
-
-                }
+                recyclerAdapter = new RecyclerAdapter(subjects,getContext());
+                recyclerAdapter.notifyDataSetChanged();
+                recyclerView.setAdapter(recyclerAdapter);
             } catch (Exception e) {
             }
-            recyclerAdapter = new RecyclerAdapter(classDetailArrayList,getContext());
-            recyclerAdapter.notifyDataSetChanged();
-            recyclerView.setAdapter(recyclerAdapter);
+
             try {
                 view.findViewById(R.id.noClassMsg).setVisibility(View.GONE);
             }catch (Exception e){

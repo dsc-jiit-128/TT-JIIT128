@@ -6,17 +6,17 @@ public class SubjectDetails {
     public String subjectTiming;
     public String subjectFaculty;
     public String subjectVenue;
-    public String subjectValue;
+    public String subjectCode;
     public String batchName;
 
 
-    public SubjectDetails(String subjectType, String subjectName, String subjectTiming, String subjectFaculty, String subjectVenue, String subjectValue, String batchName) {
+    public SubjectDetails(String subjectType, String subjectName, String subjectTiming, String subjectFaculty, String subjectVenue, String subjectCode, String batchName) {
         this.subjectType = subjectType;
         this.subjectName = subjectName;
         this.subjectTiming = subjectTiming;
         this.subjectFaculty = subjectFaculty;
         this.subjectVenue = subjectVenue;
-        this.subjectValue = subjectValue;
+        this.subjectCode = subjectCode;
         this.batchName = batchName;
 
     }
@@ -32,12 +32,12 @@ public class SubjectDetails {
         this.batchName = batchName;
     }
 
-    public String getSubjectValue() {
-        return subjectValue;
+    public String getsubjectCode() {
+        return subjectCode;
     }
 
-    public void setSubjectValue(String subjectValue) {
-        this.subjectValue = subjectValue;
+    public void setsubjectCode(String subjectCode) {
+        this.subjectCode = subjectCode;
     }
 
     public String getSubjectType() {
