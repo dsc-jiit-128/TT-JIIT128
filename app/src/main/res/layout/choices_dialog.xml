@@ -3,39 +3,46 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:orientation="vertical"
+    android:padding="12dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/sidenavbar">
+    android:background="#ee000000">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Batch and Year:"
+        android:textSize="18dp"
+        android:layout_marginBottom="6dp"
+        android:textColor="#ffffff"
+        />
 
-    <RadioGroup
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/batch"
-        android:padding="24dp"
-        android:background="@drawable/choicesbg">
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="F7"
-            android:textSize="32dp"
-            android:layout_gravity="center"/>
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="F8"
-            android:textSize="32dp"
-            android:layout_gravity="center"/>
-    </RadioGroup>
+        android:background="@drawable/buttons_colorprimary_bg"
+        android:hint="Your Batch"
+        android:textColor="#ffffff"
+        android:textColorHint="#90ffffff"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:id="@+id/batch"/>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="4dp"
+        android:id="@+id/selectyear"
+        android:tooltipText="Select Year"
+        android:background="@drawable/btn_bg_yellow"
+        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/batch"
         android:layout_marginTop="8dp"
-        android:background="#80000000"
+        android:background="@drawable/sidenavbar"
         android:text="SAVE"
         android:id="@+id/savebatch"
-        android:textSize="24dp"
+        android:textSize="18dp"
         android:textColor="#ffffff"
         />
 

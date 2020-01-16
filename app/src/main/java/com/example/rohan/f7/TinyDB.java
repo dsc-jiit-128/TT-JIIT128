@@ -514,35 +514,31 @@ public class TinyDB {
         String json = gson.toJson(object);
         preferences.edit().putString(key,json).apply();
     }
-    public void putSubjectDetailsOfADay(String key, ArrayList<SubjectDetails> object){
-        Gson gson = new Gson();
-        String json = gson.toJson(object);
-        preferences.edit().putString(key,json).apply();
-    }
 
     public ArrayList<ArrayList<SubjectDetails>> getSubjectDetails(String key){
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<ArrayList<SubjectDetails>>>(){}.getType();
         return gson.fromJson(preferences.getString(key,null),type);
     }
-    public ArrayList<SubjectDetails> getSubjectDetailsOfADay(String key){
-        Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<SubjectDetails>>(){}.getType();
-        return gson.fromJson(preferences.getString(key,null),type);
-    }
-    public Choices getChoices(String key){
-        Gson gson = new Gson();
-        Type type = new TypeToken<Choices>(){}.getType();
-        return gson.fromJson(preferences.getString(key,null),type);
-    }
-    public void setChoices(String key, Choices object){
+
+    public void putSubjectNames(String key, ArrayList<String> object){
         Gson gson = new Gson();
         String json = gson.toJson(object);
         preferences.edit().putString(key,json).apply();
     }
-
-
-
-
-
+    public ArrayList<String> getSubjectNames(String key){
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<String>>(){}.getType();
+        return gson.fromJson(preferences.getString(key,null),type);
+    }
+    public void putSubjects(String key, ArrayList<String> object){
+        Gson gson = new Gson();
+        String json = gson.toJson(object);
+        preferences.edit().putString(key,json).apply();
+    }
+    public ArrayList<String> getSubjects(String key){
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<String>>(){}.getType();
+        return gson.fromJson(preferences.getString(key,null),type);
+    }
 }

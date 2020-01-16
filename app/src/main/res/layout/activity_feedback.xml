@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".FeedbackActivity"
+    android:padding="6dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/disclaimer"
+        android:padding="8dp"
+        android:textSize="22dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="24dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:padding="8dp"
+        android:hint="Write here"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/disclaimer"
+        android:layout_marginTop="12dp"
+        android:id="@+id/feedback"
+        android:background="@drawable/btn_bg_yellow"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/buttons_colorprimary_bg"
+        android:text="Send Feedback"
+        android:id="@+id/sendFeedback"
+        android:textColor="#ffffff"/>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress_circular"/>
+
+</RelativeLayout>

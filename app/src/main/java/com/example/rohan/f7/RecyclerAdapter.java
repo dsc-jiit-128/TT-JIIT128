@@ -1,21 +1,20 @@
 package com.example.rohan.f7;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHolder> {
 
 
-    ArrayList<SubjectDetails> classDetails;
-    Context context;
+     ArrayList<SubjectDetails> classDetails;
+     Context context;
     public RecyclerAdapter(ArrayList<SubjectDetails> classDetails, Context context)
     {
         this.classDetails=classDetails;
@@ -25,8 +24,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
     @Override
     public RecyclerAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.recyclerview, parent,false);
-        MyHolder myHolder=new MyHolder(view);
-        return myHolder;
+        return new MyHolder(view);
     }
 
     @Override
@@ -51,15 +49,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
             {
                 arr=classDetails.size();
             }
-        }catch (Exception e){
+        }catch (Exception ignored){
 
         }
         return arr;
     }
 
-    public class MyHolder extends RecyclerView.ViewHolder {
+    class MyHolder extends RecyclerView.ViewHolder {
         TextView type, subject,timing, faculty,room;
-        public MyHolder(View itemView) {
+        MyHolder(View itemView) {
             super(itemView);
             type=itemView.findViewById(R.id.type);
             subject=itemView.findViewById(R.id.subject);

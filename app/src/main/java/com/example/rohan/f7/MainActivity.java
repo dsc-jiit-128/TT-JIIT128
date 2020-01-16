@@ -3,15 +3,20 @@ package com.example.rohan.f7;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.browser.customtabs.CustomTabsIntent;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,39 +39,41 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
 
-    ArrayList<ArrayList<SubjectDetails>> subjectDetailsArrayList= new ArrayList<>();
-    DatabaseReference databaseReference;
+    DatabaseReference df;
+
+    AdView adView;
 
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
-    ArrayList<String> subjectCodes= new ArrayList<>();
-
     private ViewPager mViewPager;
-    private int i=0;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (new TinyDB(this).getString("BATCH").equals("") || new TinyDB(this).getSubjectNames("SUBJECTCODES")==null)
+        {
+            startActivity(new Intent(this, SubjectSelectionActivity.class));
+            finish();
+        }
+
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        adView = findViewById(R.id.bannerAd);
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+
+        AdRequest adRequest= new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -87,66 +94,16 @@ public class MainActivity extends AppCompatActivity {
         else{
             mViewPager.setCurrentItem(dayofweek-2,true);
         }
-        //setTimeTableToDataBase();
-
-
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        final TinyDB tinyDB= new TinyDB(this);
-        databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                    GenericTypeIndicator<ArrayList<ArrayList<SubjectDetails>>> t = new GenericTypeIndicator<ArrayList<ArrayList<SubjectDetails>>>() {
-                    };
-
-                    if (tinyDB.getSubjectDetails("3RD_YEAR")==null)
-                    {
-                        tinyDB.putSubjectDetails("3RD_YEAR",dataSnapshot.child("3RD_YEAR").getValue(t));
-
-                    }else if ((tinyDB.getSubjectDetails("3RD_YEAR")!=dataSnapshot.child("3RD_YEAR").getValue(t))){
-                        tinyDB.putSubjectDetails("3RD_YEAR",dataSnapshot.child("3RD_YEAR").getValue(t));
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-
-                }
-
-            });
 
 
 
 
 
-
-
-        if (tinyDB.getChoices("ELECTIVES")==null){
-            Toast.makeText(this, "CHOOSE ELECTIVES", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(MainActivity.this, ChooseElective.class));
-            finish();
-
-        }
 
 
     }
 
-    private String setSubjectName(String subjectName) {
 
-        for(int j = 0;j<subjectCodes.size();j++)
-        {
-            subjectCodes.get(j).replace("[", "");
-            subjectCodes.get(j).replace("]", "");
-            if (subjectCodes.get(j).contains(subjectName)){
-                Log.d("tag", "setSubjectName: "+subjectCodes.get(j).substring(subjectCodes.get(i).indexOf(",")-1));
-                return subjectCodes.get(j).substring(subjectCodes.get(i).indexOf(",")-1);
-            }
-
-        }
-       return subjectName;
-    }
 
 
     @Override
@@ -167,12 +124,80 @@ public class MainActivity extends AppCompatActivity {
             CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
             CustomTabsIntent customTabsIntent = builder.build();
             customTabsIntent.launchUrl(this, Uri.parse("https://webkiosk.jiit.ac.in/"));
-
-
         }
         if (id==R.id.changeElective){
-           startActivity(new Intent(MainActivity.this, ChooseElective.class));
+           startActivity(new Intent(MainActivity.this, SubjectSelectionActivity.class));
            finish();
+        }
+        if (id==R.id.refresh){
+            for (int i=0;i<5;i++)
+            {
+                final ArrayList<String> finalSubjects = new ArrayList<>();
+
+                df = FirebaseDatabase.getInstance().getReference("SEMESTER_5").child(""+i+"").child("slots");
+
+
+                final int finalI = i;
+                df.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
+                        {
+                            String s = dataSnapshot1.getValue(String.class);
+                            assert s != null;
+                            try {
+                                s=s.trim().replaceAll("\\s", "");
+                                s=s.replaceAll("\n", "");
+                                String st = s.trim().substring(s.indexOf("(")+1, s.indexOf(")"));
+                                String bt = s.trim().substring(s.indexOf("+"+1), s.indexOf("("));
+                                //Log.d("TAG", "onDataChange: "+st.replaceAll("\\s", ""));
+                                st = st.replaceAll("\\s", "");
+
+                                String batch = new TinyDB(getApplicationContext()).getString("BATCH");
+                                //Log.d("TAG", "onDataChange: "+s);
+                                if (s.contains("ALL") || bt.contains(batch))
+                                {
+                                    if (st.equals("B12HS613"))
+                                    {
+                                        st = "19B12HS613";
+                                        //Toast.makeText(SubjectSelectionActivity.this, "hua", Toast.LENGTH_SHORT).show();
+                                    }
+                                    if (new TinyDB(getApplicationContext()).getSubjectNames("SUBJECTCODES").contains(st))
+                                    {
+                                        Log.d("TAG", "onDataChange: "+s);
+                                        finalSubjects.add(s);
+                                    }else if (st.contains("T&P"))
+                                    {
+                                        finalSubjects.add(s);
+                                    }
+                                }
+
+                            }catch (Exception e)
+                            {
+                                //Log.d("TAG", "onDataChange: "+s);
+                                finalSubjects.add(s);
+
+                            }
+                        }
+
+                        new TinyDB(getApplicationContext()).putSubjects(""+ finalI +"", finalSubjects);
+                       recreate();
+                        //Toast.makeText(SubjectSelectionActivity.this, ""+finalSubjects, Toast.LENGTH_SHORT).show();
+                        //recreate();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        }
+        if (id==R.id.feedback){
+            startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
+            //finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -254,4 +279,5 @@ public class MainActivity extends AppCompatActivity {
             return 6;
         }
     }
-   }
+
+}

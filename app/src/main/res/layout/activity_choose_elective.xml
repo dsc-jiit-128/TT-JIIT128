@@ -6,167 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".ChooseElective">
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/sidenavbar2">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginHorizontal="12dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/elective1"
-                    android:padding="4dp"
-                    android:background="@drawable/choicesbg">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="COMPUTER NETWORKS"
-                        android:textColor="#ffffff"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="EMBEDED SYSTEMS"
-                        android:textColor="#ffffff"/>
+        android:id="@+id/subjects_to_choose"
+        android:layout_alignParentTop="true"
+        android:clickable="true"
+        android:layout_marginBottom="60dp"
+        android:focusable="true" />
 
-                </RadioGroup>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:padding="4dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/save"
+        android:text="  SAVE SUBJECTS  "
+        android:textColor="#ffffff"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/buttons_colorprimary_bg"/>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress_circular"/>
 
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/elective2"
-                    android:layout_below="@+id/elective1"
-                    android:padding="4dp"
-                    android:background="@drawable/choicesbg">
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="SOFTWARE ENGINEERING"
-                        android:textColor="#ffffff" />
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ARTIFICIAL INTELLIGENCE"
-                        android:textColor="#ffffff"/>
-                </RadioGroup>
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/elective3"
-                    android:layout_below="@id/elective2"
-                    android:padding="4dp"
-                    android:background="@drawable/choicesbg">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Matrix Computations"
-                        android:textColor="#ffffff"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Quantum Mechanics for Engineers"
-                        android:textColor="#ffffff"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Materials Science"
-                        android:textColor="#ffffff"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="DECISION MAKING USING MATHEMATICAL AND STATISTICAL APPROACH"
-                        android:textColor="#ffffff"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Laser Technology and Applications"
-                        android:textColor="#ffffff"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="STATISTICAL INFORMATION THEORY WITH APPLICATIONS"
-                        android:textColor="#ffffff"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="LOGICAL REASONING AND INEQUALITIES"
-                        android:textColor="#ffffff"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="COMPUTER BASED NUMERICAL TECHNIQUES"
-                        android:textColor="#ffffff"/>
-                </RadioGroup>
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/elective4"
-                    android:layout_below="@id/elective3"
-                    android:padding="4dp"
-                    android:background="@drawable/choicesbg">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PLANNING AND ECONOMIC DEVELOPMENT"
-                        android:textColor="#ffffff"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Technology and Culture"
-                        android:textColor="#ffffff"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PRINCIPLES OF MANAGEMENT"
-                        android:textColor="#ffffff"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sociology of Youth"
-                        android:textColor="#ffffff"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Strategic Human Resource Management"
-                        android:textColor="#ffffff"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="MARKETING MANAGEMENT"
-                        android:textColor="#ffffff"/>
-
-                </RadioGroup>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_below="@+id/elective4"
-                    android:layout_centerHorizontal="true"
-                    android:text="save electives"
-                    android:padding="8dp"
-                    android:textColor="#ffffff"
-                    android:background="#80000000"
-                    android:id="@+id/saveElectives"/>
-
-            </RelativeLayout>
-
-        </ScrollView>
-
-
-    </RelativeLayout>
 
 </RelativeLayout>

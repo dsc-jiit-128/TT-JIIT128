@@ -9,7 +9,15 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/changeElective"
-        android:title="Change Elective">
+        android:title="Change Subjects">
+    </item>
+    <item
+        android:id="@+id/refresh"
+        android:title="Refresh">
+    </item>
+    <item
+        android:id="@+id/feedback"
+        android:title="Feedback">
     </item>
 
 </menu>
