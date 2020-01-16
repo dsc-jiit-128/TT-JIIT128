@@ -484,6 +484,20 @@
                 android:gravity="center"
                 android:background="@drawable/btn_bg_yellow"
                 android:clickable="true"/>
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="-"
+                android:layout_weight="8"
+                android:textColor="#000000"
+                android:contextClickable="true"
+                android:layout_margin="4dp"
+                android:padding="4dp"
+                android:id="@+id/subjectName33"
+                android:gravity="center"
+                android:background="@drawable/btn_bg_yellow"
+                android:clickable="true"/>
 
 
 
@@ -496,10 +510,11 @@
 
     </ScrollView>
     <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:visibility="visible"
+        android:background="#40000000"
         android:id="@+id/progress_circular">
 
     </ProgressBar>
@@ -513,6 +528,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="4dp"
         android:layout_centerHorizontal="true"
-        android:text="Save Subjects"/>
+        android:text="Save Subjects" />
 
 </RelativeLayout>

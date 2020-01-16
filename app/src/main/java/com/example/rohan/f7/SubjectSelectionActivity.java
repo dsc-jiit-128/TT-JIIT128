@@ -27,7 +27,7 @@ import mva2.adapter.MultiViewAdapter;
 
 public class SubjectSelectionActivity extends AppCompatActivity {
 
-    int TOTAL_BUTTONS = 33;
+    int TOTAL_BUTTONS = 34;
     Switch[] subjects = new Switch[TOTAL_BUTTONS];
     Button saveSubjects;
     DatabaseReference df;
@@ -195,6 +195,8 @@ public class SubjectSelectionActivity extends AppCompatActivity {
         subjects[30] = findViewById(R.id.subjectName30);
         subjects[31] = findViewById(R.id.subjectName31);
         subjects[32] = findViewById(R.id.subjectName32);
+        subjects[33] = findViewById(R.id.subjectName33);
+
 
 
     }

@@ -6,4 +6,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <string-array name="year">
+        <item>1ST_YEAR</item>
+        <item>2ND_YEAR</item>
+        <item>3RD_YEAR</item>
+        <item>4TH_YEAR</item>
+    </string-array>
 </resources>
