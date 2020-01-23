@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             customTabsIntent.launchUrl(this, Uri.parse("https://webkiosk.jiit.ac.in/"));
         }
         if (id == R.id.changeElective) {
-            startActivity(new Intent(MainActivity.this, SubjectSelectionActivity.class));
+            startActivity(new Intent(MainActivity.this, ChooseSubjects.class));
             finish();
         }
         if (id == R.id.refresh) {

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BatchAndYearActivity"
+    android:background="#212b31"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Batch and Year:"
+        android:textSize="18dp"
+        android:id="@+id/message"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="6dp"
+        android:textColor="#ffffff"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttons_colorprimary_bg"
+        android:hint="Your Batch"
+        android:layout_below="@+id/message"
+        android:textColor="#ffffff"
+        android:textColorHint="#90ffffff"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:id="@+id/batch"/>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/getYear"
+        android:layout_below="@id/batch"
+        android:orientation="vertical"
+        android:padding="18dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical">
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#f5f5f5"
+            android:text="1ST_YEAR"/>
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#f5f5f5"
+            android:text="2ND_YEAR"/>
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#f5f5f5"
+            android:text="3RD_YEAR"/>
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#f5f5f5"
+            android:text="4TH_YEAR"/>
+    </RadioGroup>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/getYear"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/sidenavbar"
+        android:text="SAVE"
+        android:id="@+id/savebatch"
+        android:textSize="18dp"
+        android:textColor="#ffffff"
+        />
+
+
+</RelativeLayout>

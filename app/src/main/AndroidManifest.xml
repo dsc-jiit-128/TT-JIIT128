@@ -12,14 +12,17 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FeedbackActivity"></activity>
-        <activity android:name=".SubjectSelectionActivity"></activity>
+        <activity android:name=".BatchAndYearActivity"></activity>
+        <activity android:name=".FeedbackActivity" />
+        <activity android:name=".SubjectSelectionActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
-        <activity android:name=".ChooseElective"></activity>
+        <activity android:name=".ChooseSubjects">
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

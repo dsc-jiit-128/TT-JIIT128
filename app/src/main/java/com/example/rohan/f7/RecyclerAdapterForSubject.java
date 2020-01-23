@@ -59,21 +59,27 @@ public class RecyclerAdapterForSubject extends SelectableAdapter<RecyclerAdapter
 
                 String x = holder.subjectName.getText().toString();
                 TinyDB tinyDB = new TinyDB(context);
-                ArrayList<String> subjects = tinyDB.getSubjectNames("SUBJECTS");
+                ArrayList<String> subjects = tinyDB.getSubjectNames("SUBJECTS2");
 
                 if (model.isSelected())
                 {
-                    if (subjects!=null && !subjects.contains(x))
+                    if (subjects==null)
                     {
+                        subjects=new ArrayList<>();
                         subjects.add(x);
-                        tinyDB.putSubjects("SUBJECTS", subjects);
+                        tinyDB.putSubjects("SUBJECTS2", subjects);
 
                     }
-                    assert subjects != null;
+                    if (!subjects.contains(x))
+                    {
+                        subjects.add(x);
+                        tinyDB.putSubjects("SUBJECTS2", subjects);
+
+                    }
                     Toast.makeText(context, "added "+ x +" in "+ subjects, Toast.LENGTH_LONG).show();
                 }else{
                     subjects.remove(x);
-                    tinyDB.putSubjects("SUBJECTS", subjects);
+                    tinyDB.putSubjects("SUBJECTS2", subjects);
                     Toast.makeText(context, "removed "+ x +" from "+ subjects, Toast.LENGTH_LONG).show();
 
                 }

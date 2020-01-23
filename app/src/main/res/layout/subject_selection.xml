@@ -4,7 +4,9 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:clickable="true"
+    android:padding="4dp"
     android:weightSum="8"
+    android:background="#212b31"
     android:layout_height="wrap_content"
     >
     <TextView
@@ -15,8 +17,7 @@
         android:layout_weight="8"
         android:textColor="#000000"
         android:contextClickable="true"
-        android:paddingVertical="8dp"
-        android:layout_margin="4dp"
+        android:padding="12dp"
         android:id="@+id/subjectName"
         android:gravity="center"
         android:background="@drawable/btn_bg_yellow"

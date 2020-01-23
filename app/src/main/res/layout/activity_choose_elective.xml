@@ -3,14 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#212b31"
     android:layout_height="match_parent"
-    tools:context=".ChooseElective">
+    tools:context=".ChooseSubjects">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/subjects_to_choose"
         android:layout_alignParentTop="true"
+        android:background="#212b31"
         android:clickable="true"
         android:layout_marginBottom="60dp"
         android:focusable="true" />
