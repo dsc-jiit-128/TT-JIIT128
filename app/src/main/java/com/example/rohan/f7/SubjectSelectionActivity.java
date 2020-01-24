@@ -22,8 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import mva2.adapter.ListSection;
-import mva2.adapter.MultiViewAdapter;
 
 public class SubjectSelectionActivity extends AppCompatActivity {
 

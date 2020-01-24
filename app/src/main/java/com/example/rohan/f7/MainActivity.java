@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         tinyDB = new TinyDB(this);
-        if (tinyDB.getString("BATCH").equals("") || tinyDB.getSubjectNames("SUBJECTCODES") == null) {
-            startActivity(new Intent(this, SubjectSelectionActivity.class));
+        if (tinyDB.getString("BATCH").equals("")) {
+            startActivity(new Intent(this, ChooseSubjects.class));
             finish();
         }
 
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         adView = findViewById(R.id.bannerAd);
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        MobileAds.initialize(this, "ca-app-pub-7233191134291345~1524967297");
 
         adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             interstitialAd = new InterstitialAd(getApplicationContext());
-            interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+            interstitialAd.setAdUnitId("ca-app-pub-7233191134291345/7587736789");
             interstitialAd.loadAd(adRequest);
             new Handler().postDelayed(new Runnable() {
                 @Override
