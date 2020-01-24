@@ -171,7 +171,5 @@ public class ChooseSubjects extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
-
-
     }
 }
