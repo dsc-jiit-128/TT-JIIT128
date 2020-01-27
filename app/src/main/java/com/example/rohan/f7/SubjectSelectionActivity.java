@@ -22,8 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import mva2.adapter.ListSection;
-import mva2.adapter.MultiViewAdapter;
 
 public class SubjectSelectionActivity extends AppCompatActivity {
 
@@ -31,15 +29,17 @@ public class SubjectSelectionActivity extends AppCompatActivity {
     Switch[] subjects = new Switch[TOTAL_BUTTONS];
     Button saveSubjects;
     DatabaseReference df;
+    TinyDB tinyDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject_selection);
         setFindViewById();
+        tinyDB = new TinyDB(this);
         df = FirebaseDatabase.getInstance().getReference("3RD_YEAR");
 
-        if (new TinyDB(this).getString("BATCH").equals("")) {
+        if (tinyDB.getString("BATCH").equals("")) {
             ChoicesDialog choicesDialog = new ChoicesDialog(this);
             choicesDialog.show();
         }
@@ -93,68 +93,62 @@ public class SubjectSelectionActivity extends AppCompatActivity {
                         //Toast.makeText(SubjectSelectionActivity.this, ""+subjects[i].getText(), Toast.LENGTH_SHORT).show();
                     }
                 }
-                new TinyDB(getApplicationContext()).putSubjectNames("SUBJECTCODES", subjectCodeChosen);
-                new TinyDB(getApplicationContext()).putSubjectNames("SUBJECTS", subjectsChosen);
+                tinyDB.putSubjectNames("SUBJECTCODES", subjectCodeChosen);
+                tinyDB.putSubjectNames("SUBJECTS", subjectsChosen);
 
                 for (int i = 0; i < 5; i++) {
-                    final ArrayList<String> finalSubjects = new ArrayList<>();
+                    final ArrayList<SubjectDetails> finalSubjects = new ArrayList<>();
 
-                    df = FirebaseDatabase.getInstance().getReference("SEMESTER_5").child("" + i + "").child("slots");
+                    df = FirebaseDatabase.getInstance().getReference("TIMETABLE").child(tinyDB.getString("YEAR")).child("TT").child("" + i + "");
 
 
-                    final int finalI = i;
-                    df.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    try{
+                        final int finalI = i;
+                        df.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                String s = dataSnapshot1.getValue(String.class);
-                                assert s != null;
-                                try {
-                                    s = s.trim().replaceAll("\\s", "");
-                                    s = s.replaceAll("\n", "");
-                                    String st = s.trim().substring(s.indexOf("(") + 1, s.indexOf(")"));
-                                    String bt = s.trim().substring(s.indexOf("+" + 1), s.indexOf("("));
-                                    //Log.d("TAG", "onDataChange: "+st.replaceAll("\\s", ""));
-                                    st = st.replaceAll("\\s", "");
+                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                    SubjectDetails s = dataSnapshot1.getValue(SubjectDetails.class);
+                                    assert s != null;
+                                    try {
 
-                                    String batch = new TinyDB(getApplicationContext()).getString("BATCH");
-                                    //Log.d("TAG", "onDataChange: "+s);
-                                    if (s.contains("ALL") || bt.contains(batch)) {
-                                        if (st.equals("B12HS613")) {
-                                            st = "19B12HS613";
-                                            //Toast.makeText(SubjectSelectionActivity.this, "hua", Toast.LENGTH_SHORT).show();
+                                        String batch = tinyDB.getString("BATCH");
+                                        //Log.d("TAG", "onDataChange: "+s);
+                                        if (s.getBatchName().equals("ALL") || s.getBatchName().contains(batch)) {
+
+                                            if (subjectCodeChosen.contains(s.getsubjectCode())) {
+                                                Log.d("TAG", "onDataChange: " + s);
+                                                finalSubjects.add(s);
+                                            }
                                         }
-                                        if (subjectCodeChosen.contains(st)) {
-                                            Log.d("TAG", "onDataChange: " + s);
-                                            finalSubjects.add(s);
-                                        } else if (st.contains("T&P")) {
-                                            finalSubjects.add(s);
-                                        }
+
+                                    } catch (Exception e) {
+                                        //Log.d("TAG", "onDataChange: "+s);
+                                        //finalSubjects.add(s);
+
                                     }
-
-                                } catch (Exception e) {
-                                    //Log.d("TAG", "onDataChange: "+s);
-                                    finalSubjects.add(s);
-
                                 }
+
+                                tinyDB.putSubjectDetails("" + finalI + "", finalSubjects);
+                                startActivity(new Intent(SubjectSelectionActivity.this, MainActivity.class));
+                                finish();
+                                //Toast.makeText(SubjectSelectionActivity.this, ""+finalSubjects, Toast.LENGTH_SHORT).show();
+                                //recreate();
+
                             }
 
-                            new TinyDB(getApplicationContext()).putSubjects("" + finalI + "", finalSubjects);
-                            startActivity(new Intent(SubjectSelectionActivity.this, MainActivity.class));
-                            finish();
-                            //Toast.makeText(SubjectSelectionActivity.this, ""+finalSubjects, Toast.LENGTH_SHORT).show();
-                            //recreate();
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
+                            }
+                        });
+                    }catch (Exception e){
+                        Toast.makeText(SubjectSelectionActivity.this, ""+e, Toast.LENGTH_SHORT).show();
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
                 }
-                //Toast.makeText(SubjectSelectionActivity.this, ""+new TinyDB(getApplicationContext()).getSubjects("0"), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SubjectSelectionActivity.this, ""+tinyDB.getSubjects("0"), Toast.LENGTH_SHORT).show();
             }
         });
     }

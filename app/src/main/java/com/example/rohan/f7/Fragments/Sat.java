@@ -1,6 +1,7 @@
 package com.example.rohan.f7.Fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import com.example.rohan.f7.R;
 import com.example.rohan.f7.RecyclerAdapter;
 import com.example.rohan.f7.SubjectDetails;
 import com.example.rohan.f7.TinyDB;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 
@@ -20,6 +23,7 @@ import java.util.ArrayList;
 public class Sat extends Fragment {
     RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
+    private InterstitialAd interstitialAd;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,79 +31,37 @@ public class Sat extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sat, container, false);
 
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        interstitialAd = new InterstitialAd(getContext());
+//        interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+//        interstitialAd.loadAd(adRequest);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (interstitialAd.isLoaded())
+//                {
+//                    interstitialAd.show();
+//                }
+//            }
+//        }, 3000);
         recyclerView=view.findViewById(R.id.recycle);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         
         TinyDB tinyDB = new TinyDB(getActivity());
-        ArrayList<String> subjects = tinyDB.getSubjects("5");
-        ArrayList<SubjectDetails> classDetailArrayList = new ArrayList<>();
+        ArrayList<SubjectDetails> subjects = tinyDB.getSubjectDetails("5");
         if (subjects != null) {
             try {
-                for (int i = 0; i < subjects.size(); i++) {
-                    String type, timeslot, faculty, subject, room;
-                    String s = subjects.get(i);
-                    timeslot = s.substring(0, s.indexOf("-"));
-                    s = s.substring(s.indexOf("+") + 1);
-                    try {
-                        type = s.substring(0, s.indexOf("("));
-
-                    } catch (Exception e) {
-                        type = "-";
-                    }
-                    try {
-                        s = s.substring(s.indexOf("(") + 1);
-
-                        subject = s.substring(0, s.indexOf(")"));
-
-                        try {
-                            s = s.substring(s.indexOf("-") + 1);
-
-                            room = s.substring(0, s.indexOf("/"));
-
-                            s = s.substring(s.indexOf("/") + 1);
-
-                            faculty = s;
-                        }catch (Exception e){
-                            room = "-";
-                            faculty = "-";
-                        }
-
-                    } catch (Exception e) {
-                        subject = "-";
-                        room = "-";
-                        faculty = "-";
-
-                    }
-                    if (type.contains(tinyDB.getString("BATCH")) || type.contains("ALL"))
-                    {
-                        if (tinyDB.getSubjectNames("SUBJECTCODES").contains(subject) || subject.equals("-") || subject.equals("T&P") || subject.contains("NSS"))
-                        {
-
-                            String sub;
-                            try{
-                                sub =tinyDB.getSubjectNames("SUBJECTS").get(tinyDB.getSubjectNames("SUBJECTCODES").indexOf(subject));
-                                sub = sub.substring(sub.indexOf("-")+1);
-                            }catch (Exception e){
-                                sub = subject;
-                            }
-
-                            classDetailArrayList.add(new SubjectDetails(type, sub, timeslot, faculty, room, "", ""));
-                        }
-                    }
-
-
-                }
+                recyclerAdapter = new RecyclerAdapter(subjects,getContext());
+                recyclerAdapter.notifyDataSetChanged();
+                recyclerView.setAdapter(recyclerAdapter);
             } catch (Exception e) {
             }
-            recyclerAdapter = new RecyclerAdapter(classDetailArrayList,getContext());
-            recyclerAdapter.notifyDataSetChanged();
-            recyclerView.setAdapter(recyclerAdapter);
+
             try {
                 view.findViewById(R.id.noClassMsg).setVisibility(View.GONE);
             }catch (Exception e){
 
-                //Toast.makeText(getContext(), ""+e, Toast.LENGTH_SHORT).show();
             }
         }else{
 
@@ -109,6 +71,7 @@ public class Sat extends Fragment {
 
             }
         }
+
 
 
         return view;

@@ -3,20 +3,7 @@ package com.example.rohan.f7;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.browser.customtabs.CustomTabsIntent;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,17 +13,30 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.rohan.f7.Fragments.Fri;
 import com.example.rohan.f7.Fragments.Mon;
 import com.example.rohan.f7.Fragments.Sat;
 import com.example.rohan.f7.Fragments.Thu;
 import com.example.rohan.f7.Fragments.Tue;
 import com.example.rohan.f7.Fragments.Wed;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -54,26 +54,22 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
 
+    TinyDB tinyDB;
+    private InterstitialAd interstitialAd;
+    private AdRequest adRequest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (new TinyDB(this).getString("BATCH").equals("") || new TinyDB(this).getSubjectNames("SUBJECTCODES")==null)
-        {
-            startActivity(new Intent(this, SubjectSelectionActivity.class));
+        Toolbar toolbar =  findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        tinyDB = new TinyDB(this);
+        if (tinyDB.getString("BATCH").equals("")) {
+            startActivity(new Intent(this, ChooseSubjects.class));
             finish();
         }
 
-
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        adView = findViewById(R.id.bannerAd);
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
-
-        AdRequest adRequest= new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -87,23 +83,20 @@ public class MainActivity extends AppCompatActivity {
 
         Calendar c = Calendar.getInstance();
         int dayofweek = c.get(Calendar.DAY_OF_WEEK);
-        if(dayofweek==1 || dayofweek==2)
-        {
-            mViewPager.setCurrentItem(0,true);
-        }
-        else{
-            mViewPager.setCurrentItem(dayofweek-2,true);
+        if (dayofweek == 1 || dayofweek == 2) {
+            mViewPager.setCurrentItem(0, true);
+        } else {
+            mViewPager.setCurrentItem(dayofweek - 2, true);
         }
 
+        adView = findViewById(R.id.bannerAd);
+        MobileAds.initialize(this, "ca-app-pub-7233191134291345~1524967297");
 
-
-
-
+        adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
 
     }
-
-
 
 
     @Override
@@ -125,77 +118,62 @@ public class MainActivity extends AppCompatActivity {
             CustomTabsIntent customTabsIntent = builder.build();
             customTabsIntent.launchUrl(this, Uri.parse("https://webkiosk.jiit.ac.in/"));
         }
-        if (id==R.id.changeElective){
-           startActivity(new Intent(MainActivity.this, SubjectSelectionActivity.class));
-           finish();
+        if (id == R.id.changeElective) {
+            startActivity(new Intent(MainActivity.this, ChooseSubjects.class));
+            finish();
         }
-        if (id==R.id.refresh){
-            for (int i=0;i<5;i++)
-            {
-                final ArrayList<String> finalSubjects = new ArrayList<>();
+        if (id == R.id.refresh) {
+            for (int i = 0; i < 5; i++) {
+                final ArrayList<SubjectDetails> finalSubjects = new ArrayList<>();
 
-                df = FirebaseDatabase.getInstance().getReference("SEMESTER_5").child(""+i+"").child("slots");
+                df = FirebaseDatabase.getInstance().getReference("TIMETABLE").child(tinyDB.getString("YEAR")).child("TT").child("" + i + "");
 
 
-                final int finalI = i;
-                df.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                try {
+                    final int finalI = i;
+                    df.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                        for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
-                        {
-                            String s = dataSnapshot1.getValue(String.class);
-                            assert s != null;
-                            try {
-                                s=s.trim().replaceAll("\\s", "");
-                                s=s.replaceAll("\n", "");
-                                String st = s.trim().substring(s.indexOf("(")+1, s.indexOf(")"));
-                                String bt = s.trim().substring(s.indexOf("+"+1), s.indexOf("("));
-                                //Log.d("TAG", "onDataChange: "+st.replaceAll("\\s", ""));
-                                st = st.replaceAll("\\s", "");
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                SubjectDetails s = dataSnapshot1.getValue(SubjectDetails.class);
+                                assert s != null;
+                                try {
 
-                                String batch = new TinyDB(getApplicationContext()).getString("BATCH");
-                                //Log.d("TAG", "onDataChange: "+s);
-                                if (s.contains("ALL") || bt.contains(batch))
-                                {
-                                    if (st.equals("B12HS613"))
-                                    {
-                                        st = "19B12HS613";
-                                        //Toast.makeText(SubjectSelectionActivity.this, "hua", Toast.LENGTH_SHORT).show();
+                                    String batch = tinyDB.getString("BATCH");
+                                    //Log.d("TAG", "onDataChange: "+s);
+                                    if (s.getBatchName().equals("ALL") || s.getBatchName().contains(batch)) {
+
+                                        if (new TinyDB(getApplicationContext()).getSubjectNames("SUBJECTCODES").contains(s.getsubjectCode())) {
+                                            Log.d("TAG", "onDataChange: " + s);
+                                            finalSubjects.add(s);
+                                        }
                                     }
-                                    if (new TinyDB(getApplicationContext()).getSubjectNames("SUBJECTCODES").contains(st))
-                                    {
-                                        Log.d("TAG", "onDataChange: "+s);
-                                        finalSubjects.add(s);
-                                    }else if (st.contains("T&P"))
-                                    {
-                                        finalSubjects.add(s);
-                                    }
+
+                                } catch (Exception e) {
+                                    //Log.d("TAG", "onDataChange: "+s);
+                                    //finalSubjects.add(s);
+
                                 }
-
-                            }catch (Exception e)
-                            {
-                                //Log.d("TAG", "onDataChange: "+s);
-                                finalSubjects.add(s);
-
                             }
+                            recreate();
+                            //Toast.makeText(SubjectSelectionActivity.this, ""+finalSubjects, Toast.LENGTH_SHORT).show();
+                            //recreate();
+
                         }
 
-                        new TinyDB(getApplicationContext()).putSubjects(""+ finalI +"", finalSubjects);
-                       recreate();
-                        //Toast.makeText(SubjectSelectionActivity.this, ""+finalSubjects, Toast.LENGTH_SHORT).show();
-                        //recreate();
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
+                        }
+                    });
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "" + e, Toast.LENGTH_SHORT).show();
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
             }
         }
-        if (id==R.id.feedback){
+        if (id == R.id.feedback) {
             startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
             //finish();
         }
@@ -239,34 +217,35 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if(position==0)
-            {
-                Mon t1= new Mon();
+            interstitialAd = new InterstitialAd(getApplicationContext());
+            interstitialAd.setAdUnitId("ca-app-pub-7233191134291345/7587736789");
+            interstitialAd.loadAd(adRequest);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (interstitialAd.isLoaded())
+                    {
+                        interstitialAd.show();
+                    }
+                }
+            }, 3000);
+            if (position == 0) {
+                Mon t1 = new Mon();
                 return t1;
-            }
-            else if (position==1)
-            {
-                Tue t2= new Tue();
+            } else if (position == 1) {
+                Tue t2 = new Tue();
                 return t2;
-            }
-            else if (position==2)
-            {
-                Wed t3= new Wed();
+            } else if (position == 2) {
+                Wed t3 = new Wed();
                 return t3;
-            }
-            else if (position==3)
-            {
-                Thu t4= new Thu();
+            } else if (position == 3) {
+                Thu t4 = new Thu();
                 return t4;
-            }
-            else if (position==4)
-            {
-                Fri t5= new Fri();
+            } else if (position == 4) {
+                Fri t5 = new Fri();
                 return t5;
-            }
-            else if (position==5)
-            {
-                Sat t6= new Sat();
+            } else if (position == 5) {
+                Sat t6 = new Sat();
                 return t6;
             }
 

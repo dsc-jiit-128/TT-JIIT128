@@ -28,8 +28,9 @@
         android:id="@+id/batch"/>
     <Spinner
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:padding="12dp"
         android:id="@+id/selectyear"
         android:tooltipText="Select Year"
         android:background="@drawable/btn_bg_yellow"
@@ -38,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/batch"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/sidenavbar"
         android:text="SAVE"
         android:id="@+id/savebatch"

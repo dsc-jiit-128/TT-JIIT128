@@ -86,7 +86,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+        ads:adUnitId="ca-app-pub-7233191134291345/1400289307"/>
 
 
 

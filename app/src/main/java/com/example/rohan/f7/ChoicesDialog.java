@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class ChoicesDialog extends Dialog implements View.OnClickListener {
 
@@ -38,6 +39,7 @@ public class ChoicesDialog extends Dialog implements View.OnClickListener {
         final Spinner spinner = (Spinner) findViewById(R.id.selectyear);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.year, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setPrompt("SELECT YEAR");
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
