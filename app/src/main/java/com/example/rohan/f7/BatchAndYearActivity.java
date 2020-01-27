@@ -62,5 +62,12 @@ public class BatchAndYearActivity extends AppCompatActivity {
         });
 
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(BatchAndYearActivity.this, ChooseSubjects.class));
+        finish();
     }
 }

@@ -172,4 +172,10 @@ public class ChooseSubjects extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ChooseSubjects.this, MainActivity.class));
+        finish();
+    }
 }
