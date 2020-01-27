@@ -12,8 +12,8 @@
         android:layout_height="match_parent"
         android:id="@+id/subjects_to_choose"
         android:layout_alignParentTop="true"
-        android:background="#212b31"
         android:clickable="true"
+        android:background="#212b31"
         android:layout_marginBottom="60dp"
         android:focusable="true" />
 

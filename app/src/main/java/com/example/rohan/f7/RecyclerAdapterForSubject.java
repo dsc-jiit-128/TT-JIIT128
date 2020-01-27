@@ -48,14 +48,14 @@ public class RecyclerAdapterForSubject extends SelectableAdapter<RecyclerAdapter
 
 
         holder.subjectName.setText(model.getText());
-        holder.view.setBackgroundColor(model.isSelected() ? Color.CYAN : Color.WHITE);
+        holder.view.setBackgroundColor(model.isSelected() ? Color.CYAN : Color.TRANSPARENT);
         holder.subjectName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 model.setSelected(!model.isSelected());
 
-                holder.view.setBackgroundColor(model.isSelected() ? Color.CYAN : Color.WHITE);
+                holder.view.setBackgroundColor(model.isSelected() ? Color.CYAN : Color.TRANSPARENT);
 
                 String x = holder.subjectName.getText().toString();
                 TinyDB tinyDB = new TinyDB(context);

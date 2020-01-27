@@ -15,12 +15,12 @@
         android:textSize="18dp"
         android:text="subject"
         android:layout_weight="8"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:contextClickable="true"
         android:padding="12dp"
         android:id="@+id/subjectName"
         android:gravity="center"
-        android:background="@drawable/btn_bg_yellow"
+        android:background="@drawable/sidenavbar"
         android:clickable="true"/>
 
 

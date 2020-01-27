@@ -72,9 +72,9 @@
     <color name="yellow_6">#FFC107</color>
     <color name="yellow_7">#F8A51B</color>
     <color name="yellow_8">#FFA000</color>
-    <color name="yellow_9">#90FF8F00</color>
+    <color name="yellow_9">#FF8F00</color>
     <color name="yellow_10">#80FF6F00</color>
-    <color name="orange">#90FF9800</color>
+    <color name="orange">#FF9800</color>
 
     <color name="cyan_1">#E0F2F1</color>
     <color name="cyan_2">#B2DFDB</color>
