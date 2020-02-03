@@ -18,6 +18,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class Tue extends Fragment {
@@ -55,7 +56,7 @@ public class Tue extends Fragment {
         ArrayList<SubjectDetails> subjects = tinyDB.getSubjectDetails("1");
         if (subjects != null) {
             try {
-                recyclerAdapter = new RecyclerAdapter(subjects,getContext());
+                recyclerAdapter = new RecyclerAdapter(subjects, getActivity(), 1);
                 recyclerAdapter.notifyDataSetChanged();
                 recyclerView.setAdapter(recyclerAdapter);
             } catch (Exception e) {

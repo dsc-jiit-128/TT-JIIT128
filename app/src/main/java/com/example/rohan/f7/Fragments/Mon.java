@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rohan.f7.MainActivity;
 import com.example.rohan.f7.R;
 import com.example.rohan.f7.RecyclerAdapter;
 import com.example.rohan.f7.SubjectDetails;
@@ -19,6 +20,7 @@ import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class Mon extends Fragment {
@@ -59,7 +61,7 @@ public class Mon extends Fragment {
         ArrayList<SubjectDetails> subjects = tinyDB.getSubjectDetails("0");
         if (subjects != null) {
             try {
-                recyclerAdapter = new RecyclerAdapter(subjects,getContext());
+                recyclerAdapter = new RecyclerAdapter(subjects, getActivity(), 0);
                 recyclerAdapter.notifyDataSetChanged();
                 recyclerView.setAdapter(recyclerAdapter);
             } catch (Exception e) {

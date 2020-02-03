@@ -121,7 +121,6 @@ public class RecyclerAdapterForSubject extends SelectableAdapter<RecyclerAdapter
         }
 
 
-
     }
 
 

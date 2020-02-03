@@ -3,13 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:ads="http://schemas.android.com/tools"
     android:layout_gravity="center"
+    android:id="@+id/forEdit"
     android:clickable="true"
     android:background="@drawable/sidenavbar"
     android:orientation="vertical"
     android:paddingHorizontal="12dp"
     android:paddingVertical="6dp">
+<!--    <com.google.android.gms.ads.AdView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/adview"-->
+<!--        ads:adSize="BANNER"-->
+<!--        ads:adUnitId="ca-app-pub-7233191134291345/1400289307"/>-->
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:text="EDIT THE SLOT HERE..."
+        android:textStyle="bold"
+        android:textSize="20dp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +34,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
+            <EditText
                 android:id="@+id/type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -25,7 +42,7 @@
                 android:textSize="15sp"
                 android:textColor="#fafaff"
                 android:textStyle="bold" />
-            <TextView
+            <EditText
                 android:id="@+id/room"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,7 +59,7 @@
 
     </LinearLayout>
 
-    <TextView
+    <EditText
         android:id="@+id/subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,7 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+        <EditText
             android:id="@+id/timing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,7 +81,7 @@
             android:text="time"
             android:textSize="15sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/faculty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,23 +89,17 @@
             android:text="faculty"
             android:textColor="#fafaff"
             android:textSize="15sp" />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_edit_black_24dp"
-                android:background="@drawable/sidenavbar"
-                android:padding="4dp"
-                android:id="@+id/forEdit"/>
-        </RelativeLayout>
-
-
 
 
     </LinearLayout>
+    <Button
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/btn_bg_cyan"
+        android:text="SAVE"
+        android:textColor="#ffffff"
+        android:id="@+id/saveDetails"/>
 
 
 </LinearLayout>

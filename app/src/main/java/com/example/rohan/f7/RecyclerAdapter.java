@@ -1,69 +1,99 @@
 package com.example.rohan.f7;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHolder> {
 
 
-     ArrayList<SubjectDetails> classDetails;
-     Context context;
-    public RecyclerAdapter(ArrayList<SubjectDetails> classDetails, Context context)
-    {
-        this.classDetails=classDetails;
-        this.context=context;
+    ArrayList<SubjectDetails> classDetails;
+    Context context;
+    int dayNumber;
+
+    public RecyclerAdapter(ArrayList<SubjectDetails> classDetails, Context context, int dayNumber) {
+        this.classDetails = classDetails;
+        this.context = context;
+        this.dayNumber = dayNumber;
     }
+
     @NonNull
     @Override
     public RecyclerAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.recyclerview, parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.recyclerview, parent, false);
         return new MyHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerAdapter.MyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerAdapter.MyHolder holder, final int position) {
 
-        SubjectDetails classlist=classDetails.get(position);
+        SubjectDetails classlist = classDetails.get(position);
         holder.type.setText(classlist.subjectType);
         holder.subject.setText(classlist.subjectName);
         holder.timing.setText(classlist.subjectTiming);
         holder.faculty.setText(classlist.subjectFaculty);
         holder.room.setText(classlist.subjectVenue);
+        holder.forEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                try {
+                    ForEditDialog forEditDialog = new ForEditDialog(context, classDetails, position, dayNumber);
+                    forEditDialog.show();
+                    forEditDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialogInterface) {
+                            notifyDataSetChanged();
+                        }
+                    });
+                } catch (Exception e) {
+                    Toast.makeText(context, "" + e, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+
+        });
     }
 
     @Override
     public int getItemCount() {
-        int arr=0;
+        int arr = 0;
         try {
-            if(classDetails.size()==0)
-            {
-                arr=0;
-            }else
-            {
-                arr=classDetails.size();
+            if (classDetails.size() == 0) {
+                arr = 0;
+            } else {
+                arr = classDetails.size();
             }
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
         return arr;
     }
 
     class MyHolder extends RecyclerView.ViewHolder {
-        TextView type, subject,timing, faculty,room;
+        TextView type, subject, timing, faculty, room;
+        ImageButton forEdit;
+
         MyHolder(View itemView) {
             super(itemView);
-            type=itemView.findViewById(R.id.type);
-            subject=itemView.findViewById(R.id.subject);
-            timing=itemView.findViewById(R.id.timing);
-            faculty=itemView.findViewById(R.id.faculty);
-            room=itemView.findViewById(R.id.room);
+            type = itemView.findViewById(R.id.type);
+            subject = itemView.findViewById(R.id.subject);
+            timing = itemView.findViewById(R.id.timing);
+            faculty = itemView.findViewById(R.id.faculty);
+            room = itemView.findViewById(R.id.room);
+            forEdit = itemView.findViewById(R.id.forEdit);
         }
     }
 }

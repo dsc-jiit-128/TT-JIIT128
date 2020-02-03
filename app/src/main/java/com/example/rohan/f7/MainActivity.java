@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         adView = findViewById(R.id.bannerAd);
-        MobileAds.initialize(this, "ca-app-pub-7233191134291345~1524967297");
+        MobileAds.initialize(this, String.valueOf(R.string.bannerAd));
 
         adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             interstitialAd = new InterstitialAd(getApplicationContext());
-            interstitialAd.setAdUnitId("ca-app-pub-7233191134291345/7587736789");
+            interstitialAd.setAdUnitId(String.valueOf(R.string.interestitialAd));
             interstitialAd.loadAd(adRequest);
             new Handler().postDelayed(new Runnable() {
                 @Override
