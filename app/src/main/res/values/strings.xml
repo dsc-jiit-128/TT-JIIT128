@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JIIT128@TT</string>
+    <string name="app_name">DSCJIIT128@TT</string>
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -8,6 +8,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="interestitialAd">ca-app-pub-7233191134291345/7587736789</string>
     <string name="bannerAd">ca-app-pub-7233191134291345~1524967297</string>
+    <string name="videoAd">ca-app-pub-7233191134291345/1290572110</string>
 
     <string-array name="year">
         <item>SELECT YEAR</item>

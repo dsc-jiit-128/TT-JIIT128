@@ -6,13 +6,21 @@
     android:background="#212b31"
     android:layout_height="match_parent"
     tools:context=".ChooseSubjects">
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/choosemsg"
+        android:gravity="center"
+        android:text="TAP TO CHOOSE YOUR SUBJECTS"
+        android:padding="6dp"
+        android:textSize="20dp"
+        android:textColor="#ffffff"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/subjects_to_choose"
-        android:layout_alignParentTop="true"
         android:clickable="true"
+        android:layout_below="@+id/choosemsg"
         android:background="#212b31"
         android:layout_marginBottom="60dp"
         android:focusable="true" />

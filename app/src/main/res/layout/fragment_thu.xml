@@ -4,23 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.Thu">
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="NO CLASSES TODAY !"
-        android:textSize="24dp"
-        android:layout_marginTop="16dp"
-        android:id="@+id/noClassMsg"
-        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        android:textColor="#ffffff"
-        android:gravity="center_horizontal"
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="T\nH\nU\nR\nS\nD\nA\nY"
+            android:textSize="34sp"
+            android:gravity="center"
+            android:padding="12dp"
+            android:textStyle="bold"
+            android:textColor="#f5f5f5"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NO CLASSES TODAY !"
+            android:textSize="24dp"
+            android:layout_marginTop="16dp"
+            android:id="@+id/noClassMsg"
+            android:textColor="#ffffff"
+            android:visibility="gone"
+            android:gravity="center_horizontal"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ></androidx.recyclerview.widget.RecyclerView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/recycle"></androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 
 </FrameLayout>

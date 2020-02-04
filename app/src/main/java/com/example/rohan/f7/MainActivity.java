@@ -1,5 +1,6 @@
 package com.example.rohan.f7;
 
+import android.animation.LayoutTransition;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,9 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,12 +61,14 @@ public class MainActivity extends AppCompatActivity {
     TinyDB tinyDB;
     private InterstitialAd interstitialAd;
     private AdRequest adRequest;
+    private RewardedVideoAd rewardedVideoAd;
+    private boolean adOpened = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar =  findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         tinyDB = new TinyDB(this);
         if (tinyDB.getString("BATCH").equals("")) {
@@ -79,6 +85,14 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        mViewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
+            @Override
+            public void transformPage(View page, float position) {
+                // do transformation here
+                page.setRotationY(position * -30);
+
+            }
+        });
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         Calendar c = Calendar.getInstance();
@@ -91,9 +105,10 @@ public class MainActivity extends AppCompatActivity {
 
         adView = findViewById(R.id.bannerAd);
         MobileAds.initialize(this, String.valueOf(R.string.bannerAd));
-
         adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+        rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+        rewardedVideoAd.loadAd(String.valueOf(R.string.videoAd), adRequest);
 
 
     }
@@ -119,8 +134,25 @@ public class MainActivity extends AppCompatActivity {
             customTabsIntent.launchUrl(this, Uri.parse("https://webkiosk.jiit.ac.in/"));
         }
         if (id == R.id.changeElective) {
+
             startActivity(new Intent(MainActivity.this, ChooseSubjects.class));
             finish();
+
+//            if (rewardedVideoAd.isLoaded()) {
+//                if (!adOpened)
+//                {
+//                    rewardedVideoAd.show();
+//                    adOpened=true;
+//                }else{
+//                    startActivity(new Intent(MainActivity.this, ChooseSubjects.class));
+//                    finish();
+//                }
+//            }else{
+//                startActivity(new Intent(MainActivity.this, ChooseSubjects.class));
+//                finish();
+//            }
+
+
         }
         if (id == R.id.refresh) {
             for (int i = 0; i < 5; i++) {
@@ -218,13 +250,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             interstitialAd = new InterstitialAd(getApplicationContext());
-            interstitialAd.setAdUnitId(String.valueOf(R.string.interestitialAd));
+            interstitialAd.setAdUnitId("ca-app-pub-7233191134291345/7587736789");
             interstitialAd.loadAd(adRequest);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (interstitialAd.isLoaded())
-                    {
+                    if (interstitialAd.isLoaded()) {
                         interstitialAd.show();
                     }
                 }

@@ -2,6 +2,7 @@ package com.example.rohan.f7;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,12 +34,28 @@ public class ChooseSubjects extends AppCompatActivity {
     RecyclerAdapterForSubject recyclerAdapterForSubject;
     Button saveSubjects;
     TinyDB tinyDB;
+    private AdRequest adRequest;
+    private RewardedVideoAd rewardedVideoAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_elective);
         saveSubjects = findViewById(R.id.save);
+
+        MobileAds.initialize(this, String.valueOf(R.string.bannerAd));
+        adRequest = new AdRequest.Builder().build();
+        rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (rewardedVideoAd.isLoaded())
+                {
+                    rewardedVideoAd.loadAd("ca-app-pub-7233191134291345/1290572110", adRequest);
+                }
+            }
+        }, 3000);
 
         tinyDB = new TinyDB(this);
         tinyDB.putSubjects("SUBJECTS2", null);

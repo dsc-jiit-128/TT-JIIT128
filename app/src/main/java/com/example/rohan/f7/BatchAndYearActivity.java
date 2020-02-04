@@ -37,25 +37,20 @@ public class BatchAndYearActivity extends AppCompatActivity {
         findViewById(R.id.savebatch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tinyDB.getString("YEAR").equals("")) {
-                    Toast.makeText(getApplicationContext(), "Select Year", Toast.LENGTH_SHORT).show();
-                } else {
-                    try {
-                        int selectedId=radioGroup.getCheckedRadioButtonId();
-                        RadioButton r =(RadioButton)findViewById(selectedId);
-                        tinyDB.putString("YEAR",r.getText().toString() );
-
-                    }catch (Exception Ignore){}
-
-
+                try {
+                    int selectedId=radioGroup.getCheckedRadioButtonId();
+                    RadioButton r =(RadioButton)findViewById(selectedId);
+                    tinyDB.putString("YEAR",r.getText().toString() );
                     if (arrayList.contains(batch.getText().toString().trim().toUpperCase())) {
                         tinyDB.putString("BATCH", batch.getText().toString().trim().toUpperCase());
                         startActivity(new Intent(BatchAndYearActivity.this,ChooseSubjects.class));
                         finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), "PLEASE ENTER BATCH NAME CORRECTLY.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "PLEASE ENTER CORRECTLY.", Toast.LENGTH_SHORT).show();
                     }
-                }
+
+                }catch (Exception Ignore){}
+
 
 
             }
