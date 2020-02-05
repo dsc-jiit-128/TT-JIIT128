@@ -46,13 +46,14 @@ public class ChooseSubjects extends AppCompatActivity {
         MobileAds.initialize(this, String.valueOf(R.string.bannerAd));
         adRequest = new AdRequest.Builder().build();
         rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+        rewardedVideoAd.loadAd("ca-app-pub-7233191134291345/1290572110", adRequest);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (rewardedVideoAd.isLoaded())
                 {
-                    rewardedVideoAd.loadAd("ca-app-pub-7233191134291345/1290572110", adRequest);
+                    rewardedVideoAd.show();
                 }
             }
         }, 3000);
@@ -74,7 +75,6 @@ public class ChooseSubjects extends AppCompatActivity {
         df.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int x = list.size();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     String[] s = new String[2];
                     s[0] = dataSnapshot1.getKey();
@@ -83,14 +83,13 @@ public class ChooseSubjects extends AppCompatActivity {
                     list.add(new Model(s[0] + " - " + s[1]));
                 }
 
-                if (list.size() > x) {
-                    recyclerAdapterForSubject = new RecyclerAdapterForSubject(list, getApplicationContext());
-                    recyclerAdapterForSubject.notifyDataSetChanged();
-                    recyclerView.setAdapter(recyclerAdapterForSubject);
-                    Log.d("TAG", "onDataChange: " + list);
 
-                    findViewById(R.id.progress_circular).setVisibility(View.GONE);
-                }
+                recyclerAdapterForSubject = new RecyclerAdapterForSubject(list, getApplicationContext());
+                recyclerAdapterForSubject.notifyDataSetChanged();
+                recyclerView.setAdapter(recyclerAdapterForSubject);
+                Log.d("TAG", "onDataChange: " + list);
+
+                findViewById(R.id.progress_circular).setVisibility(View.GONE);
             }
 
             @Override

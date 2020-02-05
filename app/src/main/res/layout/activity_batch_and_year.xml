@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BatchAndYearActivity"
+    android:gravity="center"
     android:background="#212b31"
     android:orientation="vertical">
     <TextView
@@ -24,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/buttons_colorprimary_bg"
-        android:hint="Your Batch"
+        android:hint="Enter Your Batch"
         android:layout_below="@+id/message"
         android:textColor="#ffffff"
         android:textColorHint="#90ffffff"
@@ -66,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/getYear"
         android:layout_marginTop="16dp"
-        android:background="@drawable/sidenavbar"
+        android:background="@drawable/buttons_colorprimary_bg"
         android:text="SAVE"
         android:id="@+id/savebatch"
         android:textSize="18dp"

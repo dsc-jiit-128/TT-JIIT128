@@ -18,23 +18,32 @@
             android:padding="12dp"
             android:textStyle="bold"
             android:textColor="#f5f5f5"/>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical"
+           >
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="NO CLASSES TODAY !"
+               android:textSize="24dp"
+               android:layout_marginTop="16dp"
+               android:id="@+id/noClassMsg"
+               android:textColor="#ffffff"
+               android:visibility="gone"
+               android:gravity="center_horizontal"
+               />
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/recycle"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               ></androidx.recyclerview.widget.RecyclerView>
 
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="NO CLASSES TODAY !"
-          android:textSize="24dp"
-          android:layout_marginTop="16dp"
-          android:id="@+id/noClassMsg"
-          android:textColor="#ffffff"
-          android:visibility="gone"
-          android:gravity="center_horizontal"
-          />
-      <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/recycle"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          ></androidx.recyclerview.widget.RecyclerView>
+       </LinearLayout>
+
+
+
 
    </LinearLayout>
 

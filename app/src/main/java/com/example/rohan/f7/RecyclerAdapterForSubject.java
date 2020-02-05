@@ -76,11 +76,11 @@ public class RecyclerAdapterForSubject extends SelectableAdapter<RecyclerAdapter
                         tinyDB.putSubjects("SUBJECTS2", subjects);
 
                     }
-                    Toast.makeText(context, "added "+ x +" in "+ subjects, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, ""+ x+" Added ! \nTotal Subjects: "+subjects.size() , Toast.LENGTH_LONG).show();
                 }else{
                     subjects.remove(x);
                     tinyDB.putSubjects("SUBJECTS2", subjects);
-                    Toast.makeText(context, "removed "+ x +" from "+ subjects, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, ""+ x +" Removed ! \nTotal Subjects:  "+ subjects.size(), Toast.LENGTH_LONG).show();
 
                 }
 

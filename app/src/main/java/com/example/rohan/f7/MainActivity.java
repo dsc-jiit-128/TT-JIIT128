@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
     private InterstitialAd interstitialAd;
     private AdRequest adRequest;
     private RewardedVideoAd rewardedVideoAd;
-    private boolean adOpened = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +70,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         tinyDB = new TinyDB(this);
-        if (tinyDB.getString("BATCH").equals("")) {
+        try{
+            if (tinyDB.getString("BATCH").equals("")) {
+                startActivity(new Intent(this, ChooseSubjects.class));
+                finish();
+            }
+        }catch (Exception e){
             startActivity(new Intent(this, ChooseSubjects.class));
             finish();
         }
+
 
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
