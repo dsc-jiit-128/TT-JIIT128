@@ -7,7 +7,7 @@
         android:endColor="@color/colorPrimaryDark"
         android:startColor="@color/colorPrimaryDark"
         android:type="sweep" />
-    <stroke android:width="0.5dp" android:color="#ffffff" />
+    <stroke android:width="0.75dp" android:color="#ffffff" />
     <corners
         android:radius="16dp"
         android:topLeftRadius="-25dp"></corners>
