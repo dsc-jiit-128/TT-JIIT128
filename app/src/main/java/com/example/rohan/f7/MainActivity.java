@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void transformPage(View page, float position) {
                 // do transformation here
-                page.setRotationY(position * -30);
+                page.setRotationY(position * -20);
 
             }
         });

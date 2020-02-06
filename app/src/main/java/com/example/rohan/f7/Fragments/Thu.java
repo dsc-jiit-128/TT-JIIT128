@@ -1,5 +1,6 @@
 package com.example.rohan.f7.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rohan.f7.BatchAndYearActivity;
 import com.example.rohan.f7.R;
 import com.example.rohan.f7.RecyclerAdapter;
 import com.example.rohan.f7.SubjectDetails;
@@ -51,28 +53,34 @@ public class Thu extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         TinyDB tinyDB = new TinyDB(getActivity());
-        ArrayList<SubjectDetails> subjects = tinyDB.getSubjectDetails("3");
-        if (subjects != null) {
-            try {
-                recyclerAdapter = new RecyclerAdapter(subjects, getActivity(), 3);
-                recyclerAdapter.notifyDataSetChanged();
-                recyclerView.setAdapter(recyclerAdapter);
-            } catch (Exception e) {
+        try{
+            ArrayList<SubjectDetails> subjects = tinyDB.getSubjectDetails("3");
+            if (subjects != null) {
+                try {
+                    recyclerAdapter = new RecyclerAdapter(subjects, getActivity(), 3);
+                    recyclerAdapter.notifyDataSetChanged();
+                    recyclerView.setAdapter(recyclerAdapter);
+                } catch (Exception e) {
+                }
+
+                try {
+                    view.findViewById(R.id.noClassMsg).setVisibility(View.GONE);
+                }catch (Exception e){
+
+                }
+            }else{
+
+                try {
+                    view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
+                }catch (Exception e){
+
+                }
             }
 
-            try {
-                view.findViewById(R.id.noClassMsg).setVisibility(View.GONE);
-            }catch (Exception e){
-
-            }
-        }else{
-
-            try {
-                view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
-            }catch (Exception e){
-
-            }
+        }catch (Exception e){
+            startActivity(new Intent(getActivity().getApplicationContext(), BatchAndYearActivity.class));
         }
+
 
         return view;
     }
