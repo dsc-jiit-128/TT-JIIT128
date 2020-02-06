@@ -1,8 +1,7 @@
-package com.example.rohan.f7.Fragments;
+package com.rohan.rohan.f7.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,23 +10,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rohan.f7.BatchAndYearActivity;
-import com.example.rohan.f7.R;
-import com.example.rohan.f7.RecyclerAdapter;
-import com.example.rohan.f7.SubjectDetails;
-import com.example.rohan.f7.TinyDB;
-import com.google.android.gms.ads.AdRequest;
+import com.rohan.rohan.f7.BatchAndYearActivity;
+import com.rohan.rohan.f7.R;
+import com.rohan.rohan.f7.RecyclerAdapter;
+import com.rohan.rohan.f7.SubjectDetails;
+import com.rohan.rohan.f7.TinyDB;
 import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class Tue extends Fragment {
+public class Fri extends Fragment {
 
     RecyclerView recyclerView;
-
-
     private RecyclerAdapter recyclerAdapter;
     private InterstitialAd interstitialAd;
 
@@ -35,8 +31,8 @@ public class Tue extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_tue, container, false);
-       // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        View view = inflater.inflate(R.layout.fragment_fri, container, false);
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
 //        AdRequest adRequest = new AdRequest.Builder().build();
 //        interstitialAd = new InterstitialAd(getContext());
@@ -51,15 +47,15 @@ public class Tue extends Fragment {
 //                }
 //            }
 //        }, 3000);
-        recyclerView=view.findViewById(R.id.recycle);
+        recyclerView = view.findViewById(R.id.recycle);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         TinyDB tinyDB = new TinyDB(getActivity());
         try{
-            ArrayList<SubjectDetails> subjects = tinyDB.getSubjectDetails("1");
+            ArrayList<SubjectDetails> subjects = tinyDB.getSubjectDetails("4");
             if (subjects != null) {
                 try {
-                    recyclerAdapter = new RecyclerAdapter(subjects, getActivity(), 1);
+                    recyclerAdapter = new RecyclerAdapter(subjects, getActivity(), 4);
                     recyclerAdapter.notifyDataSetChanged();
                     recyclerView.setAdapter(recyclerAdapter);
                 } catch (Exception e) {
@@ -80,7 +76,9 @@ public class Tue extends Fragment {
             }
 
         }catch (Exception e){
-            startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext(), BatchAndYearActivity.class));
+           // startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext(), BatchAndYearActivity.class));
+            //getActivity().finish();
+
 
         }
 

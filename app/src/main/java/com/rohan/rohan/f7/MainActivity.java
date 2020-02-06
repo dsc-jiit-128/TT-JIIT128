@@ -1,6 +1,5 @@
-package com.example.rohan.f7;
+package com.rohan.rohan.f7;
 
-import android.animation.LayoutTransition;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,19 +22,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.rohan.f7.Fragments.Fri;
-import com.example.rohan.f7.Fragments.Mon;
-import com.example.rohan.f7.Fragments.Sat;
-import com.example.rohan.f7.Fragments.Thu;
-import com.example.rohan.f7.Fragments.Tue;
-import com.example.rohan.f7.Fragments.Wed;
+import com.rohan.rohan.f7.Fragments.Fri;
+import com.rohan.rohan.f7.Fragments.Mon;
+import com.rohan.rohan.f7.Fragments.Sat;
+import com.rohan.rohan.f7.Fragments.Thu;
+import com.rohan.rohan.f7.Fragments.Tue;
+import com.rohan.rohan.f7.Fragments.Wed;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

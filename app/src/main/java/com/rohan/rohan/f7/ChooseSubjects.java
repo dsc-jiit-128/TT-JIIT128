@@ -1,4 +1,4 @@
-package com.example.rohan.f7;
+package com.rohan.rohan.f7;
 
 import android.content.Intent;
 import android.os.Bundle;

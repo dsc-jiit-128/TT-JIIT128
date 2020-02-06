@@ -1,8 +1,7 @@
-package com.example.rohan.f7.Fragments;
+package com.rohan.rohan.f7.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +10,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rohan.f7.BatchAndYearActivity;
-import com.example.rohan.f7.R;
-import com.example.rohan.f7.RecyclerAdapter;
-import com.example.rohan.f7.SubjectDetails;
-import com.example.rohan.f7.TinyDB;
-import com.google.android.gms.ads.AdRequest;
+import com.rohan.rohan.f7.BatchAndYearActivity;
+import com.rohan.rohan.f7.R;
+import com.rohan.rohan.f7.RecyclerAdapter;
+import com.rohan.rohan.f7.SubjectDetails;
+import com.rohan.rohan.f7.TinyDB;
 import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class Thu extends Fragment {
@@ -78,7 +75,8 @@ public class Thu extends Fragment {
             }
 
         }catch (Exception e){
-            startActivity(new Intent(getActivity().getApplicationContext(), BatchAndYearActivity.class));
+            //startActivity(new Intent(getActivity().getApplicationContext(), BatchAndYearActivity.class));
+            //getActivity().finish();
         }
 
 

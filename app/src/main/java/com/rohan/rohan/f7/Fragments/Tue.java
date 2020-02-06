@@ -1,8 +1,7 @@
-package com.example.rohan.f7.Fragments;
+package com.rohan.rohan.f7.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,22 +10,22 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rohan.f7.BatchAndYearActivity;
-import com.example.rohan.f7.R;
-import com.example.rohan.f7.RecyclerAdapter;
-import com.example.rohan.f7.SubjectDetails;
-import com.example.rohan.f7.TinyDB;
-import com.google.android.gms.ads.AdRequest;
+import com.rohan.rohan.f7.BatchAndYearActivity;
+import com.rohan.rohan.f7.R;
+import com.rohan.rohan.f7.RecyclerAdapter;
+import com.rohan.rohan.f7.SubjectDetails;
+import com.rohan.rohan.f7.TinyDB;
 import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class Wed extends Fragment {
-
+public class Tue extends Fragment {
 
     RecyclerView recyclerView;
+
+
     private RecyclerAdapter recyclerAdapter;
     private InterstitialAd interstitialAd;
 
@@ -34,7 +33,9 @@ public class Wed extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_wed, container, false);
+        View view = inflater.inflate(R.layout.fragment_tue, container, false);
+       // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
 //        AdRequest adRequest = new AdRequest.Builder().build();
 //        interstitialAd = new InterstitialAd(getContext());
 //        interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
@@ -53,10 +54,10 @@ public class Wed extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         TinyDB tinyDB = new TinyDB(getActivity());
         try{
-            ArrayList<SubjectDetails> subjects = tinyDB.getSubjectDetails("2");
+            ArrayList<SubjectDetails> subjects = tinyDB.getSubjectDetails("1");
             if (subjects != null) {
                 try {
-                    recyclerAdapter = new RecyclerAdapter(subjects, getActivity(), 2);
+                    recyclerAdapter = new RecyclerAdapter(subjects, getActivity(), 1);
                     recyclerAdapter.notifyDataSetChanged();
                     recyclerView.setAdapter(recyclerAdapter);
                 } catch (Exception e) {
@@ -77,15 +78,14 @@ public class Wed extends Fragment {
             }
 
         }catch (Exception e){
-            startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext(), BatchAndYearActivity.class));
+           // startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext(), BatchAndYearActivity.class));
+            //getActivity().finish();
+
+
         }
 
         return view;
     }
-
-
-
-
 
 
 }

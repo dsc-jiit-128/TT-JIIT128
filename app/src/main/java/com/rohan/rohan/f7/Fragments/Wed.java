@@ -1,8 +1,7 @@
-package com.example.rohan.f7.Fragments;
+package com.rohan.rohan.f7.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,38 +10,33 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rohan.f7.BatchAndYearActivity;
-import com.example.rohan.f7.MainActivity;
-import com.example.rohan.f7.R;
-import com.example.rohan.f7.RecyclerAdapter;
-import com.example.rohan.f7.SubjectDetails;
-import com.example.rohan.f7.TinyDB;
-import com.google.android.gms.ads.AdRequest;
+import com.rohan.rohan.f7.BatchAndYearActivity;
+import com.rohan.rohan.f7.R;
+import com.rohan.rohan.f7.RecyclerAdapter;
+import com.rohan.rohan.f7.SubjectDetails;
+import com.rohan.rohan.f7.TinyDB;
 import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 
 
-public class Mon extends Fragment {
+public class Wed extends Fragment {
+
 
     RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
     private InterstitialAd interstitialAd;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_mon, container, false);
-
+        View view=inflater.inflate(R.layout.fragment_wed, container, false);
 //        AdRequest adRequest = new AdRequest.Builder().build();
 //        interstitialAd = new InterstitialAd(getContext());
 //        interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 //        interstitialAd.loadAd(adRequest);
-//
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
@@ -52,19 +46,15 @@ public class Mon extends Fragment {
 //                }
 //            }
 //        }, 3000);
-        recyclerView = view.findViewById(R.id.recycle);
+        recyclerView=view.findViewById(R.id.recycle);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
         TinyDB tinyDB = new TinyDB(getActivity());
-
-
         try{
-            ArrayList<SubjectDetails> subjects = tinyDB.getSubjectDetails("0");
+            ArrayList<SubjectDetails> subjects = tinyDB.getSubjectDetails("2");
             if (subjects != null) {
                 try {
-                    recyclerAdapter = new RecyclerAdapter(subjects, getActivity(), 0);
+                    recyclerAdapter = new RecyclerAdapter(subjects, getActivity(), 2);
                     recyclerAdapter.notifyDataSetChanged();
                     recyclerView.setAdapter(recyclerAdapter);
                 } catch (Exception e) {
@@ -83,15 +73,18 @@ public class Mon extends Fragment {
 
                 }
             }
+
         }catch (Exception e){
-            startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext(), BatchAndYearActivity.class));
+           // startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext(), BatchAndYearActivity.class));
+            //getActivity().finish();
 
         }
 
-
-
         return view;
     }
+
+
+
 
 
 

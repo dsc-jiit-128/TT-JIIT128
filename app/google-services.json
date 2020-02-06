@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:378898909816:android:b80a7da3cf6fbac7",
         "android_client_info": {
-          "package_name": "com.example.rohan.appbuddy"
+          "package_name": "com.rohan.rohan.appbuddy"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "378898909816-9c8lacf6atkf80qo83lvsj3korvek4bt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.rohan.appbuddy",
+            "package_name": "com.rohan.rohan.appbuddy",
             "certificate_hash": "b2d9496c60056a5ef5f96ecf4a25ce3c3dea9804"
           }
         },
@@ -47,7 +47,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:378898909816:android:767ebceeada37459",
         "android_client_info": {
-          "package_name": "com.example.rohan.appbuddywinter"
+          "package_name": "com.rohan.rohan.appbuddywinter"
         }
       },
       "oauth_client": [
@@ -55,7 +55,7 @@
           "client_id": "378898909816-4l610u7n0ljthbu9lv8q6btkolr75oe2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.rohan.appbuddywinter",
+            "package_name": "com.rohan.rohan.appbuddywinter",
             "certificate_hash": "b2d9496c60056a5ef5f96ecf4a25ce3c3dea9804"
           }
         },
@@ -84,7 +84,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:378898909816:android:3b64803bb1037c6c",
         "android_client_info": {
-          "package_name": "com.example.rohan.f7"
+          "package_name": "com.rohan.rohan.f7"
         }
       },
       "oauth_client": [
@@ -92,7 +92,7 @@
           "client_id": "378898909816-rhkihke36fube160nnbnfjg2krqic1ui.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.rohan.f7",
+            "package_name": "com.rohan.rohan.f7",
             "certificate_hash": "e4ff16046f24b2619d29c1cd3f02bfc1f59bc096"
           }
         },
@@ -100,7 +100,7 @@
           "client_id": "378898909816-armv81a6jth0lto1rsne0uovhmdoa10o.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.rohan.f7",
+            "package_name": "com.rohan.rohan.f7",
             "certificate_hash": "f6ef91ac350122957ad3e6d739efdec9f8530db6"
           }
         },
@@ -108,7 +108,7 @@
           "client_id": "378898909816-8ec9840a8b58rtlir1rd9q02si9a5v1l.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.rohan.f7",
+            "package_name": "com.rohan.rohan.f7",
             "certificate_hash": "b2d9496c60056a5ef5f96ecf4a25ce3c3dea9804"
           }
         },

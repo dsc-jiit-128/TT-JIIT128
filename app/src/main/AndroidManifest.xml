@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.rohan.f7">
+    package="com.rohan.rohan.f7">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,19 +12,19 @@
         android:roundIcon="@drawable/logo_transparent"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BatchAndYearActivity"></activity>
-        <activity android:name=".FeedbackActivity" />
-        <activity android:name=".SubjectSelectionActivity" />
+        <activity android:name="com.rohan.rohan.f7.BatchAndYearActivity"></activity>
+        <activity android:name="com.rohan.rohan.f7.FeedbackActivity" />
+        <activity android:name="com.rohan.rohan.f7.SubjectSelectionActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7233191134291345~1524967297" />
 
-        <activity android:name=".ChooseSubjects">
+        <activity android:name="com.rohan.rohan.f7.ChooseSubjects">
 
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.rohan.rohan.f7.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
