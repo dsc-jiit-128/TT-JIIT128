@@ -1,78 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BatchAndYearActivity"
-    android:gravity="center"
-    android:background="#212b31"
-    android:orientation="vertical">
+    android:background="@color/bgdefault"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:weightSum="3"
+    tools:context=".BatchAndYearActivity">
+    <!--    -->
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Batch and Year:"
-        android:textSize="18dp"
         android:id="@+id/message"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
-        android:layout_marginBottom="6dp"
-        android:textColor="#ffffff"
-        />
-
-    <EditText
+        android:layout_marginTop="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/buttons_colorprimary_bg"
-        android:hint="Enter Your Batch"
-        android:layout_below="@+id/message"
-        android:textColor="#ffffff"
-        android:textColorHint="#90ffffff"
-        android:gravity="center_vertical"
-        android:padding="16dp"
-        android:id="@+id/batch"/>
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/getYear"
-        android:layout_below="@id/batch"
-        android:orientation="vertical"
-        android:padding="18dp"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_vertical">
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#f5f5f5"
-            android:text="1ST_YEAR"/>
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#f5f5f5"
-            android:text="2ND_YEAR"/>
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#f5f5f5"
-            android:text="3RD_YEAR"/>
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#f5f5f5"
-            android:text="4TH_YEAR"/>
-    </RadioGroup>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/getYear"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/buttons_colorprimary_bg"
-        android:text="SAVE"
-        android:id="@+id/savebatch"
-        android:textSize="18dp"
-        android:textColor="#ffffff"
-        />
+        android:gravity="center"
+        android:layout_marginBottom="12dp"
+        android:padding="8dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:text="@string/signup"
+        android:textSize="32sp" />
 
 
-</RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bgrectyellow"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/icon1"
+                android:layout_width="84dp"
+                android:layout_height="84dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/roundbluebg"
+                android:src="@drawable/signup1" />
+
+
+            <EditText
+                android:id="@+id/batch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:focusable="true"
+                android:background="@drawable/choicesbg"
+                android:gravity="center"
+                android:hint="@string/enter_your_batch"
+                android:padding="12dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textColorHint="#ffffff" />
+
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/YearArray"
+                android:padding="12dp"
+                android:id="@+id/getYearSpinner"
+                android:layout_margin="4dp"
+                android:scrollbars="none"
+                android:spinnerMode="dialog"
+                android:gravity="center_horizontal"
+                />
+            <RadioGroup
+                android:id="@+id/getYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_1st_year"
+                    android:textColor="#f5f5f5" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_2nd_year"
+                    android:textColor="#f5f5f5" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_3rd_year"
+                    android:textColor="#f5f5f5" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_4th_year"
+                    android:textColor="#f5f5f5" />
+            </RadioGroup>
+            <ImageButton
+                android:id="@+id/savebatch"
+                android:layout_width="80dp"
+                android:padding="12dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rectbluebg"
+                android:text="@string/save"
+                android:src="@drawable/ic_send_black_24dp"
+                android:textColor="@color/grey_2"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+
+
+
+</LinearLayout>

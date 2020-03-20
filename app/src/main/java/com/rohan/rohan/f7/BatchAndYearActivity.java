@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -31,6 +33,11 @@ public class BatchAndYearActivity extends AppCompatActivity {
         radioGroup=findViewById(R.id.getYear);
         batch = findViewById(R.id.batch);
 
+        final Spinner spinner = findViewById(R.id.getYearSpinner);
+
+        TextView tv = (TextView) spinner.getChildAt(0);
+        //tv.setTextColor(getResources().getColor(R.color.grey_2));
+        //tv.setGravity(View.TEXT_ALIGNMENT_CENTER);
         batch.setText(tinyDB.getString("BATCH"));
 
         arrayList.addAll(Arrays.asList(s).subList(0, 16));
@@ -38,16 +45,21 @@ public class BatchAndYearActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    int selectedId=radioGroup.getCheckedRadioButtonId();
-                    RadioButton r =(RadioButton)findViewById(selectedId);
-                    tinyDB.putString("YEAR",r.getText().toString() );
-                    if (arrayList.contains(batch.getText().toString().trim().toUpperCase())) {
-                        tinyDB.putString("BATCH", batch.getText().toString().trim().toUpperCase());
-                        startActivity(new Intent(BatchAndYearActivity.this,ChooseSubjects.class));
-                        finish();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "PLEASE ENTER CORRECTLY.", Toast.LENGTH_SHORT).show();
+                    String s1 = spinner.getSelectedItem().toString();
+                    if (!s1.equals("SELECT YEAR"))
+                    {
+                        tinyDB.putString("YEAR", s1);
+                        if (arrayList.contains(batch.getText().toString().trim().toUpperCase())) {
+                            tinyDB.putString("BATCH", batch.getText().toString().trim().toUpperCase());
+                            startActivity(new Intent(BatchAndYearActivity.this,ChooseSubjects.class));
+                            finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "PLEASE ENTER CORRECTLY.", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(BatchAndYearActivity.this, "Select Year", Toast.LENGTH_SHORT).show();
                     }
+
 
                 }catch (Exception Ignore){}
 

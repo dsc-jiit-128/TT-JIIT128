@@ -1,96 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
-    android:clickable="true"
     android:background="@drawable/sidenavbar"
     android:orientation="vertical"
-    android:paddingHorizontal="12dp"
-    android:layout_marginVertical="2dp"
-    android:layout_marginHorizontal="4dp"
-    android:paddingVertical="6dp">
+    android:padding="4dp"
+    android:layout_margin="2dp">
+
+    <TextView
+        android:id="@+id/timing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="@string/time"
+        android:padding="8dp"
+        android:background="@drawable/choicesbg"
+        android:textColor="#fafaff"
+        android:textSize="15sp"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LEC"
-                android:textSize="15sp"
+                android:text="@string/lec"
                 android:textColor="#fafaff"
+                android:textSize="15sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/room"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="room"
-                android:layout_marginRight="16dp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:layout_toEndOf="@id/type"
+                android:gravity="end"
+                android:text="@string/room"
                 android:textColor="#fafaff"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
-
         </RelativeLayout>
-
-
     </LinearLayout>
 
     <TextView
         android:id="@+id/subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/type"
-        android:text="subject"
+        android:text="@string/subject"
+        android:textStyle="bold"
         android:textColor="#fafaff"
-        android:textSize="16sp" />
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/timing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="7dp"
-            android:textColor="#fafaff"
-            android:text="time"
-            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/faculty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
-            android:text="faculty"
+            android:layout_margin="4dp"
+            android:text="@string/faculty"
             android:textColor="#fafaff"
             android:textSize="15sp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageButton
+                android:id="@+id/forEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_edit_black_24dp"
+                android:layout_alignParentEnd="true"
                 android:background="@drawable/sidenavbar"
+                android:contentDescription="@string/edit_button"
                 android:padding="4dp"
-                android:id="@+id/forEdit"/>
+                android:src="@drawable/ic_edit_black_24dp" />
         </RelativeLayout>
 
 
-
-
     </LinearLayout>
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/bannerAd"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@color/trans"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-7233191134291345/9708550356"
+        android:layout_gravity="center_horizontal"/>
+
 
 
 </LinearLayout>

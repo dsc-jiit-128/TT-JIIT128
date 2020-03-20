@@ -3,21 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.Mon">
+    tools:context=".Fragments.Day">
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:orientation="horizontal">
+       android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="M\nO\nN\nD\nA\nY"
-            android:textSize="34sp"
+            android:layout_height="wrap_content"
+            android:text="DAY"
+            android:layout_gravity="center"
+            android:drawableEnd="@drawable/ic_arrow_forward_black_24dp"
+            android:drawablePadding="12dp"
+            android:drawableStart="@drawable/ic_arrow_back_black_24dp"
             android:gravity="center"
-            android:padding="12dp"
+            android:textSize="22sp"
+            android:id="@+id/dayName"
+            android:paddingTop="8dp"
+            android:paddingBottom="6dp"
             android:textStyle="bold"
-            android:textColor="#f5f5f5"/>
+            android:textColor="@android:color/primary_text_dark"/>
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent"
@@ -28,8 +34,9 @@
                android:layout_height="wrap_content"
                android:text="NO CLASSES TODAY !"
                android:textSize="24dp"
-               android:layout_marginTop="16dp"
+               android:layout_marginTop="36dp"
                android:id="@+id/noClassMsg"
+               android:textStyle="bold"
                android:textColor="#ffffff"
                android:visibility="gone"
                android:gravity="center_horizontal"
@@ -38,6 +45,8 @@
                android:id="@+id/recycle"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+               android:paddingStart="2dp"
+               android:paddingEnd="2dp"
                ></androidx.recyclerview.widget.RecyclerView>
 
        </LinearLayout>

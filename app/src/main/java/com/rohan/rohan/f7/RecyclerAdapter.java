@@ -13,6 +13,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.ads.mediation.AbstractAdViewAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHolder> {
@@ -21,6 +26,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
     ArrayList<SubjectDetails> classDetails;
     Context context;
     int dayNumber;
+
 
     public RecyclerAdapter(ArrayList<SubjectDetails> classDetails, Context context, int dayNumber) {
         this.classDetails = classDetails;
@@ -64,6 +70,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
 
 
         });
+
+
     }
 
     @Override
@@ -84,9 +92,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
     class MyHolder extends RecyclerView.ViewHolder {
         TextView type, subject, timing, faculty, room;
         ImageButton forEdit;
+        private AdView adView;
+
 
         MyHolder(View itemView) {
             super(itemView);
+            adView = itemView.findViewById(R.id.bannerAd);
             type = itemView.findViewById(R.id.type);
             subject = itemView.findViewById(R.id.subject);
             timing = itemView.findViewById(R.id.timing);

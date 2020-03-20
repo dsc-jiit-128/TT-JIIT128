@@ -1,20 +1,37 @@
 <resources>
-    <string name="app_name">TT-JIIT128</string>
+    <string name="app_name">TT JIIT128</string>
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="interestitialAd">ca-app-pub-7233191134291345/7587736789</string>
-    <string name="bannerAd">ca-app-pub-7233191134291345~1524967297</string>
+    <string name="interestitialAd">ca-app-pub-7233191134291345/3992834026</string>
+    <string name="bannerAd">ca-app-pub-7233191134291345~8567238972</string>
     <string name="videoAd">ca-app-pub-7233191134291345/1290572110</string>
+    <string name="faculty">faculty</string>
+    <string name="time">time</string>
+    <string name="subject">subject</string>
+    <string name="room">room</string>
+    <string name="lec">LEC</string>
+    <string name="edit_button">Edit Button</string>
+    <string name="batch_and_year">Batch and Year:</string>
+    <string name="enter_your_batch">Enter Your Batch</string>
+    <string name="_1st_year">1ST_YEAR</string>
+    <string name="_2nd_year">2ND_YEAR</string>
+    <string name="_3rd_year">3RD_YEAR</string>
+    <string name="_4th_year">4TH_YEAR</string>
+    <string name="edit_the_slot_here">EDIT THE SLOT HERE…</string>
+    <string name="save">SAVE</string>
+    <string name="signup">Sign Up</string>
 
-    <string-array name="year">
+    <string-array name="YearArray">
         <item>SELECT YEAR</item>
         <item>1ST_YEAR</item>
         <item>2ND_YEAR</item>
         <item>3RD_YEAR</item>
         <item>4TH_YEAR</item>
     </string-array>
+
+
 </resources>

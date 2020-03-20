@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#212b31"
+    android:background="@color/bgdefault"
     tools:context=".FeedbackActivity"
     android:padding="6dp">
 
@@ -33,13 +33,13 @@
         />
 
     <Button
+        android:id="@+id/sendFeedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/buttons_colorprimary_bg"
         android:text="Send Feedback"
-        android:id="@+id/sendFeedback"
-        android:textColor="#ffffff"/>
+        android:textColor="#ffffff" />
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

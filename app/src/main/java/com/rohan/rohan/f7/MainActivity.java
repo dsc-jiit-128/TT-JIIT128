@@ -22,12 +22,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.rohan.rohan.f7.Fragments.Fri;
-import com.rohan.rohan.f7.Fragments.Mon;
-import com.rohan.rohan.f7.Fragments.Sat;
-import com.rohan.rohan.f7.Fragments.Thu;
-import com.rohan.rohan.f7.Fragments.Tue;
-import com.rohan.rohan.f7.Fragments.Wed;
+import com.rohan.rohan.f7.Fragments.Day;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
@@ -42,6 +37,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import javax.security.auth.Subject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,16 +64,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         tinyDB = new TinyDB(this);
-        try{
+        try {
             if (tinyDB.getString("BATCH").equals("")) {
                 startActivity(new Intent(this, ChooseSubjects.class));
                 finish();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             startActivity(new Intent(this, ChooseSubjects.class));
             finish();
         }
-
 
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -140,72 +136,69 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, ChooseSubjects.class));
             finish();
 
-//            if (rewardedVideoAd.isLoaded()) {
-//                if (!adOpened)
-//                {
-//                    rewardedVideoAd.show();
-//                    adOpened=true;
-//                }else{
-//                    startActivity(new Intent(MainActivity.this, ChooseSubjects.class));
-//                    finish();
-//                }
-//            }else{
-//                startActivity(new Intent(MainActivity.this, ChooseSubjects.class));
-//                finish();
-//            }
-
 
         }
         if (id == R.id.refresh) {
-            for (int i = 0; i < 5; i++) {
-                final ArrayList<SubjectDetails> finalSubjects = new ArrayList<>();
+            ArrayList<String> subjects=new TinyDB(getApplicationContext()).getSubjectNames("SUBJECTCODES");
+            if (subjects== null || subjects.size()==0)
+            {
+                startActivity(new Intent(getApplicationContext(), ChooseSubjects.class));
+                finish();
+            }else{
+                for (int i = 0; i < 5; i++) {
+                    final ArrayList<SubjectDetails> finalSubjects = new ArrayList<>();
 
-                df = FirebaseDatabase.getInstance().getReference("TIMETABLE").child(tinyDB.getString("YEAR")).child("TT").child("" + i + "");
+                    df = FirebaseDatabase.getInstance().getReference("TIMETABLE").child(tinyDB.getString("YEAR")).child("TT").child("" + i + "");
 
 
-                try {
-                    final int finalI = i;
-                    df.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    try {
+                        final int finalI = i;
+                        df.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                SubjectDetails s = dataSnapshot1.getValue(SubjectDetails.class);
-                                assert s != null;
-                                try {
+                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                    SubjectDetails s = dataSnapshot1.getValue(SubjectDetails.class);
+                                    assert s != null;
+                                    try {
 
-                                    String batch = tinyDB.getString("BATCH");
-                                    //Log.d("TAG", "onDataChange: "+s);
-                                    if (s.getBatchName().equals("ALL") || s.getBatchName().contains(batch)) {
+                                        String batch = tinyDB.getString("BATCH");
+                                        //Log.d("TAG", "onDataChange: "+s);
+                                        if (s.getBatchName().equals("ALL") || s.getBatchName().contains(batch)) {
 
-                                        if (new TinyDB(getApplicationContext()).getSubjectNames("SUBJECTCODES").contains(s.getsubjectCode())) {
-                                            Log.d("TAG", "onDataChange: " + s);
-                                            finalSubjects.add(s);
+                                            if (new TinyDB(getApplicationContext()).getSubjectNames("SUBJECTCODES").contains(s.getsubjectCode())) {
+                                                Log.d("TAG", "onDataChange: " + s);
+                                                finalSubjects.add(s);
+                                            }
                                         }
+
+                                    } catch (Exception e) {
+                                        //Log.d("TAG", "onDataChange: "+s);
+                                        //finalSubjects.add(s);
+
                                     }
-
-                                } catch (Exception e) {
-                                    //Log.d("TAG", "onDataChange: "+s);
-                                    //finalSubjects.add(s);
-
                                 }
+                                tinyDB.putSubjectDetails("" + finalI + "", finalSubjects);
+
+                                //notifyAll();
+                                //recreate();
+                                //Toast.makeText(SubjectSelectionActivity.this, ""+finalSubjects, Toast.LENGTH_SHORT).show();
+                                //recreate();
+
                             }
-                            recreate();
-                            //Toast.makeText(SubjectSelectionActivity.this, ""+finalSubjects, Toast.LENGTH_SHORT).show();
-                            //recreate();
 
-                        }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), "" + e, Toast.LENGTH_SHORT).show();
+                    }
 
-                        }
-                    });
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "" + e, Toast.LENGTH_SHORT).show();
                 }
-
             }
+
         }
         if (id == R.id.feedback) {
             startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
@@ -252,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             interstitialAd = new InterstitialAd(getApplicationContext());
-            interstitialAd.setAdUnitId("ca-app-pub-7233191134291345/7587736789");
+            interstitialAd.setAdUnitId("ca-app-pub-7233191134291345/3992834026");
             interstitialAd.loadAd(adRequest);
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -263,22 +256,22 @@ public class MainActivity extends AppCompatActivity {
                 }
             }, 3000);
             if (position == 0) {
-                Mon t1 = new Mon();
+                Day t1 = new Day(0, "MONDAY");
                 return t1;
             } else if (position == 1) {
-                Tue t2 = new Tue();
+                Day t2 = new Day(1, "TUESDAY");
                 return t2;
             } else if (position == 2) {
-                Wed t3 = new Wed();
+                Day t3 = new Day(2, "WEDNESDAY");
                 return t3;
             } else if (position == 3) {
-                Thu t4 = new Thu();
+                Day t4 = new Day(3, "THURSDAY");
                 return t4;
             } else if (position == 4) {
-                Fri t5 = new Fri();
+                Day t5 = new Day(4, "FRIDAY");
                 return t5;
             } else if (position == 5) {
-                Sat t6 = new Sat();
+                Day t6 = new Day(5, "SATURDAY");
                 return t6;
             }
 

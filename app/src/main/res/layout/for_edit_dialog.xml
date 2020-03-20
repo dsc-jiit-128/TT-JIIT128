@@ -9,22 +9,18 @@
     android:clickable="true"
     android:orientation="vertical"
     android:paddingHorizontal="12dp"
-    android:paddingVertical="6dp">
-<!--    <com.google.android.gms.ads.AdView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/adview"-->
-<!--        ads:adSize="BANNER"-->
-<!--        ads:adUnitId="ca-app-pub-7233191134291345/1400289307"/>-->
+    android:paddingVertical="6dp"
+    ads:targetApi="o"
+    android:focusable="true">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
         android:gravity="center"
-        android:text="EDIT THE SLOT HERE..."
+        android:text="@string/edit_the_slot_here"
         android:textStyle="bold"
-        android:textSize="20dp"
+        android:textSize="20sp"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +33,7 @@
                 android:id="@+id/type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LEC"
+                android:text="@string/lec"
                 android:textSize="15sp"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -45,9 +41,9 @@
                 android:id="@+id/room"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="room"
-                android:layout_marginRight="16dp"
-                android:layout_alignParentRight="true"
+                android:text="@string/room"
+                android:layout_marginEnd="16dp"
+                android:layout_alignParentEnd="true"
                 android:textColor="#000000"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -62,8 +58,7 @@
         android:id="@+id/subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/type"
-        android:text="subject"
+        android:text="@string/subject"
         android:textColor="#000000"
         android:textSize="17sp" />
 
@@ -77,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="7dp"
             android:textColor="#000000"
-            android:text="time"
+            android:text="@string/time"
             android:textSize="15sp" />
 
         <EditText
@@ -85,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="7dp"
-            android:text="faculty"
+            android:text="@string/faculty"
             android:textColor="#000000"
             android:textSize="15sp" />
 
@@ -96,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/buttons_colorprimary_bg"
-        android:text="SAVE"
+        android:text="@string/save"
         android:textColor="#ffffff"
         android:id="@+id/saveDetails"/>
 
