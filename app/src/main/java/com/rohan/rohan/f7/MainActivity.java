@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             ArrayList<String> subjects=new TinyDB(getApplicationContext()).getSubjectNames("SUBJECTCODES");
             if (subjects== null || subjects.size()==0)
             {
+                Toast.makeText(this, "KINDLY SELECT ALL THE SUBJECTS AGAIN !", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), ChooseSubjects.class));
                 finish();
             }else{
