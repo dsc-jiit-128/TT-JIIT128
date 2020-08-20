@@ -1,6 +1,7 @@
 package com.rohan.rohan.f7.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,11 +58,20 @@ public class Day extends Fragment {
                     recyclerAdapter.notifyDataSetChanged();
                     recyclerView.setAdapter(recyclerAdapter);
                 } catch (Exception e) {
+                    Log.e("TAG", "onCreateView: +e"+e );
+
                 }
 
                 try {
-                    view.findViewById(R.id.noClassMsg).setVisibility(View.GONE);
+                    if (subjects.size()==0)
+                    {
+                        view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
+                    }else{
+                        view.findViewById(R.id.noClassMsg).setVisibility(View.GONE);
+
+                    }
                 }catch (Exception e){
+                    Log.e("TAG", "onCreateView: +e"+e );
 
                 }
             }else{
@@ -69,10 +79,12 @@ public class Day extends Fragment {
                 try {
                     view.findViewById(R.id.noClassMsg).setVisibility(View.VISIBLE);
                 }catch (Exception e){
+                    Log.e("TAG", "onCreateView: +e"+e );
 
                 }
             }
         }catch (Exception e){
+            Log.e("TAG", "onCreateView: +e"+e );
             //startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext(), BatchAndYearActivity.class));
             //getActivity().finish();
 

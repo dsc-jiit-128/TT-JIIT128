@@ -1,6 +1,7 @@
 package com.rohan.rohan.f7;
 
 import android.content.Intent;
+import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +23,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.Task;
 import com.rohan.rohan.f7.Fragments.Day;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -107,11 +114,44 @@ public class MainActivity extends AppCompatActivity {
         adView.loadAd(adRequest);
         rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         rewardedVideoAd.loadAd(String.valueOf(R.string.videoAd), adRequest);
-
+//        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(getApplicationContext());
+//
+//        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+//
+//
+//        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+//            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+//                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+//                // Request an immediate update.
+//                try {
+//                    appUpdateManager.startUpdateFlowForResult(
+//                            // Pass the intent that is returned by 'getAppUpdateInfo()'.
+//                            appUpdateInfo,
+//                            // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
+//                            AppUpdateType.IMMEDIATE,
+//                            // The current activity making the update request.
+//                            this,
+//                            // Include a request code to later monitor this update request.
+//                            1);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
     }
 
-
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 1) {
+//            if (resultCode != RESULT_OK) {
+//                Log.e("TAG", "onActivityResult: Update flow failed! Result code: " + resultCode);
+//                // If the update is cancelled or fails,
+//                // you can request to start the update again.
+//            }
+//        }
+//    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
