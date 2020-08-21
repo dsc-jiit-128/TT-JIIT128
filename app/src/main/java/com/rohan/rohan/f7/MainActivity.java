@@ -109,49 +109,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         adView = findViewById(R.id.bannerAd);
-        MobileAds.initialize(this, String.valueOf(R.string.bannerAd));
+        MobileAds.initialize(this, "ca-app-pub-7233191134291345/4405619760");
+        //MobileAds.initialize(this, "ca-app-pub-3940256099942544/6300978111");
+
         adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
         rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         rewardedVideoAd.loadAd(String.valueOf(R.string.videoAd), adRequest);
-//        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(getApplicationContext());
-//
-//        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
-//
-//
-//        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
-//            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-//                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-//                // Request an immediate update.
-//                try {
-//                    appUpdateManager.startUpdateFlowForResult(
-//                            // Pass the intent that is returned by 'getAppUpdateInfo()'.
-//                            appUpdateInfo,
-//                            // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
-//                            AppUpdateType.IMMEDIATE,
-//                            // The current activity making the update request.
-//                            this,
-//                            // Include a request code to later monitor this update request.
-//                            1);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
+
 
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 1) {
-//            if (resultCode != RESULT_OK) {
-//                Log.e("TAG", "onActivityResult: Update flow failed! Result code: " + resultCode);
-//                // If the update is cancelled or fails,
-//                // you can request to start the update again.
-//            }
-//        }
-//    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -287,6 +255,8 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             interstitialAd = new InterstitialAd(getApplicationContext());
             interstitialAd.setAdUnitId("ca-app-pub-7233191134291345/3992834026");
+            //interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
             interstitialAd.loadAd(adRequest);
             new Handler().postDelayed(new Runnable() {
                 @Override

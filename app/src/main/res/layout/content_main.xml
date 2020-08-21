@@ -1,81 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
-        android:padding="0dp"
-        app:tabTextColor="#ffffff"
-        app:tabSelectedTextColor="@color/colorAccent"
-        app:tabIndicatorColor="@color/colorAccent"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/sidenavbar"
-        android:layout_height="0dp">
+        android:padding="0dp"
+        app:tabIndicatorColor="@color/colorAccent"
+        app:tabSelectedTextColor="@color/colorAccent"
+        app:tabTextColor="#ffffff">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mon"
-            android:padding="2dp"/>
+            android:padding="2dp"
+            android:text="Mon" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tue"
-            android:padding="2dp"/>
+            android:padding="2dp"
+            android:text="Tue" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wed"
-            android:padding="2dp"/>
+            android:padding="2dp"
+            android:text="Wed" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thu"
-            android:padding="2dp"/>
+            android:padding="2dp"
+            android:text="Thu" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fri"
-            android:padding="2dp"/>
+            android:padding="2dp"
+            android:text="Fri" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sat"
-            android:padding="2dp"/>
+            android:padding="2dp"
+            android:text="Sat" />
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/container"
-        android:paddingHorizontal="4dp"
-        android:padding="4dp"
         android:layout_width="match_parent"
-        android:layout_below="@+id/tabs"
         android:layout_height="match_parent"
+        android:layout_below="@+id/tabs"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="50dp"
+        android:padding="4dp"
+        android:paddingHorizontal="4dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </androidx.viewpager.widget.ViewPager>
@@ -83,13 +82,14 @@
     <com.google.android.gms.ads.AdView
         android:id="@+id/bannerAd"
         android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="@color/trans"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/trans"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-7233191134291345/4405619760"/>
+        ads:adUnitId="ca-app-pub-7233191134291345/4405619760" />
 
 
+    <!--    ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>-->
 
 </RelativeLayout>
