@@ -76,10 +76,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
 
         });
 
-        if (position%2==0)
-        {
+
             holder.adView.loadAd(adRequest);
-        }
+
 
     }
 
@@ -88,7 +87,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
         int arr = 0;
         try {
             if (classDetails.size() == 0) {
-                arr = 0;
             } else {
                 arr = classDetails.size();
             }
