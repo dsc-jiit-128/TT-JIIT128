@@ -77,7 +77,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
         });
 
 
-            holder.adView.loadAd(adRequest);
+
+        holder.adView.loadAd(adRequest);
 
 
     }
