@@ -43,6 +43,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.MyHolder holder, final int position) {
+        AdRequest adRequest;
+        MobileAds.initialize(context, "ca-app-pub-7233191134291345/9708550356");
+        //MobileAds.initialize(context, "ca-app-pub-3940256099942544/6300978111");
+
+        adRequest = new AdRequest.Builder().build();
 
         SubjectDetails classlist = classDetails.get(position);
         holder.type.setText(classlist.subjectType);
@@ -72,6 +77,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
         });
 
 
+
+        holder.adView.loadAd(adRequest);
+
+
     }
 
     @Override
@@ -79,7 +88,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
         int arr = 0;
         try {
             if (classDetails.size() == 0) {
-                arr = 0;
             } else {
                 arr = classDetails.size();
             }
@@ -92,7 +100,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyHold
     class MyHolder extends RecyclerView.ViewHolder {
         TextView type, subject, timing, faculty, room;
         ImageButton forEdit;
-        private AdView adView;
+        AdView adView;
 
 
         MyHolder(View itemView) {

@@ -1,6 +1,7 @@
 package com.rohan.rohan.f7;
 
 import android.content.Intent;
+import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +23,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.Task;
 import com.rohan.rohan.f7.Fragments.Day;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -102,7 +109,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         adView = findViewById(R.id.bannerAd);
-        MobileAds.initialize(this, String.valueOf(R.string.bannerAd));
+        MobileAds.initialize(this, "ca-app-pub-7233191134291345/4405619760");
+        //MobileAds.initialize(this, "ca-app-pub-3940256099942544/6300978111");
+
         adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
         rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
@@ -110,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -247,6 +255,8 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             interstitialAd = new InterstitialAd(getApplicationContext());
             interstitialAd.setAdUnitId("ca-app-pub-7233191134291345/3992834026");
+            //interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
             interstitialAd.loadAd(adRequest);
             new Handler().postDelayed(new Runnable() {
                 @Override

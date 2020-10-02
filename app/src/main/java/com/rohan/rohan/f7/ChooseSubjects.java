@@ -118,7 +118,7 @@ public class ChooseSubjects extends AppCompatActivity {
                     }
 
 
-                    for (int i = 0; i < 5; i++) {
+                    for (int i = 0; i <= 5; i++) {
                         final ArrayList<SubjectDetails> finalSubjects = new ArrayList<>();
 
                         df = FirebaseDatabase.getInstance().getReference("TIMETABLE").child(tinyDB.getString("YEAR")).child("TT").child("" + i + "");
